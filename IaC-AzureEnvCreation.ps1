@@ -171,7 +171,7 @@ if ($svcpexists -eq $false)
 Write-Host 'Running WebApp .....' 
 if ($appexists -eq $false)
 {
-    az webapp create --resource-group $rgname --plan $appServicePlan --name $app --deployment-container-image-name bkimminich/juice-shop
+    az webapp create --resource-group $rgname --plan $appServicePlan --name $app --deployment-container-image-name bkimminich/juice-shop:v9.3.1
     Write-Host 'Azure Web App : ' + $app + ' created '
 }
 
