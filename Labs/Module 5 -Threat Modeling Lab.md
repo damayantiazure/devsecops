@@ -46,7 +46,7 @@ simple Azure hosted web application.
 
 3. It uses AAD authentication for users
 
-4. It needs to start credit card numbers (Primary account number - "PAN")
+4. It needs to display starting credit card numbers (Primary account number - "PAN")
 
 5. It stores its data in Cosmos DB and Azure SQL
 
