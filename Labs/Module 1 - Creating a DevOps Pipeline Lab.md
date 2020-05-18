@@ -136,7 +136,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline.png)
 
-4.  Select the `MyHealth.AKS.build.json` file in    `"C:\Users\Student\MyHealth.AKS.build.json"` from the local drive.
+4.  Select the `MyHealth.AKS.build.json` file in    `"C:\Users\Student\Source\repos\MyHealthClinicSecDevOps-Public\BuildScripts\MyHealth.AKS.build.json"` from the local drive.
 
 5.  Once imported, Azure DevOps will present you with the definition
     editing screen. `Make sure you remove the trailing \"-Import\" from your build definition name. Build definition should be named MyHealth.AKS.build.`
@@ -227,7 +227,7 @@ triggered soon after the build completes successfully.
 
 2.  Navigate back to the `Release` section under `Pipelines` in the left
     navigation bar. Select New and Import Release Pipeline. Select the
-    MyHealth.AKS.Release.json found in `"C:\Users\Student\MyHealth.AKS.Release.json"`
+    MyHealth.AKS.Release.json found in `"C:\Users\Student\Source\repos\MyHealthClinicSecDevOps-Public\ReleaseScripts\MyHealth.AKS.Release.json"`
     from the local Cloned Drive 
     
     ![](./Images/Module1-NewImportReleasePipeline.png)
