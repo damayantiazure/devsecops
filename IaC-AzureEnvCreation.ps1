@@ -10,6 +10,7 @@ $acrexists = $false
 $dbexists = $false
 $svcpexists = $false
 $appexists = $false
+$appdemoexists = $false
 $kvexists = $false
 $snrexists = $false
 
@@ -45,6 +46,7 @@ try
             ("devsecops" + $unicstr + "db"){ $dbexists = $true}
             ("devsecopsowasp" + $unicstr + "t10"){ $svcpexists = $true}
             ("devsecopsowaspapp" + $unicstr + "t10"){ $appexists = $true}
+            ("devsecopsdemoapp" + $unicstr + "t10"){ $appdemoexists = $true}
             ("devsecops" + $unicstr + "akv"){ $kvexists = $true}
             ("devsecops" + $unicstr + "snr"){ $snrexists = $true}
         }
@@ -62,6 +64,7 @@ $acrname = "devsecops" + $unicstr + "acr"
 $sqlsvname =  "devsecops" + $unicstr + "db"
 $appServicePlan = "devsecopsowasp" + $unicstr + "t10"
 $app = "devsecopsowaspapp" + $unicstr + "t10"
+$appdemo = "devsecopsdemoapp" + $unicstr + "t10"
 $keyvaultname = "devsecops" + $unicstr + "akv"
 $sonarqaciname = "devsecops" + $unicstr + "snr"
 
@@ -134,7 +137,7 @@ if ($aksexists -eq $false)
 Write-Host 'Running ACR service .....' 
 if ($acrexists -eq $false)
 {
-    az acr create --resource-group $rgname --name $acrname --sku Standard --location $location
+    az acr create --resource-group $rgname --name $acrname --sku Standard --location $location --admin-enabled true
     Write-Host 'Azure Container Registry : ' + $acrname + ' created '
 
     # Get the id of the service principal configured for AKS
@@ -155,6 +158,8 @@ if ($dbexists -eq $false)
     az sql server create -l $location -g $rgname -n $sqlsvname -u sqladmin -p P2ssw0rd1234
     Write-Host 'Azure SQL Server : ' + $sqlsvname + ' created '
 
+    az sql server firewall-rule create -g $rgname -s $sqlsvname -n azsvc --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+
     az sql db create -g $rgname -s $sqlsvname -n mhcdb --service-objective S0
     Write-Host 'Databae on SQL Server : mhcdb created '
 }
@@ -173,6 +178,14 @@ if ($appexists -eq $false)
 {
     az webapp create --resource-group $rgname --plan $appServicePlan --name $app --deployment-container-image-name bkimminich/juice-shop:v9.3.1
     Write-Host 'Azure Web App : ' + $app + ' created '
+}
+
+# Create service WebApp for OWASP top 10
+Write-Host 'Running WebApp .....' 
+if ($appdemoexists -eq $false)
+{
+    az webapp create --resource-group $rgname --plan $appServicePlan --name $appdemo -i $acrname".azurecr.io/demo"
+    Write-Host 'Azure Web App : ' + $appdemo + ' created '
 }
 
 # Create service SonarQube  in Azure Container Instances

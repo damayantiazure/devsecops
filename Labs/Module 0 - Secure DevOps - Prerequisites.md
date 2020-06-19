@@ -52,17 +52,16 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
     
     ![](images/CreateDevOpsAcc00.png)
 
-  > **If asked create a new private project e.g. DevSecOps**
-
-   ![](images/CreateDevOpsAcc00B.png)
-
-
 2. Login with your new Microsoft account and Select `Continue`
     
     ![](images/CreateDevOpsAcc01.png)
 
+  > **If asked create a new private project e.g. DevSecOps, otherwise create one**
+
+   ![](images/CreateDevOpsAcc00B.png)
+
 3. In your new Organization, create a Personal Access Token ([PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&viewFallbackFrom=vsts&tabs=preview-page#create-personal-access-tokens-to-authenticate-access))
-    
+
     ![](images/CreateDevOpsAcc10.png)
     ![](images/CreateDevOpsAcc11.png)
 

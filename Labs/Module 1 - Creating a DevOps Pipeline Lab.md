@@ -188,9 +188,11 @@ eventually publish artifacts for the Release Pipeline to consume.
       |Push services                     |   Pushes the docker image [myhealth.web](http://myhealth.web/)  to Azure Container Registry. Push Docker images with multiple tags to an authenticated Docker Registry or Azure Container Registry and save the resulting repository image digest to a file.|
       |Lock Services                     |   Docker provides a way to lock container images. Once it is locked, nobody can delete it unknowingly, even if they try it shows an error.|
 
-10. Explore the Variable on the `Variables` tab and Check how to configuring the environment with Shared Variables.
+10. Link the Variable Group existent on the `Variables` tab and Check how to configuring the environment with Shared Variables.
 
     ![](./Images/Module1-ReplaceVariablesServer.png)
+
+    ![](./Images/Module1-ReplaceVariablesServer1.png)
 
   > Variables in this pipeline are not Hard-coded, those Variables. 
   > come from the menu Library, save your Pipeline before to open the Library.
@@ -305,9 +307,11 @@ triggered soon after the build completes successfully.
         This secret will be used for authorization while pulling
         myhealth.web image from the Azure Container Registry.
 
-7. Explore the Variable on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
+7. Link the Variable Group on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
 
     ![](./Images/Module1-ReplaceVariablesServer.png)
+
+    ![](./Images/Module1-ReplaceVariablesServer2.png)
 
     > Variables in this pipeline are not Hard-coded, those Variables. 
     > come from the menu Library, save your Pipeline before to open the Library.
@@ -338,11 +342,13 @@ application is designed to be deployed in a Kubernetes pod with the load
 balancer in the front-end and Redis cache in the back-end.
 
 1.  Select `Pipelines` in the left navigation bar and under
-    the `Builds` section click on the `Queue` button.
-    Click `Queue` again when the window titled \"Queue build for
-    MyHealth.AKS.build\" pops up.
+    the `Pipelines` section click on the `MyHealth.AKS.build` created before then `Run pipeline` button.
+    Click `Run` again when the window titled \"Run pipeline
+    \".
 
     ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease.png)
+
+    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease2.png)
 
 2.  Once the build process starts, click on the link `Updated appsettings.json` to see the build in progress.
 
@@ -407,6 +413,8 @@ balancer in the front-end and Redis cache in the back-end.
     button to launch the application.
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png)
+
+    > Use the credentials Username: user and Password: P2ssw0rd@1 to login to the HealthClinic web application.
 
 8.  Access Azure Kubernetes Services (AKS) through the browser Type the below command in the
     command prompt to access the AKS through the browser.
