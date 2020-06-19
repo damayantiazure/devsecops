@@ -36,7 +36,7 @@ DirectX, Hyper-V, Internet Explorer, Microsoft, Outlook, OneDrive, SQL Server, W
 - Edge Chromium or Chrome
 - Recomended a new @outlook or @hotmail account, e.g: DevSecOpsYourName@outlook.com at https://account.microsoft.com using a InPrivate/Incognito browser Window
 
-    ![](images/CreateOutlookAcc00.png)
+    ![](images/CreateOutlookAcc00.png =300x)
 
 **Overview**
 In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environment including the initial `Build Pipeline` and `Release Pipeline`.
@@ -50,29 +50,29 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 ## Create an Azure DevOps
 1. Navigate to https://dev.azure.com/ Click `Start Free`
     
-    ![](images/CreateDevOpsAcc00.png)
+    ![](images/CreateDevOpsAcc00.png =500x)
 
 2. Login with your new Microsoft account and Select `Continue`
     
-    ![](images/CreateDevOpsAcc01.png)
+    ![](images/CreateDevOpsAcc01.png =300x)
 
   > **If asked create a new private project e.g. DevSecOps, otherwise create one**
 
-   ![](images/CreateDevOpsAcc00B.png)
+   ![](images/CreateDevOpsAcc00B.png =400x)
 
 3. In your new Organization, create a Personal Access Token ([PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&viewFallbackFrom=vsts&tabs=preview-page#create-personal-access-tokens-to-authenticate-access))
 
-    ![](images/CreateDevOpsAcc10.png)
-    ![](images/CreateDevOpsAcc11.png)
+    ![](images/CreateDevOpsAcc10.png =400x)
+    ![](images/CreateDevOpsAcc11.png =300x)
 
 4. Name the Personal Access Token (PAT) as `DevSecOps`, select Full access and click `Create`
 
-   ![](images/CreateDevOpsAcc12.png)
+   ![](images/CreateDevOpsAcc12.png =500x)
 
 
    > **Save your new token key in a notepad**
    
-    ![](images/CreateDevOpsAcc13.png)
+    ![](images/CreateDevOpsAcc13.png =400x)
 
    > **Save your new token key in a notepad**
 
@@ -81,20 +81,20 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 1. Navigate to http://aka.ms/azurepass and use the Promo code located in your VM
     
-    ![](images/CreateAzurePass02.png)
-    ![](images/CreateAzurePass01.png)
+    ![](images/CreateAzurePass02.png =600x)
+    ![](images/CreateAzurePass01.png =800x)
     
     Click Claim
     
-    ![](images/CreateAzurePass03.png)
+    ![](images/CreateAzurePass03.png =600x)
 
 2. Fill all fields and click Next
     
-    ![](images/CreateAzurePass04.png)
+    ![](images/CreateAzurePass04.png =600x)
 
 3. Accept the terms and click ``Sign up``
     
-    ![](images/CreateAzurePass05.png)
+    ![](images/CreateAzurePass05.png =600x)
   
 > Attention
 > 
@@ -120,16 +120,18 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
     **Keep the following information in a notepad, you will be asked for those values in the executing script.**
 
     a) URL DevOps with your organization name (See following image)
+
     b) Project Name (See following image)
+
     c) Personal Token Access (PAT), obtained in the step 4 of **Create an Azure DevOps**
 
-    ![](images/CreateDevOpsAcc15.png)
+    ![](images/CreateDevOpsAcc15.png =800x)
 
     **The script will take about 15 minutes to execute.**
     **If any task fails during the execution of the script, delete the newly created resource groups and run the script again**
     **Script failures typically use red lettering unless you changed the CLI color scheme**
      
-    ![](images/CreateDevOpsAcc16.png)
+    ![](images/CreateDevOpsAcc16.png =800x)
 
     > Optional
     > 

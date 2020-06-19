@@ -124,9 +124,9 @@ eventually publish artifacts for the Release Pipeline to consume.
     JSON file.
 
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty.png)
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_02.png)
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_03.png)
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_04.png)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_02.png =300x)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_03.png =300x)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_04.png =400x)
 
     > Save this Pipeline as is
 
@@ -134,28 +134,28 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 3.  Under `Pipelines\\Builds`, select `New\\Import a pipeline`
 
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline.png)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline.png =800x)
 
 4.  Select the `MyHealth.AKS.build.json` file in    `"C:\Users\Student\Source\repos\MyHealthClinicSecDevOps-Public\BuildScripts\MyHealth.AKS.build.json"` from the local drive.
 
 5.  Once imported, Azure DevOps will present you with the definition
     editing screen. `Make sure you remove the trailing \"-Import\" from your build definition name. Build definition should be named MyHealth.AKS.build.`
 
-    ![](./Images/Module1-NewImportBuildPipelineImported.png)
+    ![](./Images/Module1-NewImportBuildPipelineImported.png =800x)
 
 6.  Select the `Pipeline\\Build Pipeline` area of the definition and
     select `Hosted Ubuntu 1604` for the Agent Pool.
 
-    ![](./Images/Module1-SelectHostToBuild.png)
+    ![](./Images/Module1-SelectHostToBuild.png =800x)
 
 7. Select the `MyHealthClinicSecDevOps-Public` as Repository in the `Get sources`
 
-    ![](./Images/Module1-NewImportBuildPipelineImported02.png)
+    ![](./Images/Module1-NewImportBuildPipelineImported02.png =800x)
 8.  Select `Run services` task under the `Tasks` tab then select your
     Azure subscription from the `Azure subscription` dropdown.
     Click `Authorize` to create a connexion with Azure.
 
-    ![](./Images/Module1-SelectSubscriptionRunService.png)
+    ![](./Images/Module1-SelectSubscriptionRunService.png =800x)
 
     a.  You will be prompted to authorize this connection with Azure
         credentials. Disable pop-up blocker in your browser if you see a
@@ -169,11 +169,11 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     > Now you are able to select you Azure Container Registry as it follow:
 
-    ![](./Images/Module1-SelectSubscriptionRunService_Container.png)
+    ![](./Images/Module1-SelectSubscriptionRunService_Container.png =800x)
 
 9.  Repeat the selection of the same values from the dropdown `Azure subscription` and `Azure Container Registry` for the `Build services`, `Push services` and `Lock services` as shown below.
 
-    ![](./Images/Module1-SelectSubscriptionOtherServices.png)
+    ![](./Images/Module1-SelectSubscriptionOtherServices.png =800x)
 
   > The pipeline tasks are used for automating various items. 
   > The table below provides an overview of each task.
@@ -190,27 +190,26 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 10. Link the Variable Group existent on the `Variables` tab and Check how to configuring the environment with Shared Variables.
 
-    ![](./Images/Module1-ReplaceVariablesServer.png)
+    ![](./Images/Module1-ReplaceVariablesServer.png =800x)
 
-    ![](./Images/Module1-ReplaceVariablesServer1.png)
+    ![](./Images/Module1-ReplaceVariablesServer1.png =800x)
 
   > Variables in this pipeline are not Hard-coded, those Variables. 
   > come from the menu Library, save your Pipeline before to open the Library.
 
-   ![](./Images/Module1-ReplaceVariablesServer_Save.png)
+   ![](./Images/Module1-ReplaceVariablesServer_Save.png =500x)
 
 ### Exercise 1.2: Configure Release Pipeline
-
 
 **Objectives**
 
 After completing this exercise, you will be able to:
 
-  - Configure an Azure DevOps pipeline
+- Configure an Azure DevOps pipeline
 
 **Prerequisites**
 
-  - Completion of the Exercise 1.1: Configure Build Pipeline
+- Completion of the Exercise 1.1: Configure Build Pipeline
 
 **Scenario**
 
@@ -219,52 +218,52 @@ triggered soon after the build completes successfully.
 
 ##### Task 1 : Import Release Pipeline 
 
-1.  Start by creating an empty release pipeline. Make sure you save the pipeline once you have created it. Do not worry, this pipeline
+1. Start by creating an empty release pipeline. Make sure you save the pipeline once you have created it. Do not worry, this pipeline
     will not be used. Instead we will be importing a pipeline from a
     JSON file.
 
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_Release.png)
-    ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty01.png)
-    ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty02.png)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_Release.png =600x)
+    ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty01.png =400x)
+    ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty02.png =400x)
 
-2.  Navigate back to the `Release` section under `Pipelines` in the left
+2. Navigate back to the `Release` section under `Pipelines` in the left
     navigation bar. Select New and Import Release Pipeline. Select the
     MyHealth.AKS.Release.json found in `"C:\Users\Student\Source\repos\MyHealthClinicSecDevOps-Public\ReleaseScripts\MyHealth.AKS.Release.json"`
-    from the local Cloned Drive 
-    
-    ![](./Images/Module1-NewImportReleasePipeline.png)
+    from the local Cloned Drive
+
+    ![](./Images/Module1-NewImportReleasePipeline.png =600x)
 
     > **Make sure you remove the trailing `-Copy` from your release definition name. Release definition name should be MyHealth.AKS.Release.**
 
-    ![](./Images/Module1-NewImportReleasePipeline_Copy.png)
+    ![](./Images/Module1-NewImportReleasePipeline_Copy.png =600x)
 
-3.  Delete the previous created artifacts MyHealth.AKS.build and then click `+ Add` to add an artifact. Select MyHealth.AKS.build as `Source`, `Default version` should be `Latest` and Source.
+3. Delete the previous created artifacts MyHealth.AKS.build and then click `+ Add` to add an artifact. Select MyHealth.AKS.build as `Source`, `Default version` should be `Latest` and Source.
 
-    ![](./Images/Module1-NewImportReleasePipelineSelectHost.png)
+    ![](./Images/Module1-NewImportReleasePipelineSelectHost.png =600x)
 
     > Activate the `Continuous Deployment trigger` button as follows
 
-    ![](./Images/Module1-NewImportReleasePipelineSelectHost02.png)
+    ![](./Images/Module1-NewImportReleasePipelineSelectHost02.png =600x)
 
-4.  Click on the `Tasks-->Dev` tab and select `DB deployment`.
+4. Click on the `Tasks-->Dev` tab and select `DB deployment`.
 
     > Make sure that the agents selected for each task is a `Hosted Agents (windows 2019)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png)
- 
-5.  In the `Dev` stage, under the `DB deployment` phase, click on
+    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png =600x)
+
+5. In the `Dev` stage, under the `DB deployment` phase, click on
     the `Execute Azure SQL: DacpacTask` task. Under `Azure Service Connection Type`, select from the drop down `Azure Resource Manager`. Under `Azure Subscription`, select your Azure
     subscription.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =600x)
 
-6.  Under the AKS deployment phase, for the Create Deployments &
+6. Under the AKS deployment phase, for the Create Deployments &
     Services in AKS task, update the following fields based on the
     resources you created in the preparation lab:
 
     > Make sure that the agents selected for each task is a `Azure Pipelines (ubuntu-16.04)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =600x)
 
     a.  Azure Subscription,
 
@@ -275,12 +274,12 @@ triggered soon after the build completes successfully.
     d.  Expand the Secrets section and update the parameters for Azure
         subscription from the dropdown.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png)
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS03.png)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS03.png =600x)
 
      Click on the `Update image in AKS` task and repeat the same steps as above.
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedConfigAKS.png)
+    ![](./Images/Module1-NewImportBuildPipelineImportedConfigAKS.png =600x)
 
     > Don't forget Expand the `Secrets` area and use the following values for your
     `Secrets` section `except for the Azure Container Registry`.
