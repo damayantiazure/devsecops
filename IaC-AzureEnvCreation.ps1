@@ -5,7 +5,7 @@ $location = 'eastus'
 cd c:\users\student
 
 $unicstr = -join ((97..122) | Get-Random -Count 5 | % {[char]$_})
-$aksexists = $false
+# $aksexists = $false
 $acrexists = $false
 $dbexists = $false
 $svcpexists = $false
@@ -41,7 +41,7 @@ try
     foreach ($item in $a) {
         $unicstr = $a[2].substring(9,5)
         switch ($item) {
-            ("devsecops"+ $unicstr + "aks"){ $aksexists = $true}
+           # ("devsecops"+ $unicstr + "aks"){ $aksexists = $true}
             ("devsecops" + $unicstr + "acr"){ $acrexists = $true}
             ("devsecops" + $unicstr + "db"){ $dbexists = $true}
             ("devsecopsowasp" + $unicstr + "t10"){ $svcpexists = $true}
@@ -59,7 +59,7 @@ catch
     }
 
 $rgname = "devsecops-" + $unicstr + "-rg"
-$aksname = "devsecops"+ $unicstr + "aks" 
+# $aksname = "devsecops"+ $unicstr + "aks" 
 $acrname = "devsecops" + $unicstr + "acr"
 $sqlsvname =  "devsecops" + $unicstr + "db"
 $appServicePlan = "devsecopsowasp" + $unicstr + "t10"
@@ -99,7 +99,7 @@ az devops extension install --extension-id 'replacetokens' --publisher-id 'qetza
 az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource' --detect true
 
 #Creating variable group'
-az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' --project $devopsproject --authorize true
+az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest'--project $devopsproject --authorize true
 
 # Register the network provider
 az provider register --namespace Microsoft.Network
@@ -121,17 +121,17 @@ if ($kvexists -eq $false)
     Write-Host 'Keyvault : ' + $keyvaultname + ' created '
 }
 
-Write-Host 'Running Azure Kubernetes Services setup .....' 
-if ($aksexists -eq $false)
-{
-    $spn = (az ad sp create-for-rbac --name $aksname) | ConvertFrom-Json
+# Write-Host 'Running Azure Kubernetes Services setup .....' 
+# if ($aksexists -eq $false)
+# {
+#     $spn = (az ad sp create-for-rbac --name $aksname) | ConvertFrom-Json
 
-    Write-Host 'Service Principal Name : created '
+#     Write-Host 'Service Principal Name : created '
 
-    # Create AKS Service
-    az aks create --resource-group $rgname --name $aksname --enable-addons monitoring --kubernetes-version 1.15.10 --generate-ssh-keys --location $location --node-vm-size Standard_D2s_v3 --disable-rbac --service-principal $spn.appId --client-secret $spn.password
-    Write-Host 'Azure Kubernetes Service : ' + $aksname + ' created '
-}
+#     # Create AKS Service
+#     az aks create --resource-group $rgname --name $aksname --enable-addons monitoring --kubernetes-version 1.15.10 --generate-ssh-keys --location $location --node-vm-size Standard_D2s_v3 --disable-rbac --service-principal $spn.appId --client-secret $spn.password
+#     Write-Host 'Azure Kubernetes Service : ' + $aksname + ' created '
+# }
 
 # Create ACR service
 Write-Host 'Running ACR service .....' 

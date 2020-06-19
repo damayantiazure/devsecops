@@ -368,61 +368,14 @@ balancer in the front-end and Redis cache in the back-end.
 
     ![](./Images/Module1-NewImportBuildPipelineInProgressRelease.png)
 
-5.  Once the release is complete, go to the same powershell that you used to execute the Script and run the below
-    commands to see the pods running in AKS:
+5. Once the release is complete, navigate to the portal Azure **http://portal.azure.com**, then open the `App Service` **devsecopsdemoappxxxxxt10** inside the resource group **devsecopsxxxxx-rg**
 
-    > If you didn't close the powershel windows, skip the next 2 steps
-    > and commands for the step c and 8 are in the output powershell
-    
-    a.  Type `az login` in the command
-        prompt and press Enter. Authenticate yourself by entering your
-        credentials in the web browser that automatically opens up.
+    ![](./Images/Module1-WebPppDemo.png)
 
-    ![](./Images/Module1-AzureResultAKSSetup.png)
+6. In the overview menu, click on the URL link to navigate to the website
 
-    b.  Type `az account show` to see the active subscription you are
-        connected to. If it is not the right one, type `az account set --subscription [name or id\]`, replacing name or id with the
-        one for the right subscription, which you can find in the list
-        generated when running the command `az login` above.
-
-    c.  Type `az aks get-credentials --resource-group yourResourceGroup --name yourAKSname` in the command prompt to get the access credentials
-        for the Kubernetes cluster. Replace the
-        variables `yourResourceGroup` and `yourAKSname` with the
-        actual values.
-
-    ![](./Images/Module1-AzureResultAKSSetupGetCredentials.png)
-
-    d.  Type `kubectl get pods` to see the pods that are running (if
-        the command is not recognized make sure that you set the
-        installation folder for kubectl.exe into your environment PATH
-        variable):
-
-    ![](./Images/Module1-AzureResultAKSSetupGetPods.png)
-
-    > The deployed web application is running in the displayed pods. Make sure both `STATUS` is \"Running\".
-
-6.  To see what external IP address the application is using, run the
-    below command. If you see that `External-IP` is pending, wait for
-    sometime until an IP is assigned.
-
-    `kubectl get service mhc-front --watch`
-
-    ![](./Images/Module1-AzureResultAKSShowPortsAKS.png)
-
-7.  Copy the External-IP and paste it in the browser and press the Enter
-    button to launch the application.
+    ![](./Images/Module1-WebPppDemo2.png)
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png)
 
-    > Use the credentials Username: user and Password: P2ssw0rd@1 to login to the HealthClinic web application.
-
-8.  Access Azure Kubernetes Services (AKS) through the browser Type the below command in the
-    command prompt to access the AKS through the browser.
-
-    `az aks browse --resource-group YourResourceGroup --name yourAKSname`
-
-    ![](./Images/Module1-AzureResultAKSSetupShowBrowser.png)
-
-    > Once the `AKS Dashboard` is launched, the following details will be displayed.
-
-    ![](./Images/Module1-AzureResultAKSDashboard.png)
+    > If you want, Use the credentials Username: user and Password: P2ssw0rd@1 to login to the HealthClinic web application.
