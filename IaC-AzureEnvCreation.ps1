@@ -99,7 +99,7 @@ az devops extension install --extension-id 'replacetokens' --publisher-id 'qetza
 az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource' --detect true
 
 #Creating variable group'
-az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest'--project $devopsproject --authorize true
+az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' --project $devopsproject --authorize true
 
 # Register the network provider
 az provider register --namespace Microsoft.Network
@@ -140,15 +140,15 @@ if ($acrexists -eq $false)
     az acr create --resource-group $rgname --name $acrname --sku Standard --location $location --admin-enabled true
     Write-Host 'Azure Container Registry : ' + $acrname + ' created '
 
-    # Get the id of the service principal configured for AKS
-    $CLIENT_ID=(az aks show --resource-group $rgname --name $aksname --query "servicePrincipalProfile.clientId" --output tsv)
+    # # Get the id of the service principal configured for AKS
+    # $CLIENT_ID=(az aks show --resource-group $rgname --name $aksname --query "servicePrincipalProfile.clientId" --output tsv)
 
-    # Get the ACR registry resource id
-    $ACR_ID=(az acr show --name $acrname --resource-group $rgname --query "id" --output tsv)
+    # # Get the ACR registry resource id
+    # $ACR_ID=(az acr show --name $acrname --resource-group $rgname --query "id" --output tsv)
 
     # Create role assignment
-    az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
-    Write-Host 'Access from AKS to ACR : granted '
+    # az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
+    # Write-Host 'Access from AKS to ACR : granted '
 }
 
 # Create database server
@@ -196,10 +196,10 @@ if ($snrexists -eq $false)
     Write-Host 'Azure Web App SonarQube : ' + $sonarqaciname + ' created '
 }
 
-# Create service SonarQube  in Azure Container Instances
-Write-Host 'Installing Kubernetes cli .....' 
-az aks install-cli
-$env:path += ';C:\Users\Student\.azure-kubectl'
+# # Create service SonarQube  in Azure Container Instances
+# Write-Host 'Installing Kubernetes cli .....' 
+# az aks install-cli
+# $env:path += ';C:\Users\Student\.azure-kubectl'
 
 Write-Host "====================================================================================================== 
 Please take note of the following ressource names, they will be used in the next labs 
