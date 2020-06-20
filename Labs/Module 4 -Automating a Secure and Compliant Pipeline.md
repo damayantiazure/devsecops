@@ -200,24 +200,24 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
     Source Bolt tab, provide your Work Email, Company Name, Country and
     click Get Started button to start using the Free version.
 
-    ![WhiteBolt Config](./images/Module4-WhiteBoltConfig.png)
+    ![WhiteBolt Config](./images/Module4-WhiteBoltConfig.png =800x)
 
     Upon activation, the below message is displayed.
-    ![WhiteBolt Confirmation](./images/Module4-WhiteBoltConfigResult.png)
+    ![WhiteBolt Confirmation](./images/Module4-WhiteBoltConfigResult.png =600x)
 
 2. Go back and edit the `MyHealth.AKS.build` build definition and Add the `WhiteSource Bolt task` to your pipeline.
 
-    ![Add White source](./images/Module4-WhiteSource.png)
+    ![Add White source](./images/Module4-WhiteSource.png =600x)
 
 3. Set the Root working directory to `src`.
 
-    ![White Source SRC](./images/Module4-WhiteSourceSrc.png)
+    ![White Source SRC](./images/Module4-WhiteSourceSrc.png =500x)
 
 4.  Navigate to `White Source Bolt` tab under `Pipelines` section
     and wait for the report generation of the completed build to see the
     vulnerability report.
 
-    ![White source Result](./images/Module4-WhiteSourceResult.png)
+    ![White source Result](./images/Module4-WhiteSourceResult.png =600x)
 
 ## Lab 3 - Secure DevOps Kit for Azure
 
@@ -247,15 +247,15 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
     dots and selecting `Add an agent job`. This will be a Hosted
     Windows Agent as the AzSK job is supported only on Windows.
 
-    ![AzSK Tool](./images/Module4-AzSKAdd.png)
+    ![AzSK Tool](./images/Module4-AzSKAdd.png =800x)
 
 2. In the display name enter `AzSK` and in the `Agent pool` select \"windows-2019\".
 
-    ![AzSk Config](./images/Module4-AzSKAgentConfig.png)
+    ![AzSk Config](./images/Module4-AzSKAgentConfig.png =800x)
 
 3. Click the plus sign `( + )` and search for \"AzSK\". Add the task `AzSK Security Verification Tests` by clicking on `Add`.
 
-    ![AzSK Add to Pipeline](./images/Module4-AzSKAddToPipe.png)
+    ![AzSK Add to Pipeline](./images/Module4-AzSKAddToPipe.png =800x)
 
 4. Set the `Display name` for the task to `Secure Devops kit for
     Azure` and set your `Azure Subscription`. In the `Select the
@@ -269,7 +269,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     The final config should be like this:
 
-    ![Az Configured](./images/Module4-AzSKConfigured.png)
+    ![Az Configured](./images/Module4-AzSKConfigured.png =800x)
 
     > Note: In order to generate the **Autofix scripts** which are useful for Remediation include the ExtendedCommand variable in the pipeline with the switch -GenerateFixScript. Check the `Variables` section under the release definition the value `ExtendedCommand` variable with the switch `  -GenerateFixScript` as value.
 
@@ -281,45 +281,45 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 1. Navigate to the `Release` section under the `Pipelines` menu,
     select `MyHealth.AKS.Release` and select the latest release.
 
-    ![Remediation](./images/Module4-RemediationCheck.png)
+    ![Remediation](./images/Module4-RemediationCheck.png =800x)
 
 2. In the  \"Dev\" `Stages` click `Logs` under the failed release.
    
-    ![Remediation Log](./images/Module4-RemediationCheckLog.png)
+    ![Remediation Log](./images/Module4-RemediationCheckLog.png =800x)
 
 3. Click the failed task `Secure Devops Kit for Azure` for detailed
     description about the scan results.
 
-    ![Remediation Log of AzSK](./images/Module4-RemediationCheckLogAzSK.png)
+    ![Remediation Log of AzSK](./images/Module4-RemediationCheckLogAzSK.png =800x)
 
 4. Scroll down to verify the number of passed and failed Controls.
 
-    ![Remediation Log of AzSK View](./images/Module4-RemediationCheckLogAzSKView.png)
+    ![Remediation Log of AzSK View](./images/Module4-RemediationCheckLogAzSKView.png =800x)
 
 5. Click the `Download all logs` to download all the logs to you
     local machine.
 
-    ![Download Logs](./images/Module4-RemediationCheckDownloadLog.png)
+    ![Download Logs](./images/Module4-RemediationCheckDownloadLog.png =800x)
 
 6. After downloading the logs, navigate to the below path and extract
     the AzSK Logs.
 
-    ![Extract logs](./images/Module4-RemediationCheckLogExtract.png)
+    ![Extract logs](./images/Module4-RemediationCheckLogExtract.png =600x)
 
 7. This consists of the Security Report in CSV format and also the
     AutoFix Scripts that you can use to fix the failed Controls that are
     supported.
 
-    ![Download Check](./images/Module4-RemediationCheckDownloadCheck.png)
+    ![Download Check](./images/Module4-RemediationCheckDownloadCheck.png =600x)
 
 8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
 
-    ![Auto Fix Problems](./images/Module4-RemediationAutoFix.png)
+    ![Auto Fix Problems](./images/Module4-RemediationAutoFix.png =600x)
 
 9. Navigate to the `FixControlScripts` folder and check the scripts
     generated in the `Services` folder to see what they do.
 
-    ![Run AutoFix](./images/Module4-RemediationAutoFixRun.png)
+    ![Run AutoFix](./images/Module4-RemediationAutoFixRun.png =600x)
 
 > (Optional maybe not work, preview features)
 

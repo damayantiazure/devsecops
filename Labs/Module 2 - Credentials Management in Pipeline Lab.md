@@ -114,7 +114,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 1.  Navigate to Pipelines-->Library in https://dev.azure.com and click `+ Variable group`
 
-    ![Key vault](./Images/Module2-CreateKeyVault01.png)
+    ![Key vault](./Images/Module2-CreateKeyVault01.png  =600x)
 
 2.  In the `Variable group name` field type `SecurityKeyVault`, then
 
@@ -124,20 +124,20 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     > If asked type your outlook accont and password
      
-    ![Key vault](./Images/Module2-CreateKeyVault02.png)
+    ![Key vault](./Images/Module2-CreateKeyVault02.png =300x)
 
 3.  Click on `+ Add` in the current page, select `SQLpassword` and click `Ok`
 
-    ![Key vault](./Images/Module2-CreateKeyVault03.png)
+    ![Key vault](./Images/Module2-CreateKeyVault03.png =600x)
 
     > Save your Security group
 
-     ![Key vault](./Images/Module2-CreateKeyVault04.png)
+     ![Key vault](./Images/Module2-CreateKeyVault04.png =400x)
 
 
 4.  Go Back to Library open the `DevSecOpsVariable` variable group, and delete the variable named `SQLpassword` in the list.
 
-    ![Key vault](./Images/Module2-CreateKeyVault05.png)
+    ![Key vault](./Images/Module2-CreateKeyVault05.png =800x)
 
     > Save your change
 
@@ -145,18 +145,18 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 1.  Go back to Releases and edit your Release 
  
-    ![](./Images/Module2-CreateKeyVaultRelease01.png)
+    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
 2.  Select the `Variables` tab then `Variable group`, and click in `Link variable group`
 
 
-    ![](./Images/Module2-CreateKeyVaultRelease02.png)
+    ![](./Images/Module2-CreateKeyVaultRelease02.png =600x)
 
 3.  Select `SecurityKeyVault(1)` variable group and click `Link`
 
-    ![](./Images/Module2-CreateKeyVaultRelease03.png)
+    ![](./Images/Module2-CreateKeyVaultRelease03.png =600x)
      
-    ![](./Images/Module2-CreateKeyVaultRelease04.png)
+    ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
 
     > Click in `Save`
     > 
@@ -167,18 +167,18 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 1.  Go back to Builds and edit your Build 
  
-    ![](./Images/Module2-CreateKeyVault06.png)
+    ![](./Images/Module2-CreateKeyVault06.png =800x)
 
 2.  Select the `Variables` tab then `Variable group`, and click in `Link variable group`
 
 
-    ![](./Images/Module2-CreateKeyVault07.png)
+    ![](./Images/Module2-CreateKeyVault07.png =600x)
 
 3.  Select `SecurityKeyVault(1)` variable group and click `Link`
 
-    ![](./Images/Module2-CreateKeyVault08.png)
+    ![](./Images/Module2-CreateKeyVault08.png =400x)
      
-    ![](./Images/Module2-CreateKeyVault09.png)
+    ![](./Images/Module2-CreateKeyVault09.png =500x)
 
     > Click in `Save & queue`
     > 
@@ -187,9 +187,9 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
     >Now the replace token task will use the new Password coming from Azure Key Vault at the build stage
     > We don't have passwords stored in Source code anymore, and any security officer can setup the new Password in a secure way
     
-    ![](./Images/Module2-CreateKeyVault10.png)
+    ![](./Images/Module2-CreateKeyVault10.png =600x)
 
 
 4.  Wait for the release to be completed and confirm that the website is running.
 
-    ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png)
+    ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)

@@ -217,6 +217,5 @@ Please take note of the following ressource names, they will be used in the next
 			SonarQube Instance: 
 			http://$($sonarqaciname)dns.eastus.azurecontainer.io:9000 
 			`n
-			Azure Kubernetes Services instance: `n
-			az aks get-credentials --resource-group $($rgname) --name $($aksname) 
-			az aks browse --resource-group $($rgname) --name $($aksname)"
+			Demo WebApp: `n
+            https://$($appdemo).azurewebsites.net"

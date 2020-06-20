@@ -26,16 +26,16 @@
     "tags": [],
     "_links": {
         "self": {
-            "href": "https://dev.azure.com/devsecops002/2050bb5f-e7a6-4642-acfb-6db787cbe901/_apis/build/Definitions/2?revision=3"
+            "href": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_apis/build/Definitions/14?revision=3"
         },
         "web": {
-            "href": "https://dev.azure.com/devsecops002/2050bb5f-e7a6-4642-acfb-6db787cbe901/_build/definition?definitionId=2"
+            "href": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_build/definition?definitionId=14"
         },
         "editor": {
-            "href": "https://dev.azure.com/devsecops002/2050bb5f-e7a6-4642-acfb-6db787cbe901/_build/designer?id=2&_a=edit-build-definition"
+            "href": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_build/designer?id=14&_a=edit-build-definition"
         },
         "badge": {
-            "href": "https://dev.azure.com/devsecops002/2050bb5f-e7a6-4642-acfb-6db787cbe901/_apis/build/status/2"
+            "href": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_apis/build/status/14"
         }
     },
     "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
@@ -46,64 +46,6 @@
         "phases": [
             {
                 "steps": [
-                    {
-                        "environment": {},
-                        "enabled": true,
-                        "continueOnError": false,
-                        "alwaysRun": false,
-                        "displayName": "Replace tokens in appsettings.json",
-                        "timeoutInMinutes": 0,
-                        "condition": "succeeded()",
-                        "task": {
-                            "id": "a8515ec8-7254-4ffd-912c-86772e2b5962",
-                            "versionSpec": "3.*",
-                            "definitionType": "task"
-                        },
-                        "inputs": {
-                            "rootDirectory": "$(build.sourcesdirectory)/src/MyHealth.Web",
-                            "targetFiles": "appsettings.json",
-                            "encoding": "auto",
-                            "writeBOM": "true",
-                            "escapeType": "none",
-                            "escapeChar": "",
-                            "charsToEscape": "",
-                            "verbosity": "normal",
-                            "actionOnMissing": "warn",
-                            "keepToken": "false",
-                            "tokenPrefix": "__",
-                            "tokenSuffix": "__",
-                            "emptyValue": "(empty)"
-                        }
-                    },
-                    {
-                        "environment": {},
-                        "enabled": true,
-                        "continueOnError": false,
-                        "alwaysRun": false,
-                        "displayName": "Replace tokens in mhc-aks.yaml",
-                        "timeoutInMinutes": 0,
-                        "condition": "succeeded()",
-                        "task": {
-                            "id": "a8515ec8-7254-4ffd-912c-86772e2b5962",
-                            "versionSpec": "3.*",
-                            "definitionType": "task"
-                        },
-                        "inputs": {
-                            "rootDirectory": "",
-                            "targetFiles": "mhc-aks.yaml",
-                            "encoding": "auto",
-                            "writeBOM": "true",
-                            "escapeType": "none",
-                            "escapeChar": "",
-                            "charsToEscape": "",
-                            "verbosity": "normal",
-                            "actionOnMissing": "warn",
-                            "keepToken": "false",
-                            "tokenPrefix": "__",
-                            "tokenSuffix": "__",
-                            "emptyValue": "(empty)"
-                        }
-                    },
                     {
                         "environment": {},
                         "enabled": true,
@@ -121,8 +63,8 @@
                         "inputs": {
                             "containerregistrytype": "Azure Container Registry",
                             "dockerRegistryEndpoint": "",
-                            "azureSubscriptionEndpoint": "36abe01d-c97a-4906-99c7-383f78bdd691",
-                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsvifxracr.azurecr.io\", \"id\" : \"/subscriptions/3ffec951-adf9-4bba-9a7f-760f181ae0d6/resourceGroups/DevSecOps-vifxr-RG/providers/Microsoft.ContainerRegistry/registries/devsecopsvifxracr\"}",
+                            "azureSubscriptionEndpoint": "9c3d1596-1863-4290-b47a-518cf180440d",
+                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsdeorxacr.azurecr.io\", \"id\" : \"/subscriptions/02ef44da-5876-4082-81a3-b9960e5ff717/resourceGroups/devsecops-deorx-rg/providers/Microsoft.ContainerRegistry/registries/devsecopsdeorxacr\"}",
                             "dockerComposeFile": "docker-compose.ci.build.yml",
                             "additionalDockerComposeFiles": "",
                             "dockerComposeFileArgs": "",
@@ -170,8 +112,8 @@
                         "inputs": {
                             "containerregistrytype": "Azure Container Registry",
                             "dockerRegistryEndpoint": "",
-                            "azureSubscriptionEndpoint": "36abe01d-c97a-4906-99c7-383f78bdd691",
-                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsvifxracr.azurecr.io\", \"id\" : \"/subscriptions/3ffec951-adf9-4bba-9a7f-760f181ae0d6/resourceGroups/DevSecOps-vifxr-RG/providers/Microsoft.ContainerRegistry/registries/devsecopsvifxracr\"}",
+                            "azureSubscriptionEndpoint": "9c3d1596-1863-4290-b47a-518cf180440d",
+                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsdeorxacr.azurecr.io\", \"id\" : \"/subscriptions/02ef44da-5876-4082-81a3-b9960e5ff717/resourceGroups/devsecops-deorx-rg/providers/Microsoft.ContainerRegistry/registries/devsecopsdeorxacr\"}",
                             "dockerComposeFile": "docker-compose.yml",
                             "additionalDockerComposeFiles": "",
                             "dockerComposeFileArgs": "DOCKER_BUILD_SOURCE=",
@@ -219,8 +161,8 @@
                         "inputs": {
                             "containerregistrytype": "Azure Container Registry",
                             "dockerRegistryEndpoint": "",
-                            "azureSubscriptionEndpoint": "36abe01d-c97a-4906-99c7-383f78bdd691",
-                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsvifxracr.azurecr.io\", \"id\" : \"/subscriptions/3ffec951-adf9-4bba-9a7f-760f181ae0d6/resourceGroups/DevSecOps-vifxr-RG/providers/Microsoft.ContainerRegistry/registries/devsecopsvifxracr\"}",
+                            "azureSubscriptionEndpoint": "9c3d1596-1863-4290-b47a-518cf180440d",
+                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsdeorxacr.azurecr.io\", \"id\" : \"/subscriptions/02ef44da-5876-4082-81a3-b9960e5ff717/resourceGroups/devsecops-deorx-rg/providers/Microsoft.ContainerRegistry/registries/devsecopsdeorxacr\"}",
                             "dockerComposeFile": "docker-compose.yml",
                             "additionalDockerComposeFiles": "",
                             "dockerComposeFileArgs": "DOCKER_BUILD_SOURCE=",
@@ -268,8 +210,8 @@
                         "inputs": {
                             "containerregistrytype": "Azure Container Registry",
                             "dockerRegistryEndpoint": "",
-                            "azureSubscriptionEndpoint": "36abe01d-c97a-4906-99c7-383f78bdd691",
-                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsvifxracr.azurecr.io\", \"id\" : \"/subscriptions/3ffec951-adf9-4bba-9a7f-760f181ae0d6/resourceGroups/DevSecOps-vifxr-RG/providers/Microsoft.ContainerRegistry/registries/devsecopsvifxracr\"}",
+                            "azureSubscriptionEndpoint": "9c3d1596-1863-4290-b47a-518cf180440d",
+                            "azureContainerRegistry": "{\"loginServer\":\"devsecopsdeorxacr.azurecr.io\", \"id\" : \"/subscriptions/02ef44da-5876-4082-81a3-b9960e5ff717/resourceGroups/devsecops-deorx-rg/providers/Microsoft.ContainerRegistry/registries/devsecopsdeorxacr\"}",
                             "dockerComposeFile": "docker-compose.yml",
                             "additionalDockerComposeFiles": "",
                             "dockerComposeFileArgs": "DOCKER_BUILD_SOURCE=",
@@ -380,10 +322,10 @@
             "checkoutNestedSubmodules": "false",
             "fetchDepth": "0"
         },
-        "id": "15e4f067-832c-40aa-b4e5-83dab1a76878",
+        "id": "11214663-aa13-469a-ae1c-aa08571d803c",
         "type": "TfsGit",
         "name": "MyHealthClinicSecDevOps-Public",
-        "url": "https://dev.azure.com/devsecops002/devsecops_002/_git/MyHealthClinicSecDevOps-Public",
+        "url": "https://dev.azure.com/robertoon02/devsecops03/_git/MyHealthClinicSecDevOps-Public",
         "defaultBranch": "refs/heads/master",
         "clean": "false",
         "checkoutSubmodules": false
@@ -391,50 +333,50 @@
     "processParameters": {},
     "quality": 1,
     "authoredBy": {
-        "displayName": "devsecops_002@outlook.com",
-        "url": "https://spsprodcca1.vssps.visualstudio.com/A5364afc6-b8d1-44ea-aa75-428591df0a22/_apis/Identities/210f606d-48ff-69f9-b978-086f1e565052",
+        "displayName": "roberto.on02",
+        "url": "https://spsprodcca1.vssps.visualstudio.com/A9ca90b8c-e51a-4648-bb3f-d4d538b519aa/_apis/Identities/40a537fc-9dee-6da1-8a16-2d4f66bc1019",
         "_links": {
             "avatar": {
-                "href": "https://dev.azure.com/devsecops002/_apis/GraphProfile/MemberAvatars/msa.MjEwZjYwNmQtNDhmZi03OWY5LWI5NzgtMDg2ZjFlNTY1MDUy"
+                "href": "https://dev.azure.com/robertoon02/_apis/GraphProfile/MemberAvatars/msa.NDBhNTM3ZmMtOWRlZS03ZGExLThhMTYtMmQ0ZjY2YmMxMDE5"
             }
         },
-        "id": "210f606d-48ff-69f9-b978-086f1e565052",
-        "uniqueName": "devsecops_002@outlook.com",
-        "imageUrl": "https://dev.azure.com/devsecops002/_apis/GraphProfile/MemberAvatars/msa.MjEwZjYwNmQtNDhmZi03OWY5LWI5NzgtMDg2ZjFlNTY1MDUy",
-        "descriptor": "msa.MjEwZjYwNmQtNDhmZi03OWY5LWI5NzgtMDg2ZjFlNTY1MDUy"
+        "id": "40a537fc-9dee-6da1-8a16-2d4f66bc1019",
+        "uniqueName": "roberto.on02@outlook.com",
+        "imageUrl": "https://dev.azure.com/robertoon02/_apis/GraphProfile/MemberAvatars/msa.NDBhNTM3ZmMtOWRlZS03ZGExLThhMTYtMmQ0ZjY2YmMxMDE5",
+        "descriptor": "msa.NDBhNTM3ZmMtOWRlZS03ZGExLThhMTYtMmQ0ZjY2YmMxMDE5"
     },
     "drafts": [],
     "queue": {
         "_links": {
             "self": {
-                "href": "https://dev.azure.com/devsecops002/_apis/build/Queues/9"
+                "href": "https://dev.azure.com/robertoon02/_apis/build/Queues/66"
             }
         },
-        "id": 9,
+        "id": 66,
         "name": "Azure Pipelines",
-        "url": "https://dev.azure.com/devsecops002/_apis/build/Queues/9",
+        "url": "https://dev.azure.com/robertoon02/_apis/build/Queues/66",
         "pool": {
             "id": 9,
             "name": "Azure Pipelines",
             "isHosted": true
         }
     },
-    "id": 2,
+    "id": 14,
     "name": "MyHealth.AKS.build",
-    "url": "https://dev.azure.com/devsecops002/2050bb5f-e7a6-4642-acfb-6db787cbe901/_apis/build/Definitions/2?revision=3",
-    "uri": "vstfs:///Build/Definition/2",
+    "url": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_apis/build/Definitions/14?revision=3",
+    "uri": "vstfs:///Build/Definition/14",
     "path": "\\",
     "type": 2,
     "queueStatus": 0,
     "revision": 3,
-    "createdDate": "2019-12-11T17:11:49.067Z",
+    "createdDate": "2020-06-20T01:09:55.633Z",
     "project": {
-        "id": "2050bb5f-e7a6-4642-acfb-6db787cbe901",
-        "name": "devsecops_002",
-        "url": "https://dev.azure.com/devsecops002/_apis/projects/2050bb5f-e7a6-4642-acfb-6db787cbe901",
+        "id": "304d9df3-9c1d-44cf-b8db-13922dc1b179",
+        "name": "devsecops03",
+        "url": "https://dev.azure.com/robertoon02/_apis/projects/304d9df3-9c1d-44cf-b8db-13922dc1b179",
         "state": 1,
-        "revision": 11,
+        "revision": 71,
         "visibility": 0,
-        "lastUpdateTime": "2019-12-05T13:42:25.483Z"
+        "lastUpdateTime": "2020-06-20T01:02:35.563Z"
     }
 }
