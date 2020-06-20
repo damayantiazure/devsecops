@@ -508,12 +508,36 @@ div.box-purple a {
 	background-repeat: no-repeat;
 }
 
+* html .icon-text01 {
+	width: 460px; /* must have a width or heigh tag for ie6*/
+	background-image: none;
+	filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(src = "images/icon_search-engine-market.png",
+		sizingMethod = "crop");
+}
+
 .icon-text02 {
 	background: url(images/icon_landing-pages.png) 0 0 no-repeat;
 }
 
+* html .icon-text02 {
+	width: 460px; /* must have a width or heigh tag for ie6*/
+	background-image: none;
+	filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(src = "images/icon_landing-pages.png", sizingMethod =
+		"crop");
+}
+
 .icon-text03 {
 	background: url(images/icon_salesforce.png) 0 0 no-repeat;
+}
+
+* html .icon-text03 {
+	width: 460px; /* must have a width or heigh tag for ie6*/
+	background-image: none;
+	filter: progid : DXImageTransform . Microsoft .
+		AlphaImageLoader(src = "images/icon_salesforce.png", sizingMethod =
+		"crop");
 }
 
 /* s4.4 - news home boxes */

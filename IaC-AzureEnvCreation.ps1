@@ -186,6 +186,9 @@ if ($appdemoexists -eq $false)
 {
     az webapp create --resource-group $rgname --plan $appServicePlan --name $appdemo -i $acrname".azurecr.io/demo"
     Write-Host 'Azure Web App : ' + $appdemo + ' created '
+
+    az webapp config connection-string set -g $rgname -n $appdemo -t SQLAzure --settings defaultConnection='Data Source=tcp:'$sqlsvname'.database.windows.net,1433;Initial Catalog=mhcdb;User Id=sqladmin;Password=P2ssw0rd1234;'
+
 }
 
 # Create service SonarQube  in Azure Container Instances
