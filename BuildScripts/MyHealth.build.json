@@ -362,7 +362,7 @@
         }
     },
     "id": 14,
-    "name": "MyHealth.AKS.build",
+    "name": "MyHealth.build",
     "url": "https://dev.azure.com/robertoon02/304d9df3-9c1d-44cf-b8db-13922dc1b179/_apis/build/Definitions/14?revision=3",
     "uri": "vstfs:///Build/Definition/14",
     "path": "\\",

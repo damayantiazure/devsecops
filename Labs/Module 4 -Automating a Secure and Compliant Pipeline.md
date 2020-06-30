@@ -65,11 +65,11 @@ discover bug or vulnerability early in the process.
 
     > Username= admin, Password= admin
 
-    ![](./images/Module4-AddSonarConfigure02.png)
+    ![](./images/Module4-AddSonarConfigure02.png =300x)
 
 3.  Choose `Administration` in the toolbar, click Projects tab and then `Management`.
   
-    ![](./images/Module4-sonar_admin.png)
+    ![](./images/Module4-sonar_admin.png =800x)
 
 4.  Create a project with `Name` and Key as `DevSecOps`.
 
@@ -77,48 +77,43 @@ discover bug or vulnerability early in the process.
     b) `Key`: The SonarQube project key that is unique for each project.
     c) Leave the `Visibility` option to `Private`.
 
-    ![](./images/Module4-AddSonarConfigure03.png)
+    ![](./images/Module4-AddSonarConfigure03.png =800x)
 
     Let us create a Quality Gate to enforce a policy which fails the gate if there are bugs in the code. A Quality Gate is a PASS/FAIL check on a code quality that must be enforced before releasing software.
 
 5. Click the `Quality Gates` menu and click `Create` in the Quality Gates screen. Enter a name for the Quality Gate and click `Create`.
 
-    ![](./images/Module4-AddSonarConfigurequalitygate.png)
+    ![](./images/Module4-AddSonarConfigurequalitygate.png =800x)
 
 6. Let us add a condition to check for the number of bugs in the code. Click on `Add Condition` drop down, choose the value `Vulnerabilities`.
  
     > Set the `Operator` value to `is greater than` value to 1 and click on the `Add condition` button.
     
-    ![](./images/Module4-AddSonarConfigure04.png)
+    ![](./images/Module4-AddSonarConfigure04.png =800x)
 
     > **Note**: This condition means that if the number of Vulnerabilities in Sonar Analysis is greater than 1 , then the quality gate will fail and optionally this fails the DevOps build.
 
 7.  To enforce this quality gate for DevSecOps project, click on `All` under `Projects` section and select the project checkbox.
 
-    ![](./images/Module4-AddSonarConfigure05.png)
+    ![](./images/Module4-AddSonarConfigure05.png =600x)
 
 8.  Navigate to `My Account` then `Security` tab, in the field `Enter Token Name` type `DevSecOps` and click `Generate`, Copy the generated token in a notepad.
 
-    ![](./images/Module4-AddSonarConfigure07.png)
+    ![](./images/Module4-AddSonarConfigure07.png =800x)
 
     > **Note**: The tokens are used to run analysis or invoke web services without access to the user’s actual credentials.
 
 ### Exercise - 2 : Integrate SCA in the Build Pipeline**
 
-1. In Azure Pipelines, navigate to the `Builds` page and select `MyHealth.AKS.build` Pipeline and Click on `Edit`
+1. In Azure Pipelines, navigate to the `Pipelines` page and select `MyHealth.build` Pipeline and Click on `Edit`
 
-    ![Build Pipeline](./images/Module4-EditBuildPipeline.png)
+    ![Build Pipeline](./images/Module4-EditBuildPipeline.png =800x)
 
 2. On the Tasks tab `Agent Job 1`, select the plus sign ( + ) and search for the `Prepare analysis Configuration` task, and then select `Add` before `Run Services` task.
 
     ![](./images/Module4-AddSonarConfigure06.png)
 
-3. `Prepare Analysis on SonarQube` Configuration task is to configure all the required settings before executing the build. Click `+ NEW` to add SonarQube server endpoint.
-
-    a) Chose `Use standalone scanner`
-    b) Mode `Manually provider configuration`
-    c) Project Key `DevSecOpsKey`
-    d) Project name `DevSecOps`
+3. Click on `Prepare Analysis on SonarQube` Configuration task the click `+ NEW` to add SonarQube server endpoint.
 
     ![](./images/Module4-AddSonarConfigure08.png)
 
@@ -127,25 +122,27 @@ discover bug or vulnerability early in the process.
     If you don’t have SonarQube security token follow 
     [this](https://docs.sonarqube.org/latest/user-guide/user-token/) to create one. And make sure SonarQube project name and project key are same as you entered while creating SonarQube project in `Exercise 1`.
 
-    ![](./images/Module4-AddSonarConfigure09.png)
+    ![](./images/Module4-AddSonarConfigure09.png =300x)
 
     >  **Note**: The tokens are used to run analysis or invoke web services without access to the user’s actual credentials.    
 
 4. Make sure the following options are properly configured in the Prepare Analysis task:
 
-    a) Select `Use Standalone Scanner`
 
-    b) Select `Manually provide configuration`
+    a) Chose `Use standalone scanner`
+    b) Mode `Manually provider configuration`
+    c) Project Key `DevSecOpsKey`
+    d) Project name `DevSecOps`
 
-   ![Add Sonar](./images/Module4-AddSonarTask.png)
+   ![Add Sonar](./images/Module4-AddSonarTask.png =800x)
 
 5. Add a new task `Run Code Analysis` after Build services.
 
-      ![Code Analysis](./images/Module4-AddSonarTaskCodeAnalysis.png)
+      ![Code Analysis](./images/Module4-AddSonarTaskCodeAnalysis.png =800x)
 
 6. Add a new task `Publish Quality Gate Result` after `Run Code Analysis`.
 
-      ![Publish task](./images/Module4-AddSonarTaskPublish.png)
+      ![Publish task](./images/Module4-AddSonarTaskPublish.png =800x)
 
       This step will provide a summary of the analysis results on your SonarQube Instance created on the requistes.
 
@@ -205,7 +202,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
     Upon activation, the below message is displayed.
     ![WhiteBolt Confirmation](./images/Module4-WhiteBoltConfigResult.png =600x)
 
-2. Go back and edit the `MyHealth.AKS.build` build definition and Add the `WhiteSource Bolt task` to your pipeline.
+2. Go back and edit the `MyHealth.build` build definition and Add the `WhiteSource Bolt task` to your pipeline.
 
     ![Add White source](./images/Module4-WhiteSource.png =600x)
 
@@ -241,11 +238,13 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
 ### Exercise 1: Release Pipeline
 
-1. Under `Pipelines`, click on `Releases` and
-    select `Edit`. Click on the `Tasks` tab and in the `Dev`
-    Environment create a new deployment phase by clicking on the three
-    dots and selecting `Add an agent job`. This will be a Hosted
-    Windows Agent as the AzSK job is supported only on Windows.
+1. Under `Pipelines`, click on `Releases`,
+    select **MyHealth.Release-Web** and the click `Edit`. 
+
+    ![AzSK Tool](./images/Module4-AzSKAdd1.png =800x)
+
+    Click on the `Tasks` tab and in the `Dev`
+    Environment, then create a new deployment phase by clicking on the `three dots` and selecting `Add an agent job`. Name this Agent as `AzSK`.
 
     ![AzSK Tool](./images/Module4-AzSKAdd.png =800x)
 
@@ -279,7 +278,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 ### Exercise 2: Remediation
 
 1. Navigate to the `Release` section under the `Pipelines` menu,
-    select `MyHealth.AKS.Release` and select the latest release.
+    select `MyHealth.Release` and select the latest release.
 
     ![Remediation](./images/Module4-RemediationCheck.png =800x)
 

@@ -81,8 +81,8 @@ $env:AZURE_DEVOPS_EXT_PAT = $devopspat
 az devops configure --defaults project=$devopsproject organization=$devopsservice
 	
 Write-Host 'Downloading required lab files'
-Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=%2FBuildScripts%2FMyHealth.AKS.build.json&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\MyHealth.AKS.build.json'
-Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=%2FReleaseScripts%2FMyHealth.AKS.Release.json&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\MyHealth.AKS.Release.json'
+Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=%2FBuildScripts%2FMyHealth.build.json&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\MyHealth.build.json'
+Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=%2FReleaseScripts%2FMyHealth.Release.json&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\MyHealth.Release.json'
 
 #Create a Repo for the Labs
 Write-Host 'Importing labs to your Azure DevOps'

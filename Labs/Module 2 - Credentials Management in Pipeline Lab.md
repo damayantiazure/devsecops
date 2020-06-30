@@ -165,16 +165,16 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 #### Task 3: Configue the Build Pipeline to use the New Key Vault from Variable Group 
 
-1.  Go back to Builds and edit your Build 
+1. Go back to Builds and edit your Build 
  
     ![](./Images/Module2-CreateKeyVault06.png =800x)
 
-2.  Select the `Variables` tab then `Variable group`, and click in `Link variable group`
+2. Select the `Variables` tab then `Variable group`, and click in `Link variable group`
 
 
     ![](./Images/Module2-CreateKeyVault07.png =600x)
 
-3.  Select `SecurityKeyVault(1)` variable group and click `Link`
+3. Select `SecurityKeyVault(1)` variable group and click `Link`
 
     ![](./Images/Module2-CreateKeyVault08.png =400x)
      
@@ -184,12 +184,11 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
     > 
     >If you configured the `Continuous Deployment` on the previous lab, a new deployment will be triggered at the end of the build
     > 
-    >Now the replace token task will use the new Password coming from Azure Key Vault at the build stage
-    > We don't have passwords stored in Source code anymore, and any security officer can setup the new Password in a secure way
-    
+    >Now the new Password coming from Azure Key Vault at the build stage
+    > We don't have passwords stored in Azure DevOps anymore, and any security officer can setup the new Password in a secure way
+
     ![](./Images/Module2-CreateKeyVault10.png =600x)
 
-
-4.  Wait for the release to be completed and confirm that the website is running.
+4. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)

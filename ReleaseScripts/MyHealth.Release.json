@@ -299,7 +299,7 @@
         {
             "sourceId": "073313a6-a1a2-498e-a677-87c973796741:8",
             "type": "Build",
-            "alias": "_MyHealth.AKS.build",
+            "alias": "_MyHealth.build",
             "definitionReference": {
                 "artifactSourceDefinitionUrl": {
                     "id": "https://dev.azure.com/robertoon02/_permalink/_build/index?collectionId=847a35a0-a9ec-4b3c-8d30-a73312bc0327&projectId=073313a6-a1a2-498e-a677-87c973796741&definitionId=8",
@@ -348,7 +348,7 @@
     ],
     "triggers": [
         {
-            "artifactAlias": "_MyHealth.AKS.build",
+            "artifactAlias": "_MyHealth.build",
             "triggerConditions": [],
             "triggerType": 1
         }
@@ -370,7 +370,7 @@
         }
     },
     "id": 3,
-    "name": "MyHealth.AKS.Release-Web",
+    "name": "MyHealth.Release-Web",
     "path": "\\",
     "projectReference": null,
     "url": "https://vsrm.dev.azure.com/robertoon02/073313a6-a1a2-498e-a677-87c973796741/_apis/Release/definitions/3",

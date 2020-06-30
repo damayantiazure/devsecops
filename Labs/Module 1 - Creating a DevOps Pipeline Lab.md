@@ -76,10 +76,7 @@ respective owners.
 **Introduction**
 
 This lab uses a Docker-based ASP.NET Core web application -
-MyHealthClinic (MHC). The application will be deployed to a Kubernetes
-cluster on Azure Kubernetes Service (AKS) using Azure DevOps. A
-"mhc-aks.yaml" file with definitions to deploy on Kubernetes services
-such: Load Balancer in the front end and Redis Cache in the back end.
+MyHealthClinic (MHC). The application will be deployed to a WebApp for Containers Service using Azure DevOps.
 
 The MHC application will be accessible in the mhc-front end pod along
 with the Load Balancer. We use this base environment to learn how to
@@ -136,10 +133,10 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline.png =800x)
 
-4.  Select the `MyHealth.AKS.build.json` file in    `"C:\Users\Student\MyHealth.AKS.build.json"` from the local drive.
+4.  Select the `MyHealth.build.json` file in    `"C:\Users\Student\MyHealth.build.json"` from the local drive.
 
 5.  Once imported, Azure DevOps will present you with the definition
-    editing screen. `Make sure you remove the trailing \"-Import\" from your build definition name. Build definition should be named MyHealth.AKS.build.`
+    editing screen. `Make sure you remove the trailing \"-Import\" from your build definition name. Build definition should be named MyHealth.build.`
 
     ![](./Images/Module1-NewImportBuildPipelineImported.png =800x)
 
@@ -181,8 +178,6 @@ eventually publish artifacts for the Release Pipeline to consume.
   
       |Task                                | Usage|
       |------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      |Replace tokens in appsettings.json|   Replace ACR in mhc-aks.yaml and database connection string in appsettings.json. This file contains details of the database connection string used to connect to Azure database which was created in the beginning of this lab.|
-      |Replace tokens in mhc-aks.yaml    |   This `mhc-aks.yaml` manifest file contains configuration details of `deployments`, `services` and `pods` which will be deployed in Azure Kubernetes Service.|
       |Run services                      |   Prepares suitable environment by pulling required image such as aspnetcore-build:1.0-2.0 and restoring packages mentioned in .csproj. It Pulls microsoft/aspnetcore-build image to build [ASP.NET](http://asp.net/)  Core apps inside the container.|
       |Build services                    |   Builds the docker images specified in a docker-compose.yml file and tags images with \$(Build.BuildId) and latest.|
       |Push services                     |   Pushes the docker image [myhealth.web](http://myhealth.web/)  to Azure Container Registry. Push Docker images with multiple tags to an authenticated Docker Registry or Azure Container Registry and save the resulting repository image digest to a file.|
@@ -228,16 +223,16 @@ triggered soon after the build completes successfully.
 
 2. Navigate back to the `Release` section under `Pipelines` in the left
     navigation bar. Select New and Import Release Pipeline. Select the
-    MyHealth.AKS.Release.json found in `"C:\Users\Student\MyHealth.AKS.Release.json"`
+    MyHealth.Release.json found in `"C:\Users\Student\MyHealth.Release.json"`
     from the local Cloned Drive
 
     ![](./Images/Module1-NewImportReleasePipeline.png =600x)
 
-    > **Make sure you remove the trailing `-Copy` from your release definition name. Release definition name should be MyHealth.AKS.Release.**
+    > **Make sure you remove the trailing `-Copy` from your release definition name. Release definition name should be MyHealth.Release.**
 
     ![](./Images/Module1-NewImportReleasePipeline_Copy.png =600x)
 
-3. Delete the previous created artifacts MyHealth.AKS.build and then click `+ Add` to add an artifact. Select MyHealth.AKS.build as `Source`, `Default version` should be `Latest` and Source.
+3. Delete the previous created artifacts MyHealth.build and then click `+ Add` to add an artifact. Select MyHealth.build as `Source`, `Default version` should be `Latest` and Source.
 
     ![](./Images/Module1-NewImportReleasePipelineSelectHost.png =600x)
 
@@ -257,54 +252,13 @@ triggered soon after the build completes successfully.
 
     ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =600x)
 
-6. Under the AKS deployment phase, for the Create Deployments &
-    Services in AKS task, update the following fields based on the
-    resources you created in the preparation lab:
-
-    > Make sure that the agents selected for each task is a `Azure Pipelines (ubuntu-16.04)`.
+6. Under the **WebApp for Containers** phase, select Agent Pool as `Azure Pipelines` and Agent Specification `Azure Pipelines (ubuntu-16.04)`.
 
     ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =600x)
 
-    a.  Azure Subscription,
-
-    b.  Resource group,
-
-    c.  Kubernetes cluster.
-
-    d.  Expand the Secrets section and update the parameters for Azure
-        subscription from the dropdown.
+    Under the task `Azure WebApp on Container Deploy: $(AppDemo)` select your Azure Pass subscription
 
     ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =600x)
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS03.png =600x)
-
-     Click on the `Update image in AKS` task and repeat the same steps as above.
-
-    ![](./Images/Module1-NewImportBuildPipelineImportedConfigAKS.png =600x)
-
-    > Don't forget Expand the `Secrets` area and use the following values for your
-    `Secrets` section `except for the Azure Container Registry`.
-    Here you will use the name you defined in the prerequisites
-    document.
-
-    ![](./Images/Module1-NewImportBuildPipelineImportedSelectSubscription.png)
-
-    The tasks configured in `Step 5` are used to automate the
-    following process:
-
-    a.  `Create Deployments & Services in AKS` will create the
-        deployments and services in AKS as per the configuration
-        specified in `mhc-aks.yaml` file. The Pods will pull up the
-        latest docker image when they are created.
-
-    b.  `Update image in AKS` will pull up the appropriate image
-        corresponding to the BuildID from the repository specified, and
-        deploys the docker image to the `mhc-front pod` running in
-        AKS.
-
-    c.  A secret called `mysecretkey` is created in the AKS cluster
-        through a kubectl command run by the pipeline in the background.
-        This secret will be used for authorization while pulling
-        myhealth.web image from the Azure Container Registry.
 
 7. Link the Variable Group on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
 
@@ -341,7 +295,7 @@ application is designed to be deployed in a Kubernetes pod with the load
 balancer in the front-end and Redis cache in the back-end.
 
 1.  Select `Pipelines` in the left navigation bar and under
-    the `Pipelines` section click on the `MyHealth.AKS.build` created before then `Run pipeline` button.
+    the `Pipelines` section click on the `MyHealth.build` created before then `Run pipeline` button.
     Click `Run` again when the window titled \"Run pipeline
     \".
 
