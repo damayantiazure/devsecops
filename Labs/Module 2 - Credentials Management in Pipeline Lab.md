@@ -171,7 +171,6 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 2. Select the `Variables` tab then `Variable group`, and click in `Link variable group`
 
-
     ![](./Images/Module2-CreateKeyVault07.png =600x)
 
 3. Select `SecurityKeyVault(1)` variable group and click `Link`

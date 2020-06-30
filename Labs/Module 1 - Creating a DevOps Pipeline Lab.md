@@ -120,16 +120,19 @@ eventually publish artifacts for the Release Pipeline to consume.
     will not be used. Instead we will be importing a pipeline from a
     JSON file.
 
-    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty.png)
+    ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty.png =800x)
+
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_02.png =300x)
+
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_03.png =300x)
+
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_04.png =400x)
 
     > Save this Pipeline as is
 
-2.  Navigate back to the `Pipelines\\Builds` area in Azure DevOps by selecting `Pipeline.`
+2.  Navigate back to the `Pipelines\\Pipelines` in Azure DevOps by selecting `Pipelines`
 
-3.  Under `Pipelines\\Builds`, select `New\\Import a pipeline`
+3.  Under `Pipelines\\Pipelines`, select `New\\Import a pipeline`
 
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline.png =800x)
 
@@ -148,6 +151,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 7. Select the `MyHealthClinicSecDevOps-Public` as Repository in the `Get sources`
 
     ![](./Images/Module1-NewImportBuildPipelineImported02.png =800x)
+
 8.  Select `Run services` task under the `Tasks` tab then select your
     Azure subscription from the `Azure subscription` dropdown.
     Click `Authorize` to create a connexion with Azure.
@@ -178,10 +182,10 @@ eventually publish artifacts for the Release Pipeline to consume.
   
       |Task                                | Usage|
       |------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-      |Run services                      |   Prepares suitable environment by pulling required image such as aspnetcore-build:1.0-2.0 and restoring packages mentioned in .csproj. It Pulls microsoft/aspnetcore-build image to build [ASP.NET](http://asp.net/)  Core apps inside the container.|
-      |Build services                    |   Builds the docker images specified in a docker-compose.yml file and tags images with \$(Build.BuildId) and latest.|
-      |Push services                     |   Pushes the docker image [myhealth.web](http://myhealth.web/)  to Azure Container Registry. Push Docker images with multiple tags to an authenticated Docker Registry or Azure Container Registry and save the resulting repository image digest to a file.|
-      |Lock Services                     |   Docker provides a way to lock container images. Once it is locked, nobody can delete it unknowingly, even if they try it shows an error.|
+      |Run services                        |   Prepares suitable environment by pulling required image such as aspnetcore-build:1.0-2.0 and restoring packages mentioned in .csproj. It Pulls microsoft/aspnetcore-build image to build [ASP.NET](http://asp.net/)  Core apps inside the container.|
+      |Build services                      |   Builds the docker images specified in a docker-compose.yml file and tags images with \$(Build.BuildId) and latest.|
+      |Push services                       |   Pushes the docker image [myhealth.web](http://myhealth.web/)  to Azure Container Registry. Push Docker images with multiple tags to an authenticated Docker Registry or Azure Container Registry and save the resulting repository image digest to a file.|
+      |Lock Services                       |   Docker provides a way to lock container images. Once it is locked, nobody can delete it unknowingly, even if they try it shows an error.|
 
 10. Link the Variable Group existent on the `Variables` tab and Check how to configuring the environment with Shared Variables.
 
@@ -218,7 +222,9 @@ triggered soon after the build completes successfully.
     JSON file.
 
     ![Edit Release Pipeline](./Images/Module1-NewImportBuildPipeline_Empty_Release.png =600x)
+
     ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty01.png =400x)
+
     ![Edit Release Pipeline](./Images/Module1-NewImportReleasePipeline_Empty02.png =400x)
 
 2. Navigate back to the `Release` section under `Pipelines` in the left
@@ -262,16 +268,16 @@ triggered soon after the build completes successfully.
 
 7. Link the Variable Group on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
 
-    ![](./Images/Module1-ReplaceVariablesServer.png)
+    ![](./Images/Module1-ReplaceVariablesServer.png =800x)
 
-    ![](./Images/Module1-ReplaceVariablesServer2.png)
+    ![](./Images/Module1-ReplaceVariablesServer2.png =400x)
 
     > Variables in this pipeline are not Hard-coded, those Variables. 
     > come from the menu Library, save your Pipeline before to open the Library.
 
     > Note: The Database Name is set to mhcdb and the Server Admin Login is sqladmin and Password is P2ssw0rd1234. <-How’s that for security!
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedConfigureVariableServer.png)
+    ![](./Images/Module1-NewImportBuildPipelineImportedConfigureVariableServer.png =800x)
     
     > Save your Release Pipeline
 
@@ -299,36 +305,36 @@ balancer in the front-end and Redis cache in the back-end.
     Click `Run` again when the window titled \"Run pipeline
     \".
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease.png)
+    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease.png =800x)
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease2.png)
+    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease2.png =300x)
 
 2.  Once the build process starts, click on the link `Updated appsettings.json` to see the build in progress.
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedResultsRelease.png)
+    ![](./Images/Module1-NewImportBuildPipelineImportedResultsRelease.png =800x)
 
 3.  The build will generate and push the docker image to Azure Container Registry in Azure. 
     After the build is completed, you will see the build summary. To view the generated images 
     in the https://portal.azure.com, select the `Azure Container Registry` inside the 
     DevSecOps-XXXXX-RG Resource Group and navigate to the `Repositories`.
 
-    ![](./Images/Module1-AzureResultDeployContainer.png)
+    ![](./Images/Module1-AzureResultDeployContainer.png =800x)
 
 4.  Switch back to the Azure DevOps portal. Select the `Release` tab
     in the `Pipelines` section and single-click on the latest release.
     Select `In progress` link to see the live logs and release
     summary.
 
-    ![](./Images/Module1-NewImportBuildPipelineInProgressRelease.png)
+    ![](./Images/Module1-NewImportBuildPipelineInProgressRelease.png =800x)
 
 5. Once the release is complete, navigate to the portal Azure **http://portal.azure.com**, then open the `App Service` **devsecopsdemoappxxxxxt10** inside the resource group **devsecopsxxxxx-rg**
 
-    ![](./Images/Module1-WebPppDemo.png)
+    ![](./Images/Module1-WebPppDemo.png =800x)
 
 6. In the overview menu, click on the URL link to navigate to the website
 
-    ![](./Images/Module1-WebPppDemo2.png)
+    ![](./Images/Module1-WebPppDemo2.png =800x)
 
-    ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png)
+    ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)
 
-    > If you want, Use the credentials Username: user and Password: P2ssw0rd@1 to login to the HealthClinic web application.
+    > If you want, Use the credentials Username: `user` and Password: `P2ssw0rd@1` to login to the HealthClinic web application.
