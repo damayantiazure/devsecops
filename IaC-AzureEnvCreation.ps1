@@ -180,7 +180,7 @@ if ($appexists -eq $false)
     Write-Host 'Azure Web App : ' + $app + ' created '
 }
 
-# Create service WebApp for OWASP top 10
+# Create service WebApp for containers which is our MyHealth Clinic
 Write-Host 'Running WebApp .....' 
 if ($appdemoexists -eq $false)
 {
@@ -209,13 +209,13 @@ Please take note of the following ressource names, they will be used in the next
 ====================================================================================================== 
 			Azure Container Registry name : $($acrname).azurecr.io 
 			SQL Server name : $($sqlsvname).database.windows.net
-			Azure Kubernetes Services name : $($aksname) 
 			Resource Groupe name : $($rgname) 
-			
-			You'll be using the following commands in the Lab 1 
-			
+					
 			SonarQube Instance: 
 			http://$($sonarqaciname)dns.eastus.azurecontainer.io:9000 
 			`n
-			Demo WebApp: `n
-            https://$($appdemo).azurewebsites.net"
+			Demo WebApp: 
+            https://$($appdemo).azurewebsites.net
+            `n"
+
+az account show
