@@ -109,7 +109,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
     
     > For the following command answer with A for `[A] Yes to All`
 
-    A)  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser  
+    A)  Set-ExecutionPolicy Unrestricted -Scope Process -Force  
 
     B)  Invoke-WebRequest 'https://aka.ms/DevSecOpsSetupFile' -UseBasicParsing -OutFile .\IaC-AzureEnvCreation.ps1
         
