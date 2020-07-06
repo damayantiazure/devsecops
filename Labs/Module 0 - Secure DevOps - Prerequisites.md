@@ -78,7 +78,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 
 ## Get you free Azure Subscription
-## Please Note: You will not need to perform this section if you have already redeemed your Azure Pass
+## Please Note: You will not need to perform this step if you have already redeemed your Azure Pass
 1. Navigate to http://aka.ms/azurepass and use the Promo code located in your VM
     
     ![](images/CreateAzurePass02.png =600x)
