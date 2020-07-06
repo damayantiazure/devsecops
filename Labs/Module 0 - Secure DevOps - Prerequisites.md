@@ -78,7 +78,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 
 ## Get you free Azure Subscription
-
+## Please Note: You will not need to perform this section if you have already redeemed your Azure Pass
 1. Navigate to http://aka.ms/azurepass and use the Promo code located in your VM
     
     ![](images/CreateAzurePass02.png =600x)
@@ -105,7 +105,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 ## Create the Infrastructure in Azure
 
-1. Run the following commands inside the VM on PowerShell:
+1. Run the following commands inside the VM using an elevated (Admin) PowerShell session:
     
     > For the following command answer with A for `[A] Yes to All`
 
