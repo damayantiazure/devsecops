@@ -34,6 +34,10 @@ if (!$output) {
     return
 }
 
+$subscription = az account list --query --% "[?contains(name,'Azure Pass - Sponsorship') && contains(state,'Enabled')].[id]" -o tsv
+
+az account set --subscription $subscription
+
 $a = az resource list --query --% "[?contains(name,'devsecops')].[name]" -o table
 # To validate if the resource already exists
 try 
@@ -93,10 +97,10 @@ Write-Host 'Running importing Lab to student repo ......'
 az repos import create --git-source-url 'https://SecureDevOpsDelivery@dev.azure.com/SecureDevOpsDelivery/MyHealthClinicSecDevOps-Public/_git/MyHealthClinicSecDevOps-Public' --detect true --project $devopsproject --repository $repomyclinic
 
 Write-Host 'Adding security extensions to your Azure DevOps'
-az devops extension install --extension-name 'AzSDK-task' --publisher-name 'azsdktm' --detect true
-az devops extension install --extension-name 'sonarqube' --publisher-name 'SonarSource' --detect true
-az devops extension install --extension-name 'replacetokens' --publisher-name 'qetza' --detect true
-az devops extension install --extension-name 'ws-bolt' --publisher-name 'whitesource' --detect true
+az devops extension install --extension-id 'AzSDK-task' --publisher-id 'azsdktm' --detect true
+az devops extension install --extension-id 'sonarqube' --publisher-id 'SonarSource' --detect true
+az devops extension install --extension-id 'replacetokens' --publisher-id 'qetza' --detect true
+az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource' --detect true
 
 #Creating variable group'
 az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' --project $devopsproject --authorize true
