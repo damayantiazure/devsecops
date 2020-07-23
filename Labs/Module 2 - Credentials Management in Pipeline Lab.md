@@ -135,7 +135,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
      ![Key vault](./Images/Module2-CreateKeyVault04.png =400x)
 
 
-4.  Go Back to Library open the `DevSecOpsVariable` variable group, and delete the variable named `SQLpassword` in the list.
+4.  Go Back to Library open the `DevSecOpsVariables` variable group, and delete the variable named `SQLpassword` in the list.
 
     ![Key vault](./Images/Module2-CreateKeyVault05.png =800x)
 
@@ -143,7 +143,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 #### Task 2: Configure Release Pipeline to use the New Key Vault from Variable Group 
 
-1.  Go back to Releases and edit your Release 
+1.  Go back to Releases and edit your Release
  
     ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 

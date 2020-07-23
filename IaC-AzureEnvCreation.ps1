@@ -220,6 +220,7 @@ Please take note of the following ressource names, they will be used in the next
 			`n
 			Demo WebApp: 
             https://$($appdemo).azurewebsites.net
-            `n"
+            `n
+            Subscription information"
 
 az account show

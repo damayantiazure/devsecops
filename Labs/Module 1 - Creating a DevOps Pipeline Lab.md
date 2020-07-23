@@ -307,7 +307,7 @@ balancer in the front-end and Redis cache in the back-end.
 
     ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease.png =800x)
 
-    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease2.png =300x)
+    ![](./Images/Module1-NewImportBuildPipelineImportedQueueRelease2.png =400x)
 
 2.  Once the build process starts, click on the link `Updated appsettings.json` to see the build in progress.
 
