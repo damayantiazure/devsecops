@@ -107,7 +107,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 1. Using the new Windows Terminal, run the following commands inside the VM using an elevated (Administrator) :
 
-    ![](images/poweshell-runcommand.png =400x)
+    ![](images/poweshell-runcommand.png =800x)
 
     > For the following command answer with A for `[A] Yes to All`
 
@@ -129,8 +129,8 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
     ![](images/CreateDevOpsAcc15.png =800x)
 
-    ![](images/poweshell-runcommand2.png =400x)
-    
+    ![](images/poweshell-runcommand2.png =800x)
+
     **The script will take about 15 minutes to execute.**
     **If any task fails during the execution of the script, delete the newly created resource groups and run the script again**
     **Script failures typically use red lettering unless you changed the CLI color scheme**
