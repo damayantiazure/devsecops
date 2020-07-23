@@ -163,10 +163,10 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
     > The password will be used to update the database on the back-end
     > We don't save passwords in Source code anymore, and any security officer can setup the new Password in a secure way
 
-#### Task 3: Configue the Build Pipeline to use the New Key Vault from Variable Group 
+#### Task 3: Configue the Build Pipeline to use the New Key Vault from Variable Group
 
-1. Go back to Builds and edit your Build 
- 
+1. Go back to Builds and edit your Build
+
     ![](./Images/Module2-CreateKeyVault06.png =800x)
 
 2. Select the `Variables` tab then `Variable group`, and click in `Link variable group`

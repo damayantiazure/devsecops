@@ -111,11 +111,11 @@ discover bug or vulnerability early in the process.
 
 2. On the Tasks tab `Agent Job 1`, select the plus sign ( + ) and search for the `Prepare analysis Configuration` task, and then select `Add` before `Run Services` task.
 
-    ![](./images/Module4-AddSonarConfigure06.png)
+    ![](./images/Module4-AddSonarConfigure06.png  =800x)
 
 3. Click on `Prepare Analysis on SonarQube` Configuration task the click `+ NEW` to add SonarQube server endpoint.
 
-    ![](./images/Module4-AddSonarConfigure08.png)
+    ![](./images/Module4-AddSonarConfigure08.png  =800x)
 
     In the Add `SonarQube service connection` wizard enter the SonarQube **server URL** (e.g.: http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000), the SonarQube **security token** and in **Service Connection Name**  `DevSecOps-Private`. 
 
