@@ -109,7 +109,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
     ![](images/poweshell-runcommand.png =800x)
 
-    > For the following command answer with A for `[A] Yes to All`
+    > IF asked, for the following command answer with A for `[A] Yes to All`
 
     A)  Set-ExecutionPolicy Unrestricted -Scope Process -Force  
 

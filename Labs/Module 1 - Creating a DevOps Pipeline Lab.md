@@ -144,7 +144,7 @@ eventually publish artifacts for the Release Pipeline to consume.
     ![](./Images/Module1-NewImportBuildPipelineImported.png =800x)
 
 6.  Select the `Pipeline\\Build Pipeline` area of the definition and
-    select `Hosted Ubuntu 1604` for the Agent Pool.
+    select `Azure Pipelines` for the Agent Pool and `Hosted Ubuntu 1604` for Agent Specification.
 
     ![](./Images/Module1-SelectHostToBuild.png =800x)
 
