@@ -95,7 +95,7 @@ After completing this lab, you will be able to:
 
 **Prerequisites**
 
-Completion of the Secure DevOps prerequisites lab.
+Completion of the [Secure DevOps prerequisites lab](/Module 0 - Secure DevOps - Prerequisites)
 
 **Estimated Time to Complete This Lab**
 
