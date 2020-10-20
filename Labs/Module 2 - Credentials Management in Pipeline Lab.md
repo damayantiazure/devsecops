@@ -118,11 +118,11 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 2.  In the `Variable group name` field type `SecurityKeyVault`, then
 
-    a) Swhitch the `Link secrets from Azure key vault as variables` to On.
+    a) Switch the `Link secrets from Azure key vault as variables` to On.
     b) Select your Azure subscription.
-    c) Select your Azure Key Vault and click in `Autorize` button.
+    c) Select your Azure Key Vault and click in `Authorize` button.
 
-    > If asked type your outlook accont and password
+    > If asked type your outlook account and password
      
     ![Key vault](./Images/Module2-CreateKeyVault02.png =300x)
 
