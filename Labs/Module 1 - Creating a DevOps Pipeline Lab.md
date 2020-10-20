@@ -154,7 +154,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 8.  Select `Run services` task under the `Tasks` tab then select your
     Azure subscription from the `Azure subscription` dropdown.
-    Click `Authorize` to create a connexion with Azure.
+    Click `Authorize` to create a connection with Azure.
 
     ![](./Images/Module1-SelectSubscriptionRunService.png =800x)
 
