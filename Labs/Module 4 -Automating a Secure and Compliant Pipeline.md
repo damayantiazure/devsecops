@@ -75,7 +75,7 @@ discover bug or vulnerability early in the process.
 
     a) `Name`: Name of the SonarQube project that will be displayed on the web interface.
     b) `Key`: The SonarQube project key that is unique for each project.
-    c) Leave the `Visibility` option to `Private`.
+    c) Change the `Visibility` option to `Private`.
 
     ![](./images/Module4-AddSonarConfigure03.png =800x)
 
