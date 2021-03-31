@@ -206,7 +206,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Add White source](./images/Module4-WhiteSource.png =600x)
 
-3. Set the Root working directory to `src`.
+3. Set the Root working directory to `src`. Save and queue the build. The report will not generate unless you run the build. 
 
     ![White Source SRC](./images/Module4-WhiteSourceSrc.png =500x)
 
