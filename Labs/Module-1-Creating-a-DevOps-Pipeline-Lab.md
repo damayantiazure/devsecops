@@ -121,25 +121,30 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 2.  At your organizations home page, navigate to the bottom left corner of the page.
     You will see the cogs and an option to select `Organization Settings` 
-    ![Modify Organization Settings](./Images/Module1-ConnectAAD-OrgSettings.png =300x)
+    
+    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-OrgSettings.png =400x)
 
 3.  Navigate to the `Azure Active Directory` area under `General`. Select 'Connect Directory'.
-    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectDir.png =300x)
+    
+    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectDir.png =800x)
 
 4.  Your login ID will be displayed and you will be prompted to 'Connect your organization to a directory'.
     Select the caret do display your list of directories.
     Select the `Default Directory` for your Azure Active Directory connection
-    ![Modify Organization Settings](./Images/Module1-ConnectAAD-SelectDir.png =300x)
+    
+    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-SelectDir.png =400x)
 
 5.  Once you Azure Active Directory tenant has been selected, you will see the Azure symbol
     with your `Tenant Id`. Select `Connect` to proceed with connecting your organization to
     your Azure Active Directory Tenant.
-    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectTenant.png =300x)
+    
+    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectTenant.png =400x)
 
 6.  Once connected, you will be prompted to `sign out`. Sign out and close your browser session.
     You will need to navigate to your Azure DevOps Organization (https://dev.azure.com/<your organization>)
     to see your changes.
-    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectSignOut.png =300x)
+    
+    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectedSignOut.png =400x)
     
 
 
@@ -279,21 +284,21 @@ triggered soon after the build completes successfully.
 
     > Make sure that the agents selected for each task is a `Hosted Agents (windows 2019)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png =800x)
 
 5. In the `Dev` stage, under the `DB deployment` phase, click on
     the `Execute Azure SQL: DacpacTask` task. Under `Azure Service Connection Type`, select from the drop down `Azure Resource Manager`. Under `Azure Subscription`, select your Azure
     subscription.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =800x)
 
 6. Under the **WebApp for Containers** phase, select Agent Pool as `Azure Pipelines` and Agent Specification `Azure Pipelines (ubuntu-16.04)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =800x)
 
     Under the task `Azure WebApp on Container Deploy: $(AppDemo)` select your Azure Pass subscription
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =800x)
 
 7. Link the Variable Group on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
 
