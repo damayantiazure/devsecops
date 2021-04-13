@@ -114,7 +114,36 @@ After completing this exercise, you will be able to:
 In this exercise, you will configure a Build Pipeline that will
 eventually publish artifacts for the Release Pipeline to consume.
 
-#### Task 1: Import Repository and Build Pipeline 
+#### Task 1: Connect your Azure DevOps Organization to Azure Active Directory
+
+1.  Navigate to the Azure DevOps organization you created in Module 0.
+    The link will look similar to https://dev.azure.com/<your organization>
+
+2.  At your organizations home page, navigate to the bottom left corner of the page.
+    You will see the cogs and an option to select `Organization Settings` 
+    ![Modify Organization Settings](./Images/Module1-ConnectAAD-OrgSettings.png =300x)
+
+3.  Navigate to the `Azure Active Directory` area under `General`. Select 'Connect Directory'.
+    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectDir.png =300x)
+
+4.  Your login ID will be displayed and you will be prompted to 'Connect your organization to a directory'.
+    Select the caret do display your list of directories.
+    Select the `Default Directory` for your Azure Active Directory connection
+    ![Modify Organization Settings](./Images/Module1-ConnectAAD-SelectDir.png =300x)
+
+5.  Once you Azure Active Directory tenant has been selected, you will see the Azure symbol
+    with your `Tenant Id`. Select `Connect` to proceed with connecting your organization to
+    your Azure Active Directory Tenant.
+    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectTenant.png =300x)
+
+6.  Once connected, you will be prompted to `sign out`. Sign out and close your browser session.
+    You will need to navigate to your Azure DevOps Organization (https://dev.azure.com/<your organization>)
+    to see your changes.
+    ![Modify Organization Settings](./Images/Module1-ConnectAAD-ConnectSignOut.png =300x)
+    
+
+
+#### Task 2: Import Repository and Build Pipeline 
 
 1.  Start by creating an empty build pipeline. Do not worry, this pipeline
     will not be used. Instead we will be importing a pipeline from a
@@ -194,7 +223,7 @@ eventually publish artifacts for the Release Pipeline to consume.
     ![](./Images/Module1-ReplaceVariablesServer1.png =800x)
 
   > Variables in this pipeline are not Hard-coded, those Variables. 
-  > come from the menu Library, save your Pipeline before to open the Library.
+  > Save your Pipeline, then navigate to the Library under the Pipeline area.
 
    ![](./Images/Module1-ReplaceVariablesServer_Save.png =500x)
 
