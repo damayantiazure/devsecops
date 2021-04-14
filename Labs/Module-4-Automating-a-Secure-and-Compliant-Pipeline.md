@@ -311,7 +311,8 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Download Check](./images/Module4-RemediationCheckDownloadCheck.png =600x)
 
-8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
+8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. 
+   In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
 
     ![Auto Fix Problems](./images/Module4-RemediationAutoFix.png =600x)
 
@@ -320,11 +321,9 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Run AutoFix](./images/Module4-RemediationAutoFixRun.png =600x)
 
-> (Optional maybe not work, preview features)
+> (Optional Functionality may not work due the FixControlScripts being a Preview Feature)
 
-10. To run these scripts read the instructions in
-    the `README.txt` file.
+10. Running these scripts are not recommended as part of this lab. Typical remediation paths would include a partnership between the
+    Developer and Operations teams to ensure the DEV, TEST, or PROD environments are not impacted by the changes.
 
-11. After running the scripts, trigger the Pipeline and verify the
-    results. Note that you will need to manually fix the Controls that
-    do not generate the AutoFix Scripts.
+
