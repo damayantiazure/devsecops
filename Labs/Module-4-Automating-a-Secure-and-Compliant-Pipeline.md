@@ -259,12 +259,16 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 4. Set the `Display name` for the task to `Secure Devops kit for
     Azure` and set your `Azure Subscription`. In the `Select the
     Parameter Set` dropdown select \"ResourceGroupName\". Set
-    the `ResourceGroup Name` to the one created for this lab. Set
-    the `Subscription ID` to the Id of the subscription hosting the
+    the `ResourceGroup Name` to the one created in Module 0 - Prerequisites lab. ResourceGroup Name
+    is the output of the IaC-AzureEnvCreation.ps1 script you ran when creating your Azure resources.
+    Set the `Subscription ID` to the Id of the subscription hosting the
     resources. You will run the Security Verification Tests (SVTs) on
-    the `Subscription ID`. You can get this ID by running the command:
+    the `Subscription ID`. You can get the Subscription ID by running the command below in the Azure CLI:
 
     `az account show`
+
+    All this information is also available by navigating to https://portal.azure.com.
+
 
     The final config should be like this:
 
