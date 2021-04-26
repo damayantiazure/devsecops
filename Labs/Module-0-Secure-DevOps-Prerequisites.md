@@ -132,7 +132,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
     ![](images/poweshell-runcommand2.png =800x)
 
     **The script will take about 15 minutes to execute.**
-    **If any task fails during the execution of the script, delete the newly created resource groups and run the script again**
+    **If any task fails during the execution of the script, feel free to run the script again. The script is able to create any missing artifacts.**
     **Script failures typically use red lettering unless you changed the CLI color scheme**
      
     ![](images/CreateDevOpsAcc16.png =800x)
