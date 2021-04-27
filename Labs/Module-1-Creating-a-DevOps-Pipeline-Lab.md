@@ -131,12 +131,12 @@ eventually publish artifacts for the Release Pipeline to consume.
 4.  In Change billing, under `Select an Azure subscription` choose `Azure Pass Subcription`.
     Save your changes by selecting `Save`
         
-    ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =400x)
+    ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =300x)
 
 5.  In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 1.
     This will provide you with one paid parallel job, which will be charged to your Azure Pass. 
     
-    ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =400x)
+    ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =800x)
 
 
 
