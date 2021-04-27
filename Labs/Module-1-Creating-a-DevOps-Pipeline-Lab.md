@@ -114,7 +114,7 @@ After completing this exercise, you will be able to:
 In this exercise, you will configure a Build Pipeline that will
 eventually publish artifacts for the Release Pipeline to consume.
 
-#### Task 1: Connect your Azure DevOps Organization to Azure Active Directory
+#### Task 1: Setup Prallel MS Hosted Job
 
 1.  Navigate to the Azure DevOps organization you created in Module 0.
     The link will look similar to https://dev.azure.com/<your organization>
@@ -122,30 +122,22 @@ eventually publish artifacts for the Release Pipeline to consume.
 2.  At your organizations home page, navigate to the bottom left corner of the page.
     You will see the cogs and an option to select `Organization Settings` 
     
-    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-OrgSettings.png =400x)
+    ![Modify Organization Settings](./Images/Module-1-OrgSettings.png =400x)
 
-3.  Navigate to the `Azure Active Directory` area under `General`. Select 'Connect Directory'.
+3.  Navigate to the `Billing` area under `General`. Select 'Set up billing'.
     
-    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectDir.png =800x)
+    ![Modify Organization Settings](./Images/Module-1-BillingOption.png =800x)
 
-4.  Your login ID will be displayed and you will be prompted to 'Connect your organization to a directory'.
-    Select the caret do display your list of directories.
-    Select the `Default Directory` for your Azure Active Directory connection
-    
-    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-SelectDir.png =400x)
+4.  In Change billing, under 'Select an Azure subscription' choose 'Azure Pass Subcription'.
+    Save your changes by selecting 'Save'
+        
+    ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =400x)
 
-5.  Once you Azure Active Directory tenant has been selected, you will see the Azure symbol
-    with your `Tenant Id`. Select `Connect` to proceed with connecting your organization to
-    your Azure Active Directory Tenant.
+5.  In the 'Paid parallel jobs' box for 'MS Hosted CI/CD', enter the value 1.
+    This will provide you with one paid parallel job which will be charged to your Azure Pass. 
     
-    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectTenant.png =400x)
+    ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =400x)
 
-6.  Once connected, you will be prompted to `sign out`. Sign out and close your browser session.
-    You will need to navigate to your Azure DevOps Organization (https://dev.azure.com/<your organization>)
-    to see your changes.
-    
-    ![Modify Organization Settings](./Images/Module-1-ConnectAAD-ConnectedSignOut.png =400x)
-    
 
 
 #### Task 2: Import Repository and Build Pipeline 
