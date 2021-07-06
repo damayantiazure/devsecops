@@ -5,7 +5,7 @@ $location = 'eastus'
 cd c:\users\student
 
 $unicstr = -join ((97..122) | Get-Random -Count 5 | % {[char]$_})
-# $aksexists = $false
+$aksexists = $false
 $acrexists = $false
 $dbexists = $false
 $svcpexists = $false
@@ -13,6 +13,7 @@ $appexists = $false
 $appdemoexists = $false
 $kvexists = $false
 $snrexists = $false
+$devopsprojectexists = $false
 
 Write-Host ''
 Write-Host '---------------------------------------------------------------------------------------------------'
@@ -63,7 +64,6 @@ catch
     }
 
 $rgname = "devsecops-" + $unicstr + "-rg"
-# $aksname = "devsecops"+ $unicstr + "aks" 
 $acrname = "devsecops" + $unicstr + "acr"
 $sqlsvname =  "devsecops" + $unicstr + "db"
 $appServicePlan = "devsecopsowasp" + $unicstr + "t10"
@@ -79,10 +79,32 @@ az extension add --name azure-devops
 
 #Configure local variables to call DevOps Services
 $devopspat = Read-Host -Prompt 'Enter Personal Token Access (PAT) created in the first part of requisites.'
-$devopsservice = Read-Host -Prompt 'Type the name of URL DevOps with your organization e.g. : https://dev.azure.com/YOUR_ORGNIZATION_NAME'
-$devopsproject = Read-Host -Prompt 'Type the name of you project created in your DevOps.'
+$devopsservice = Read-Host -Prompt 'Type the of URL DevOps with your organization e.g. : https://dev.azure.com/YOUR_ORGNIZATION_NAME'
 $env:AZURE_DEVOPS_EXT_PAT = $devopspat
-az devops configure --defaults project=$devopsproject organization=$devopsservice
+
+$a = az devops project list --organization $devopsservice --query value[].name -o tsv
+# To validate if the resource already exists
+try 
+{
+    foreach ($item in $a) {
+        switch ($item) {
+            ("devsecops"){ $devopsprojectexists = $true}
+        }
+    }
+}
+catch 
+{
+    Ignore this error
+}
+
+# Create a Key Vault to store secrets
+Write-Host 'Creating DevSecOps project if not exists.....' 
+if ($devopsprojectexists -eq $false)
+{
+    az devops project create --name "DevSecOps" --organization $devopsservice
+}
+
+az devops configure --defaults project="DevSecOps" organization=$devopsservice
 	
 Write-Host 'Downloading required lab files'
 Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=%2FBuildScripts%2FMyHealth.build.json&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\MyHealth.build.json'
@@ -90,11 +112,11 @@ Invoke-WebRequest 'https://dev.azure.com/secureDevOpsDelivery/82dd0a19-ef30-4974
 
 #Create a Repo for the Labs
 Write-Host 'Importing labs to your Azure DevOps'
-az repos create --name $repomyclinic --project $devopsproject
+az repos create --name $repomyclinic --project "DevSecOps"
 
 #Import the repo from Demo Website
 Write-Host 'Running importing Lab to student repo ......' 
-az repos import create --git-source-url 'https://SecureDevOpsDelivery@dev.azure.com/SecureDevOpsDelivery/MyHealthClinicSecDevOps-Public/_git/MyHealthClinicSecDevOps-Public' --detect true --project $devopsproject --repository $repomyclinic
+az repos import create --git-source-url 'https://SecureDevOpsDelivery@dev.azure.com/SecureDevOpsDelivery/MyHealthClinicSecDevOps-Public/_git/MyHealthClinicSecDevOps-Public' --detect true --project "DevSecOps" --repository $repomyclinic
 
 Write-Host 'Adding security extensions to your Azure DevOps'
 az devops extension install --extension-id 'AzSDK-task' --publisher-id 'azsdktm' --detect true
@@ -103,7 +125,7 @@ az devops extension install --extension-id 'replacetokens' --publisher-id 'qetza
 az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource' --detect true
 
 #Creating variable group'
-az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' --project $devopsproject --authorize true
+az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' --project "DevSecOps" --authorize true
 
 # Register the network provider
 az provider register --namespace Microsoft.Network
@@ -125,34 +147,12 @@ if ($kvexists -eq $false)
     Write-Host 'Keyvault : ' + $keyvaultname + ' created '
 }
 
-# Write-Host 'Running Azure Kubernetes Services setup .....' 
-# if ($aksexists -eq $false)
-# {
-#     $spn = (az ad sp create-for-rbac --name $aksname) | ConvertFrom-Json
-
-#     Write-Host 'Service Principal Name : created '
-
-#     # Create AKS Service
-#     az aks create --resource-group $rgname --name $aksname --enable-addons monitoring --kubernetes-version 1.15.10 --generate-ssh-keys --location $location --node-vm-size Standard_D2s_v3 --disable-rbac --service-principal $spn.appId --client-secret $spn.password
-#     Write-Host 'Azure Kubernetes Service : ' + $aksname + ' created '
-# }
-
 # Create ACR service
 Write-Host 'Running ACR service .....' 
 if ($acrexists -eq $false)
 {
     az acr create --resource-group $rgname --name $acrname --sku Standard --location $location --admin-enabled true
     Write-Host 'Azure Container Registry : ' + $acrname + ' created '
-
-    # # Get the id of the service principal configured for AKS
-    # $CLIENT_ID=(az aks show --resource-group $rgname --name $aksname --query "servicePrincipalProfile.clientId" --output tsv)
-
-    # # Get the ACR registry resource id
-    # $ACR_ID=(az acr show --name $acrname --resource-group $rgname --query "id" --output tsv)
-
-    # Create role assignment
-    # az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
-    # Write-Host 'Access from AKS to ACR : granted '
 }
 
 # Create database server
@@ -203,11 +203,7 @@ if ($snrexists -eq $false)
     Write-Host 'Azure Web App SonarQube : ' + $sonarqaciname + ' created '
 }
 
-# # Create service SonarQube  in Azure Container Instances
-# Write-Host 'Installing Kubernetes cli .....' 
-# az aks install-cli
-# $env:path += ';C:\Users\Student\.azure-kubectl'
-
+# Create service SonarQube  in Azure Container Instances
 Write-Host "====================================================================================================== 
 Please take note of the following ressource names, they will be used in the next labs 
 ====================================================================================================== 
@@ -217,10 +213,20 @@ Please take note of the following ressource names, they will be used in the next
 					
 			SonarQube Instance: 
 			http://$($sonarqaciname)dns.eastus.azurecontainer.io:9000 
+
 			`n
 			Demo WebApp: 
             https://$($appdemo).azurewebsites.net
+
             `n
-            Subscription information"
+            Subscription information
+
+            `n
+            Azure DevOps Project 
+            $($devopsservice)/DevSecOps
+
+            `n
+            Build and Release files as on :
+            c:\users\student "
 
 az account show
