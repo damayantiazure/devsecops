@@ -95,7 +95,7 @@ After completing this lab, you will be able to:
 
 **Prerequisites**
 
-Completion of the Secure DevOps prerequisites lab.
+Completion of the Secure DevOps prerequisites lab in Module 0 - Secure DevOps - Prerequisites
 
 **Estimated Time to Complete This Lab**
 
@@ -114,7 +114,33 @@ After completing this exercise, you will be able to:
 In this exercise, you will configure a Build Pipeline that will
 eventually publish artifacts for the Release Pipeline to consume.
 
-#### Task 1: Import Repository and Build Pipeline 
+#### Task 1: Setup Prallel MS Hosted Job
+
+1.  Navigate to the Azure DevOps organization you created in Module 0.
+    The link will look similar to https://dev.azure.com/<your organization>
+
+2.  At your organizations home page, navigate to the bottom left corner of the page.
+    You will see the cogs and an option to select `Organization Settings` 
+    
+    ![Modify Organization Settings](./Images/Module-1-OrgSettings.png =400x)
+
+3.  Navigate to the `Billing` area under `General`. Select `Set up billing`.
+    
+    ![Modify Organization Settings](./Images/Module-1-BillingOption.png =800x)
+
+4.  In Change billing, under `Select an Azure subscription` choose `Azure Pass Subcription`.
+    Save your changes by selecting `Save`
+        
+    ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =300x)
+
+5.  In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 1.
+    This will provide you with one paid parallel job, which will be charged to your Azure Pass. 
+    
+    ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =800x)
+
+
+
+#### Task 2: Import Repository and Build Pipeline 
 
 1.  Start by creating an empty build pipeline. Do not worry, this pipeline
     will not be used. Instead we will be importing a pipeline from a
@@ -154,7 +180,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 8.  Select `Run services` task under the `Tasks` tab then select your
     Azure subscription from the `Azure subscription` dropdown.
-    Click `Authorize` to create a connexion with Azure.
+    Click `Authorize` to create a connection with Azure.
 
     ![](./Images/Module1-SelectSubscriptionRunService.png =800x)
 
@@ -194,7 +220,7 @@ eventually publish artifacts for the Release Pipeline to consume.
     ![](./Images/Module1-ReplaceVariablesServer1.png =800x)
 
   > Variables in this pipeline are not Hard-coded, those Variables. 
-  > come from the menu Library, save your Pipeline before to open the Library.
+  > Save your Pipeline, then navigate to the Library under the Pipeline area.
 
    ![](./Images/Module1-ReplaceVariablesServer_Save.png =500x)
 
@@ -250,21 +276,21 @@ triggered soon after the build completes successfully.
 
     > Make sure that the agents selected for each task is a `Hosted Agents (windows 2019)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureTask.png =800x)
 
 5. In the `Dev` stage, under the `DB deployment` phase, click on
     the `Execute Azure SQL: DacpacTask` task. Under `Azure Service Connection Type`, select from the drop down `Azure Resource Manager`. Under `Azure Subscription`, select your Azure
     subscription.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureDB.png =800x)
 
 6. Under the **WebApp for Containers** phase, select Agent Pool as `Azure Pipelines` and Agent Specification `Azure Pipelines (ubuntu-16.04)`.
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS01.png =800x)
 
     Under the task `Azure WebApp on Container Deploy: $(AppDemo)` select your Azure Pass subscription
 
-    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =600x)
+    ![](./Images/Module1-NewImportReleasePipelineConfigureAKS02.png =800x)
 
 7. Link the Variable Group on the `Variables` tab and Check how to configuring the environment with Shared Variables (if not linked link the `DevSecOpsVariables` to it).
 

@@ -75,7 +75,7 @@ discover bug or vulnerability early in the process.
 
     a) `Name`: Name of the SonarQube project that will be displayed on the web interface.
     b) `Key`: The SonarQube project key that is unique for each project.
-    c) Leave the `Visibility` option to `Private`.
+    c) Change the `Visibility` option to `Private`.
 
     ![](./images/Module4-AddSonarConfigure03.png =800x)
 
@@ -206,7 +206,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Add White source](./images/Module4-WhiteSource.png =600x)
 
-3. Set the Root working directory to `src`.
+3. Set the Root working directory to `src`. Save and queue the build. The report will not generate unless you run the build. 
 
     ![White Source SRC](./images/Module4-WhiteSourceSrc.png =500x)
 
@@ -259,12 +259,16 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 4. Set the `Display name` for the task to `Secure Devops kit for
     Azure` and set your `Azure Subscription`. In the `Select the
     Parameter Set` dropdown select \"ResourceGroupName\". Set
-    the `ResourceGroup Name` to the one created for this lab. Set
-    the `Subscription ID` to the Id of the subscription hosting the
+    the `ResourceGroup Name` to the one created in Module 0 - Prerequisites lab. ResourceGroup Name
+    is the output of the IaC-AzureEnvCreation.ps1 script you ran when creating your Azure resources.
+    Set the `Subscription ID` to the Id of the subscription hosting the
     resources. You will run the Security Verification Tests (SVTs) on
-    the `Subscription ID`. You can get this ID by running the command:
+    the `Subscription ID`. You can get the Subscription ID by running the command below in the Azure CLI:
 
     `az account show`
+
+    All this information is also available by navigating to https://portal.azure.com.
+
 
     The final config should be like this:
 
@@ -311,7 +315,8 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Download Check](./images/Module4-RemediationCheckDownloadCheck.png =600x)
 
-8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
+8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. 
+   In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
 
     ![Auto Fix Problems](./images/Module4-RemediationAutoFix.png =600x)
 
@@ -320,11 +325,9 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![Run AutoFix](./images/Module4-RemediationAutoFixRun.png =600x)
 
-> (Optional maybe not work, preview features)
+> (Optional Functionality may not work due the FixControlScripts being a Preview Feature)
 
-10. To run these scripts read the instructions in
-    the `README.txt` file.
+10. Running these scripts are not recommended as part of this lab. Typical remediation paths would include a partnership between the
+    Developer and Operations teams to ensure the DEV, TEST, or PROD environments are not impacted by the changes.
 
-11. After running the scripts, trigger the Pipeline and verify the
-    results. Note that you will need to manually fix the Controls that
-    do not generate the AutoFix Scripts.
+
