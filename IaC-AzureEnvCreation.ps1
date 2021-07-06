@@ -226,7 +226,7 @@ Please take note of the following ressource names, they will be used in the next
             $($devopsservice)/DevSecOps
 
             `n
-            Build and Release files as on :
+            Build and Release files are on :
             c:\users\student "
 
 az account show
