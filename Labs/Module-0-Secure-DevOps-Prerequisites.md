@@ -123,9 +123,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
     a) URL DevOps with your organization name (See following image)
 
-    b) Project Name (See following image)
-
-    c) Personal Token Access (PAT), obtained in the step 4 of **Create an Azure DevOps**
+    B) Personal Token Access (PAT), obtained in the step 4 of **Create an Azure DevOps**
 
     ![](images/CreateDevOpsAcc15.png =800x)
 
