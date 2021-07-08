@@ -138,7 +138,7 @@ eventually publish artifacts for the Release Pipeline to consume.
     
     ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =800x)
 
-
+    Click on Save
 
 #### Task 2: Import Repository and Build Pipeline 
 
