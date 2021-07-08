@@ -125,7 +125,10 @@ az devops extension install --extension-id 'replacetokens' --publisher-id 'qetza
 az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource' --detect true
 
 #Creating variable group'
-az pipelines variable-group create --name 'DevSecOpsVariables' --variables ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' --project "DevSecOps" --authorize true
+az pipelines variable-group create --name 'DevSecOpsVariables' --variables resourcegroupe=$rgname registry=$acrname ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' Subscription=$subscription --project "DevSecOps" --authorize true
+
+#Create the Azure Pipeline
+az pipelines create --name 'MyHealthClinicSecDevOps-CICD' --description 'Pipeline for contoso project'  --repository MyHealthClinicSecDevOps-Public --branch master --yml-path azure-pipelines.yml --repository-type tfsgit
 
 # Register the network provider
 az provider register --namespace Microsoft.Network
