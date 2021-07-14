@@ -1,4 +1,4 @@
-FROM whyellow/build-netcore-sonar:latest
+FROM insightsoftware/aspnetcore:1.0.4
 ARG source
 WORKDIR /app
 EXPOSE 80
