@@ -121,26 +121,38 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 2.  At your organizations home page, navigate to the bottom left corner of the page.
     You will see the cogs and an option to select `Organization Settings` 
-    
-    ![Modify Organization Settings](./Images/Module-1-OrgSettings.png =400x)
+
+    ![Modify Organization Settings](./Images/Module-1-OrgSettings.png =300x)
 
 3.  Navigate to the `Billing` area under `General`. Select `Set up billing`.
-    
+
     ![Modify Organization Settings](./Images/Module-1-BillingOption.png =800x)
 
-4.  In Change billing, under `Select an Azure subscription` choose `Azure Pass Subcription`.
+4. In Change billing, under `Select an Azure subscription` choose `Azure Pass Subcription`.
     Save your changes by selecting `Save`
-        
+
     ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =300x)
 
-5.  In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 1.
+5. In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 1.
     This will provide you with one paid parallel job, which will be charged to your Azure Pass. 
-    
+
     ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =800x)
 
-    Click on Save
+    Click on `Save`
 
-#### Task 2: Import Repository and Build Pipeline 
+6. Navigate to the DevSecOps Project properties created on the Module-0 and click on `Service Connection`-->`Create Service Connection`
+
+    ![Edit Release Pipeline](./Images/CreateServiceConnection-01.png =800x)
+
+7.  Select `Service principal (automatic)` then click on `next`
+
+    ![Edit Release Pipeline](./Images/CreateServiceConnection-02.png =400x)
+
+8.  Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** paste the `Subscription ID` that you got on the Module-0
+
+    ![Edit Release Pipeline](./Images/CreateServiceConnection-03.png =400x)
+
+#### Task 2: Import Repository and Build Pipeline
 
 1.  Start by creating an empty build pipeline. Do not worry, this pipeline
     will not be used. Instead we will be importing a pipeline from a

@@ -47,22 +47,48 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
 [[_TOC_]]
 
-## Create an Azure DevOps
+### Exercise 1 : Get you free Azure Subscription
+
+> Please Note: You will not need to perform this step if you have already redeemed your Azure Pass
+
+1. Navigate to http://aka.ms/azurepass and use the Promo code located in your VM
+
+    ![](images/CreateAzurePass02.png =600x)
+    ![](images/CreateAzurePass01.png =800x)
+
+    Click Claim
+
+    ![](images/CreateAzurePass03.png =600x)
+
+2. Fill all fields and click Next
+
+    ![](images/CreateAzurePass04.png =600x)
+
+3. Accept the terms and click ``Sign up``
+
+    ![](images/CreateAzurePass05.png =600x)
+  
+> `Attention`
+>
+> **This process will take about 15 minutes, don't refresh your screen!**
+> ---
+
+### Exercise 2 :Create an Azure DevOps
+
 1. Navigate to https://dev.azure.com/ Click `Start Free`
-    
+
     ![](images/CreateDevOpsAcc00.png =500x)
 
 2. Login with your new Microsoft account and Select `Continue`
-    
+
     ![](images/CreateDevOpsAcc01.png =300x)
 
-  > **If asked create a new private project e.g. DevSecOps, otherwise create one**
-
-   ![](images/CreateDevOpsAcc00B.png =400x)
-
-3. In your new Organization, create a Personal Access Token ([PAT](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&viewFallbackFrom=vsts&tabs=preview-page#create-personal-access-tokens-to-authenticate-access))
+3. In your new Organization, create a **Personal Access Token (PAT)**. Navigate to `Security`
 
     ![](images/CreateDevOpsAcc10.png =400x)
+
+    Click `+ New Token`
+
     ![](images/CreateDevOpsAcc11.png =300x)
 
 4. Name the Personal Access Token (PAT) as `DevSecOps`, select Full access and click `Create`
@@ -70,73 +96,48 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
    ![](images/CreateDevOpsAcc12.png =500x)
 
 
-   > **Save your new token key in a notepad**
-   
     ![](images/CreateDevOpsAcc13.png =400x)
 
-   > **Save your new token key in a notepad**
+   > **``IMPORTANT !``** **Save** your new Personal Access Token (PAT) key in a notepad for next exercises
 
+### Exercise 3 : Create the Infrastructure in Azure
 
-## Get you free Azure Subscription
-## Please Note: You will not need to perform this step if you have already redeemed your Azure Pass
-1. Navigate to http://aka.ms/azurepass and use the Promo code located in your VM
-    
-    ![](images/CreateAzurePass02.png =600x)
-    ![](images/CreateAzurePass01.png =800x)
-    
-    Click Claim
-    
-    ![](images/CreateAzurePass03.png =600x)
-
-2. Fill all fields and click Next
-    
-    ![](images/CreateAzurePass04.png =600x)
-
-3. Accept the terms and click ``Sign up``
-    
-    ![](images/CreateAzurePass05.png =600x)
-  
-> Attention
-> 
-> **This process will take about 15 minutes, don't refresh your screen!**
-> ---
-    
-
-
-## Create the Infrastructure in Azure
-
-1. Using the new Windows Terminal, run the following commands inside the VM using an elevated (Administrator) :
+1. Open the new Windows Terminal, Run as Administrator :
 
     ![](images/poweshell-runcommand.png =800x)
 
-    > IF asked, for the following command answer with A for `[A] Yes to All`
+    > run the following commands, IF asked, for the following command answer with A for `[A] Yes to All`
 
-    A)  Set-ExecutionPolicy Unrestricted -Scope Process -Force  
+    ```powershell
+    Set-ExecutionPolicy Unrestricted -Scope Process -Force
+    ```
 
-    B)  Invoke-WebRequest 'https://aka.ms/DevSecOpsSetupFile' -UseBasicParsing -OutFile .\IaC-AzureEnvCreation.ps1
-        
-    > Type the following command and hit `Enter` follow the instructions.
+    ```powershell
+    Invoke-WebRequest 'https://aka.ms/DevSecOpsSetupFile' -UseBasicParsing -OutFile .\IaC-AzureEnvCreation.ps1
+    ```
 
-    C)  .\IaC-AzureEnvCreation.ps1
+    ```powershell
+    .\IaC-AzureEnvCreation.ps1
+    ```
 
-    **Keep the following information in a notepad, you will be asked for those values in the executing script.**
+    **The script will request you Personal Access Token generated on the Exercice 1 and the DevOps Organization URL**
 
-    a) URL DevOps with your organization name (See following image)
-
-    B) Personal Token Access (PAT), obtained in the step 4 of **Create an Azure DevOps**
+    URL DevOps with your organization name (e.g. https://dev.azure.com/myorg)
 
     ![](images/CreateDevOpsAcc15.png =800x)
+
+    Exection of the script
 
     ![](images/poweshell-runcommand2.png =800x)
 
     **The script will take about 15 minutes to execute.**
     **If any task fails during the execution of the script, feel free to run the script again. The script is able to create any missing artifacts.**
     **Script failures typically use red lettering unless you changed the CLI color scheme**
-     
+
     ![](images/CreateDevOpsAcc16.png =800x)
 
     > Optional
-    > 
+    >
     > You can navigate to https://portal.azure.com in the resource group DevSecOps-xxxxx-RG and see all resources created to the workshop
     >
     > Explore as well the new repo created in your Organization-->Project named MyHealthClinicSecDevOps-Public in https://dev.azure.com 
