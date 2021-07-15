@@ -2,7 +2,7 @@ version: '2'
 
 services:
   ci-build:
-    image: whyellow/build-netcore-sonar:latest
+    image: demosecops/aspnetcore-build1.0-2.0:1.0-2.0
     volumes:
       - .:/src
     working_dir: /src
