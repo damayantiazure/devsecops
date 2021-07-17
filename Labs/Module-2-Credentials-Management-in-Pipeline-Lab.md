@@ -95,9 +95,9 @@ Completion of the Module 1: Creating a DevOps Pipeline.
 
 **Estimated Time to Complete This Lab**
 
-20 minutes
+30 minutes
 
-### Exercise 1.1: Configure Build and Release Pipeline
+## Set up security in Pipelines
 
 **Objectives**
 
@@ -110,84 +110,152 @@ After completing this exercise, you will be able to:
 In this exercise, you will configure a Build Pipeline and Release that will
 get Passwords from a KeyVault and publish artifacts for the Release Pipeline to deploy in production.
 
-#### Task 1: Link Azure Key Vault to Azure DevOps Pipeline 
+## Exercise 1: Set up Approvals in your Service Connection
 
-1.  Navigate to Pipelines-->Library in https://dev.azure.com and click `+ Variable group`
+1. In Azure DevOps, Navigate to `Project Settings`-->`Service connections` and click in your Service connections created to deploy to Azure Infrastructure e.g.:
+
+    ![](./Images/Module2-SecurityPipeline-01.png  =800x)
+
+    In the the  `...` top right then `Approvals and checks`
+
+    ![](./Images/Module2-SecurityPipeline-02.png  =800x)
+
+    Click  `Approvals`
+
+    ![](./Images/Module2-SecurityPipeline-03.png  =600x)
+
+2. In the Approvals you can configure the group or the person that will approve any usage of this Environment.
+
+    Add your name to the approvals list then click `Create`
+
+    ![](./Images/Module2-SecurityPipeline-04.png  =400x)
+
+    > Each environment can have different security approvals
+
+## Exercise 2: Set up Approvals for environments
+
+1. In Azure DevOps, Navigate to `Pipelines`-->`Environments` and click in `New environment` top right corner.
+
+    > Environments are created by YAML pipelines and by Default don't have approvals
+
+    ![](./Images/Module2-SecurityPipeline-05.png  =800x)
+
+    For the name type **MyClinicSecOps-Prod**, then click on `Create`
+
+    ![](./Images/Module2-SecurityPipeline-06.png  =400x)
+
+    Click on `...` top right corner and then `Approvals and checks`
+
+    ![](./Images/Module2-SecurityPipeline-07.png  =600x)
+
+    Click  `Approvals`
+
+    ![](./Images/Module2-SecurityPipeline-03.png  =600x)
+
+2. In the Approvals you can configure the group or the person that will approve any usage of this Environment.
+
+    Add your name to the approvals list then click `Create`
+
+    ![](./Images/Module2-SecurityPipeline-04.png  =400x)
+
+    > Each environment can have their own approvals and check
+
+## Exercise 3: Link Azure Key Vault to Azure DevOps Pipeline
+
+1. In Azure DevOps, Navigate to `Pipelines`-->`Library` and click **+ Variable group**
 
     ![Key vault](./Images/Module2-CreateKeyVault01.png  =600x)
 
-2.  In the `Variable group name` field type `SecurityKeyVault`, then
+2. In the field `Variable group name` type `SecurityKeyVault`, then
 
     a) Switch the `Link secrets from Azure key vault as variables` to On.
-    b) Select your Azure subscription.
+
+    b) Select your `Azure Pass - Sponsorship`.
+
     c) Select your Azure Key Vault and click in `Authorize` button.
 
-    > If asked type your outlook account and password
-     
-    ![Key vault](./Images/Module2-CreateKeyVault02.png =300x)
+    > If asked login in with the same account you used for Azure Pass
 
-3.  Click on `+ Add` in the current page, select `SQLpassword` and click `Ok`
+    ![Key vault](./Images/Module2-CreateKeyVault02.png =800x)
+
+3. Click on `+ Add` in the current page, select `SQLpassword` and click `Ok`
 
     ![Key vault](./Images/Module2-CreateKeyVault03.png =600x)
 
-    > Save your Security group
+    Click on `Save` 
 
      ![Key vault](./Images/Module2-CreateKeyVault04.png =400x)
 
-
-4.  Go Back to Library open the `DevSecOpsVariables` variable group, and delete the variable named `SQLpassword` in the list.
+4. Go Back to Library open the `DevSecOpsVariables` variable group, and delete the variable named `SQLpassword` in the list.
 
     ![Key vault](./Images/Module2-CreateKeyVault05.png =800x)
 
-    > Save your change
+    Click on `Save`
 
-#### Task 2: Configure Release Pipeline to use the New Key Vault from Variable Group 
+## Exercise 4: Configure the YAML Pipeline to use the New Key Vault and the new Environment
 
-1.  Go back to Releases and edit your Release
- 
+1. Bo back to `Pipelines` and Click on `...` to Edit the pipeline `MyHealthClinicSecDevOps-CICD`
+
     ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-2.  Select the `Variables` tab then `Variable group`, and click in `Link variable group`
+2. Uncomment (Remove the #) the line **14** to enable the usage of the new variable group that comes from Azure Key Vault
 
+    > **Note**: You can use the keys `CTRL + K`, `CTRL + U` to uncomment
 
-    ![](./Images/Module2-CreateKeyVaultRelease02.png =600x)
+    With this new variable group the password for the database comes from Azure Key Vault
 
-3.  Select `SecurityKeyVault(1)` variable group and click `Link`
+    ![](./Images/Module2-CreateKeyVaultRelease02.png =800x)
 
-    ![](./Images/Module2-CreateKeyVaultRelease03.png =600x)
-     
+3. Uncomment (Remove the #) all lines from **137**  to **181** to enable the deployment on the Production environment
+
+    ![](./Images/Module2-CreateKeyVaultRelease03.png =800x)
+
+    Click in `Save`
+
     ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
 
-    > Click in `Save`
-    > 
-    > The password will be used to update the database on the back-end
-    > We don't save passwords in Source code anymore, and any security officer can setup the new Password in a secure way
+    Click in `Save`
 
-#### Task 3: Configue the Build Pipeline to use the New Key Vault from Variable Group
+    ![](./Images/Module2-CreateKeyVault06.png =400x)
 
-1. Go back to Builds and edit your Build
+    > **Note** Once you click save DevOps will trigger a new pipeline to build and release changes
 
-    ![](./Images/Module2-CreateKeyVault06.png =800x)
+## Exercise 5: Approve the usage of the Service Connections and the Production
 
-2. Select the `Variables` tab then `Variable group`, and click in `Link variable group`
+1. Bo back to `Pipelines` and Click on `MyHealthClinicSecDevOps-CICD`
 
-    ![](./Images/Module2-CreateKeyVault07.png =600x)
+    ![](./Images/Module2-CreateKeyVault07.png =700x)
 
-3. Select `SecurityKeyVault(1)` variable group and click `Link`
+    Click on the pending deployment
 
-    ![](./Images/Module2-CreateKeyVault08.png =400x)
-     
-    ![](./Images/Module2-CreateKeyVault09.png =500x)
+    ![](./Images/Module2-CreateKeyVault08.png =700x)
 
-    > Click in `Save & queue`
-    > 
-    >If you configured the `Continuous Deployment` on the previous lab, a new deployment will be triggered at the end of the build
-    > 
-    >Now the new Password coming from Azure Key Vault at the build stage
-    > We don't have passwords stored in Azure DevOps anymore, and any security officer can setup the new Password in a secure way
+    Click `Review`
 
-    ![](./Images/Module2-CreateKeyVault10.png =600x)
+    ![](./Images/Module2-CreateKeyVault09.png =800x)
 
-4. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
+    > **Note** Since all stages use the `service connection` the pipeline will wait until the approval for that resource
+
+    Click `Approve`
+
+    ![](./Images/Module2-CreateKeyVault10.png =400x)
+
+    Repeat the approval for the Stage development.
+
+2. Approve the deployment for **Production** environment
+
+    > **Note** Since the production uses 2 resources that need approvals, you should check both
+
+    > Click in `Review`
+
+    ![](./Images/Module2-CreateKeyVault11.png =800x)
+
+    > **Note** The next scree shows the two resources used in this pipeline that requires approvals
+
+    Click `Approve`
+
+    ![](./Images/Module2-CreateKeyVault12.png =400x)
+
+3. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)
