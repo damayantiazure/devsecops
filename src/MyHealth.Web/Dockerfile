@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:1.0
+FROM demosecops/aspnetcore1.0:1.0.4
 ARG source
 WORKDIR /app
 EXPOSE 80
