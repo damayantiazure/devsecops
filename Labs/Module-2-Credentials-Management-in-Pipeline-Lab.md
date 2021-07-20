@@ -200,13 +200,15 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 2. Uncomment (Remove the #) the line **14** to enable the usage of the new variable group that comes from Azure Key Vault
 
-    > **Note**: You can use the keys `CTRL + K`, `CTRL + U` to uncomment
+    > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
     With this new variable group the password for the database comes from Azure Key Vault
 
     ![](./Images/Module2-CreateKeyVaultRelease02.png =800x)
 
-3. Uncomment (Remove the #) all lines from **137**  to **181** to enable the deployment on the Production environment
+3. Uncomment (Remove the #) all lines from **216**  to **261** to enable the deployment on the Production environment
+
+    > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
     ![](./Images/Module2-CreateKeyVaultRelease03.png =800x)
 
@@ -259,3 +261,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 3. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)
+
+    > If you want, Use the credentials Username: `user` and Password: `P2ssw0rd@1` to login to the HealthClinic web application.
+
+    ![](./Images/Module1-NavigateSite.png =800x)

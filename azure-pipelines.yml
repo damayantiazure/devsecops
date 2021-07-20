@@ -1,19 +1,19 @@
-# Docker
+# Docker.
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
   - master
   
-resources:
+  resources:
   - repo: self
   
   
-variables:
+  variables:
     - group: 'DevSecOpsVariables'
-    #- group: 'SecurityKeyVault'
+    # - group: 'SecurityKeyVault' #Module-2 - Exercise 4: CTRL + K, CTRL + U to uncomment
   
-stages:
+  stages:
   - stage: Build
     displayName: Build image
     jobs:
@@ -22,6 +22,17 @@ stages:
       pool:
         vmImage: ubuntu-latest
       steps:
+  
+      ##Module-4 - Exercise 2: CTRL + K, CTRL + U to uncomment
+      # - task: SonarQubePrepare@4
+      #   inputs:
+      #     SonarQube: 'Sonar'
+      #     scannerMode: 'CLI'
+      #     configMode: 'manual'
+      #     cliProjectKey: 'DevSecOps'
+      #     cliProjectName: 'DevSecOps'
+      #     cliSources: '.'
+  
       - task: DockerCompose@0
         displayName: 'Run services'
         inputs:
@@ -49,6 +60,20 @@ stages:
           qualifyImageNames: true
           additionalImageTags: '$(Build.BuildId)'
   
+      ##Module-4 - Exercise 2: CTRL + K, CTRL + U to uncomment
+      # - task: SonarQubeAnalyze@4
+      #   displayName: 'Run Code Analysis'
+  
+      ##Module-4 - Exercise 2: CTRL + K, CTRL + U to uncomment
+      # - task: SonarQubePublish@4
+      #   displayName: 'Publish Quality Gate Result'
+      #   inputs:
+      #     pollingTimeoutSec: '300'
+  
+      ##Module-4 - Exercise 3: CTRL + K, CTRL + U to uncomment
+      # - task: WhiteSource Bolt@20
+      #   inputs:
+      #     cwd: 'src'
       - task: DockerCompose@0
         displayName: 'Push services'
         inputs:
@@ -75,23 +100,67 @@ stages:
           projectName: $(Build.Repository.Name)
           qualifyImageNames: true
           action: 'Lock services'
+          
+      ## Optional enable Secret scanning
+      # - task: UsePythonVersion@0
+      #   displayName: "Set Python 3 as default"
+      #   inputs:
+      #     versionSpec: 3
   
-      - task: CopyFiles@2
-        displayName: 'Copy Files'
-        inputs:
-          Contents: |
-            **/mhc-aks.yaml
-            **/*.dacpac
+      # - task: CmdLine@2
+      #   displayName: "Install detect-secrets using pip"
+      #   inputs:
+      #     script: |
+      #       pip install detect-secrets
+  
+      # - task: CmdLine@2
+      #   displayName: "Run detect-secrets tool"
+      #   inputs:
+      #     script: |
+      #       detect-secrets scan src/ --all-files > detect-secrets.json
+  
+      # - task: PublishPipelineArtifact@1
+      #   displayName: "Publish results in the Pipeline Artifact"
+      #   inputs:
+      #     targetPath: "$(Pipeline.Workspace)/detect-secrets.json"
+      #     artifact: "detect-secrets"
+      #     publishLocation: "pipeline"
+  
+      # - task: PowerShell@2
+      #   displayName: "Analyzing detect-secrets results"
+      #   inputs:
+      #     targetType: "inline"
+      #     script: |
+      #       $ds = Get-Content detect-secrets.json
+      #       Write-Output $ds
+  
+      #       $dsObj = $ds | ConvertFrom-Json
+      #       $num = ($dsObj.results | Get-Member -MemberType NoteProperty).Count
+  
+      #       if ($num -gt 0) {
+      #         Write-Host "##vso[task.logissue type=error]Secrets were detected in code."
+      #         exit 1
+      #       }
+      #       else {
+      #         Write-Host "No secrets detected."
+      #       }
+      #     pwsh: true
+      # - task: CopyFiles@2
+      #   displayName: 'Copy Files'
+      #   inputs:
+      #     Contents: |
+      #       **/mhc-aks.yaml
+      #       **/*.dacpac
             
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact'
-        inputs:
-          ArtifactName: deploy
+      # - task: PublishBuildArtifacts@1
+      #   displayName: 'Publish Artifact'
+      #   inputs:
+      #     ArtifactName: deploy
   
-  - stage: Deploy-To-Dev
-    displayName: Deploy to Development
+  - stage: Deploy_To_Dev
+    displayName: Deploy to development
     dependsOn: Build
     jobs:
     - deployment: Database
@@ -104,6 +173,16 @@ stages:
           deploy:
             steps:
             - checkout: self 
+  
+            ##Module-4 - Exercise 5: CTRL + K, CTRL + U to uncomment  
+            # - task: AzSKSVTs@4
+            #   continueOnError: true
+            #   inputs:
+            #     ConnectedServiceNameARM: $(Subscription)
+            #     GenerateMethodParameterSetSelection: 'ResourceGroupName'
+            #     ResourceGroupName: $(resourcegroupe)
+            #     SubscriptionId: $(Subscription)
+                
             - task: SqlAzureDacpacDeployment@1
               displayName: 'Execute Azure SQL : DacpacTask'
               inputs:
@@ -133,50 +212,50 @@ stages:
                 azureSubscription: $(Subscription)
                 appName: '$(AppDemo)'
                 containers: '$(ACRImageName)'
-
-## Uncomment to enable Prod Environment
-# - stage: Deploy-To-Prod
-#   displayName: Deploy to Production
-#   dependsOn: 
-#   - Build
-#   - Deploy-To-Dev
-#   jobs:
-#   - deployment: Database
-#     displayName: DB deployment
-#     pool:
-#       vmImage: windows-latest
-#     environment: 'MyClinicSecOps-Prod'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - checkout: self 
-#           - task: SqlAzureDacpacDeployment@1
-#             displayName: 'Execute Azure SQL : DacpacTask'
-#             inputs:
-#               azureSubscription: $(Subscription)
-#               ServerName: '$(SQLserver)'
-#               DatabaseName: '$(DatabaseName)'
-#               SqlUsername: ' $(SQLuser)'
-#               SqlPassword: '$(SQLpassword)'
-#               DacpacFile: '$(System.DefaultWorkingDirectory)/**/*.dacpac'
-#               IpDetectionMethod: IPAddressRange
-#               StartIpAddress: 0.0.0.0
-#               EndIpAddress: 255.255.255.255
-
-#   - deployment: WebApp
-#     displayName: WebApp for Containers
-#     pool:
-#       vmImage: ubuntu-latest
-#     environment: 'MyClinicSecOps-Dev'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - checkout: self 
-#           - task: AzureWebAppContainer@1
-#             displayName: 'Azure Web App on Container Deploy: $(AppDemo)'
-#             inputs:
-#               azureSubscription: $(Subscription)
-#               appName: '$(AppDemo)'
-#               containers: '$(ACRImageName)'
+  
+  ###Module-2 - Exercise 4: CTRL + K, CTRL + U to uncomment 
+  # - stage: Deploy_To_Prod
+  #   displayName: Deploy to Production
+  #   dependsOn: 
+  #   - Build
+  #   - Deploy_To_Dev
+  #   jobs:
+  #   - deployment: Database
+  #     displayName: DB deployment
+  #     pool:
+  #       vmImage: windows-latest
+  #     environment: 'MyClinicSecOps-Prod'
+  #     strategy:
+  #       runOnce:
+  #         deploy:
+  #           steps:
+  #           - checkout: self 
+  #           - task: SqlAzureDacpacDeployment@1
+  #             displayName: 'Execute Azure SQL : DacpacTask'
+  #             inputs:
+  #               azureSubscription: $(Subscription)
+  #               ServerName: '$(SQLserver)'
+  #               DatabaseName: '$(DatabaseName)'
+  #               SqlUsername: ' $(SQLuser)'
+  #               SqlPassword: '$(SQLpassword)'
+  #               DacpacFile: '$(System.DefaultWorkingDirectory)/**/*.dacpac'
+  #               IpDetectionMethod: IPAddressRange
+  #               StartIpAddress: 0.0.0.0
+  #               EndIpAddress: 255.255.255.255
+  
+  #   - deployment: WebApp
+  #     displayName: WebApp for Containers
+  #     pool:
+  #       vmImage: ubuntu-latest
+  #     environment: 'MyClinicSecOps-Dev'
+  #     strategy:
+  #       runOnce:
+  #         deploy:
+  #           steps:
+  #           - checkout: self 
+  #           - task: AzureWebAppContainer@1
+  #             displayName: 'Azure Web App on Container Deploy: $(AppDemo)'
+  #             inputs:
+  #               azureSubscription: $(Subscription)
+  #               appName: '$(AppDemo)'
+  #               containers: '$(ACRImageName)'
