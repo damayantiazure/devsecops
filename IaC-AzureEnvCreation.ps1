@@ -5,7 +5,6 @@ $location = 'eastus'
 cd c:\users\student
 
 $unicstr = -join ((97..122) | Get-Random -Count 5 | % {[char]$_})
-$aksexists = $false
 $acrexists = $false
 $dbexists = $false
 $svcpexists = $false
@@ -46,7 +45,6 @@ try
     foreach ($item in $a) {
         $unicstr = $a[2].substring(9,5)
         switch ($item) {
-           # ("devsecops"+ $unicstr + "aks"){ $aksexists = $true}
             ("devsecops" + $unicstr + "acr"){ $acrexists = $true}
             ("devsecops" + $unicstr + "db"){ $dbexists = $true}
             ("devsecopsowasp" + $unicstr + "t10"){ $svcpexists = $true}
@@ -78,8 +76,8 @@ $repomyclinic = 'MyHealthClinicSecDevOps-Public'
 az extension add --name azure-devops
 
 #Configure local variables to call DevOps Services
-$devopspat = Read-Host -Prompt 'Enter Personal Token Access (PAT) created in the first part of requisites.'
 $devopsservice = Read-Host -Prompt 'Type the of URL DevOps with your organization e.g. : https://dev.azure.com/YOUR_ORGNIZATION_NAME'
+$devopspat = Read-Host -Prompt 'Enter Personal Token Access (PAT) created in the first part of requisites.'
 $env:AZURE_DEVOPS_EXT_PAT = $devopspat
 
 $a = az devops project list --organization $devopsservice --query value[].name -o tsv
@@ -126,9 +124,6 @@ az devops extension install --extension-id 'ws-bolt' --publisher-id 'whitesource
 
 #Creating variable group'
 az pipelines variable-group create --name 'DevSecOpsVariables' --variables resourcegroupe=$rgname registry=$acrname ACR=$acrname'.azurecr.io' DatabaseName='mhcdb' ExtendedCommand='-GenerateFixScript' SQLpassword='P2ssw0rd1234' SQLserver=$sqlsvname'.database.windows.net' SQLuser='sqladmin' AppDemo=$appdemo ACRImageName=$acrname'.azurecr.io/myhealth.web:latest' Subscription=$subscription --project "DevSecOps" --authorize true
-
-#Create the Azure Pipeline
-az pipelines create --name 'MyHealthClinicSecDevOps-CICD' --description 'Pipeline for contoso project'  --repository MyHealthClinicSecDevOps-Public --branch master --yml-path azure-pipelines.yml --repository-type tfsgit
 
 # Register the network provider
 az provider register --namespace Microsoft.Network
@@ -183,7 +178,7 @@ if ($svcpexists -eq $false)
 Write-Host 'Running WebApp .....' 
 if ($appexists -eq $false)
 {
-    az webapp create --resource-group $rgname --plan $appServicePlan --name $app --deployment-container-image-name bkimminich/juice-shop:v9.3.1
+    az webapp create --resource-group $rgname --plan $appServicePlan --name $app --deployment-container-image-name demosecops/juice-shop:v9.3.1
     Write-Host 'Azure Web App : ' + $app + ' created '
 }
 
@@ -206,6 +201,10 @@ if ($snrexists -eq $false)
     Write-Host 'Azure Web App SonarQube : ' + $sonarqaciname + ' created '
 }
 
+#Create the Azure DevOps Pipeline
+Write-Host 'Create the Azure DevOps Pipeline .....' 
+az pipelines create --name 'MyHealthClinicSecDevOps-CICD' --description 'Pipeline for contoso project'  --repository MyHealthClinicSecDevOps-Public --branch master --yml-path azure-pipelines.yml --repository-type tfsgit
+
 # Create service SonarQube  in Azure Container Instances
 Write-Host "====================================================================================================== 
 Please take note of the following ressource names, they will be used in the next labs 
@@ -217,19 +216,16 @@ Please take note of the following ressource names, they will be used in the next
 			SonarQube Instance: 
 			http://$($sonarqaciname)dns.eastus.azurecontainer.io:9000 
 
-			`n
 			Demo WebApp: 
             https://$($appdemo).azurewebsites.net
 
-            `n
-            Subscription information
+            Subscription ID 
+            $($subscription)
 
-            `n
             Azure DevOps Project 
             $($devopsservice)/DevSecOps
 
-            `n
-            Build and Release files are on :
+            Build, Release and adctional files are on :
             c:\users\student "
 
 az account show

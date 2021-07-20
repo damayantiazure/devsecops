@@ -25,9 +25,9 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
 **Estimated Time to Complete This Lab**
 
-30 minutes
+20 minutes
 
-## Lab 1 - Configure Build Pipeline for SonarQube
+## Configure Build Pipeline for SonarQube
 
 **Objectives**
 
@@ -54,24 +54,25 @@ definition. The tool can be integrated for pull-requests to
 automatically analyze source code before commits, allowing you to
 discover bug or vulnerability early in the process.
 
-### Exercise - 1: Configure a SonarQube Project and configure Quality Gate**
+## Exercise - 1: Configure a SonarQube Project and configure Quality Gate
 
-1.  Access the SonarQube URL provided on the pre-requisites e.g.: http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000
+1. Access the SonarQube URL provided on the pre-requisites e.g.: http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000
 
     > Important: The default port for SonarQube is 9000. Copy the DNS name from the created Container Instance in Azure Portal as shown and append :9000 at the end. The final SonarQube URL will be http://YOUR_DNS_NAME:9000
-
   
-2.  Open a browser and login to the SonarQube Portal using the following credentials-
+    Open a browser and login to the SonarQube Portal using the following credentials-
 
     > Username= admin, Password= admin
 
     ![](./images/Module4-AddSonarConfigure02.png =300x)
 
-3.  Choose `Administration` in the toolbar, click Projects tab and then `Management`.
+    > **Note** On the first log-in you will be asked to change the password, take note of your new password
+
+2. Choose `Administration` in the toolbar, click Projects tab and then `Management`.
   
     ![](./images/Module4-sonar_admin.png =800x)
 
-4.  Create a project with `Name` and Key as `DevSecOps`.
+3. Create a project with `Name` and `Key` as `DevSecOps`.
 
     a) `Name`: Name of the SonarQube project that will be displayed on the web interface.
     b) `Key`: The SonarQube project key that is unique for each project.
@@ -81,79 +82,83 @@ discover bug or vulnerability early in the process.
 
     Let us create a Quality Gate to enforce a policy which fails the gate if there are bugs in the code. A Quality Gate is a PASS/FAIL check on a code quality that must be enforced before releasing software.
 
-5. Click the `Quality Gates` menu and click `Create` in the Quality Gates screen. Enter a name for the Quality Gate and click `Create`.
+    Click `Create` then `Close`
+
+4. Click the `Quality Gates` menu and click `Create` in the Quality Gates screen
+
+    Type **DevSecOpsQG** as `Name` for this Quality Gate
 
     ![](./images/Module4-AddSonarConfigurequalitygate.png =800x)
 
-6. Let us add a condition to check for the number of bugs in the code. Click on `Add Condition` drop down, choose the value `Vulnerabilities`.
- 
-    > Set the `Operator` value to `is greater than` value to 1 and click on the `Add condition` button.
-    
+5. Let us add a condition to check for the number of bugs in the code. Click on `Add Condition`.
+
+   Select `On Overall Code` option
+
+    As `Quality Gate fails when` select **Vulnerabilities**  in the combobox
+
+    On `Value` type **1** and click `Add Condition`.
+
     ![](./images/Module4-AddSonarConfigure04.png =800x)
 
     > **Note**: This condition means that if the number of Vulnerabilities in Sonar Analysis is greater than 1 , then the quality gate will fail and optionally this fails the DevOps build.
 
-7.  To enforce this quality gate for DevSecOps project, click on `All` under `Projects` section and select the project checkbox.
+6. To enforce this quality gate for DevSecOps project, click on `All` under `Projects` section and select the project checkbox.
 
     ![](./images/Module4-AddSonarConfigure05.png =600x)
 
-8.  Navigate to `My Account` then `Security` tab, in the field `Enter Token Name` type `DevSecOps` and click `Generate`, Copy the generated token in a notepad.
+7. Navigate to `My Account` then `Security` tab, in the field `Enter Token Name` type `DevSecOps` and click `Generate`, **Copy the generated token in a notepad**.
 
     ![](./images/Module4-AddSonarConfigure07.png =800x)
 
     > **Note**: The tokens are used to run analysis or invoke web services without access to the user’s actual credentials.
 
-### Exercise - 2 : Integrate SCA in the Build Pipeline**
+## Exercise - 2 : Integrate SonarQube in the Build Pipeline
 
-1. In Azure Pipelines, navigate to the `Pipelines` page and select `MyHealth.build` Pipeline and Click on `Edit`
+1. Navigate to the `DevSecOps` project created on the Module-0 and click on `Project settings`-->`Service Connection`-->`New Service connectionA`
 
-    ![Build Pipeline](./images/Module4-EditBuildPipeline.png =800x)
+    ![Edit Release Pipeline](./Images/module2-CreateServiceConnection-1.png =800x)
 
-2. On the Tasks tab `Agent Job 1`, select the plus sign ( + ) and search for the `Prepare analysis Configuration` task, and then select `Add` before `Run Services` task.
+    In the search type `sonar` and click `Next`
 
-    ![](./images/Module4-AddSonarConfigure06.png  =800x)
+    ![Edit Release Pipeline](./Images/module2-CreateServiceConnection-2.png =400x)
 
-3. Click on `Prepare Analysis on SonarQube` Configuration task the click `+ NEW` to add SonarQube server endpoint.
+    For Server Url, paste the URL of your SonarQube obtained from the script in Module-0, same Url as previous exercise e.g.: **server URL** (e.g.: http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000)
 
-    ![](./images/Module4-AddSonarConfigure08.png  =800x)
+    ![Edit Release Pipeline](./Images/module2-CreateServiceConnection-3.png =400x)
 
-    In the Add `SonarQube service connection` wizard enter the SonarQube **server URL** (e.g.: http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000), the SonarQube **security token** and in **Service Connection Name**  `DevSecOps-Private`. 
+    Click `Save`
 
-    If you don’t have SonarQube security token follow 
-    [this](https://docs.sonarqube.org/latest/user-guide/user-token/) to create one. And make sure SonarQube project name and project key are same as you entered while creating SonarQube project in `Exercise 1`.
+2. Bo back to `Pipelines` and Click on `...` to Edit the pipeline `MyHealthClinicSecDevOps-CICD`
+
+    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
+
+3. To configure SonarQube, uncomment (Remove the #) the following lines:
+
+    > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
+
+    **26** to **34** enable the setup configuration for SonarQube
+
+    ![](./images/Module4-AddSonarConfigure08.png  =400x)
+
+    **63** to **65** enable start the SonarQube scanner
 
     ![](./images/Module4-AddSonarConfigure09.png =300x)
 
-    >  **Note**: The tokens are used to run analysis or invoke web services without access to the user’s actual credentials.    
+    **67** to **71** To Publish the results of the scanner to the SonarQube instance in Azure
 
-4. Make sure the following options are properly configured in the Prepare Analysis task:
+    ![](./images/Module4-AddSonarTask.png =300x)
 
+    Click in `Save`
 
-    a) Chose `Use standalone scanner`
-    b) Mode `Manually provider configuration`
-    c) Project Key `DevSecOpsKey`
-    d) Project name `DevSecOps`
+    ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
 
-   ![Add Sonar](./images/Module4-AddSonarTask.png =800x)
+    Click in `Save`
 
-5. Add a new task `Run Code Analysis` after Build services.
+    ![](./Images/Module2-CreateKeyVault06.png =400x)
 
-      ![Code Analysis](./images/Module4-AddSonarTaskCodeAnalysis.png =800x)
+    > **Note** Once you click save DevOps will trigger a new pipeline to build and release changes, approve and check the results in Pipelines
 
-6. Add a new task `Publish Quality Gate Result` after `Run Code Analysis`.
-
-      ![Publish task](./images/Module4-AddSonarTaskPublish.png =800x)
-
-      This step will provide a summary of the analysis results on your SonarQube Instance created on the requistes.
-
-7. Save and queue the build.
-
-8. Check the result of Sonar Analysis e.g. :
-    <http://devsecopsXXXXXsnrdns.eastus.azurecontainer.io:9000>
-
-    > **Note** This URL was created in the Requisites before module 1
-
-## Lab 2 - Managing Open-source security and licenses with WhiteSource Bolt
+## Managing Open-source security and licenses with WhiteSource Bolt
 
 **Introduction**
 
@@ -189,9 +194,9 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
 **Estimated Time to Complete This Lab:**
 
-**30 minutes**
+**10 minutes**
 
-**Exercise - 1 : Activate WhiteSource Bolt**
+## Exercise - 3 : Activate WhiteSource Bolt**
 
 1. In your Azure DevOps Project, under Pipelines section, go to White
     Source Bolt tab, provide your Work Email, Company Name, Country and
@@ -202,21 +207,29 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
     Upon activation, the below message is displayed.
     ![WhiteBolt Confirmation](./images/Module4-WhiteBoltConfigResult.png =600x)
 
-2. Go back and edit the `MyHealth.build` build definition and Add the `WhiteSource Bolt task` to your pipeline.
+2. Bo back to `Pipelines` and Click on `...` to Edit the pipeline `MyHealthClinicSecDevOps-CICD`
 
-    ![Add White source](./images/Module4-WhiteSource.png =600x)
+    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-3. Set the Root working directory to `src`. Save and queue the build. The report will not generate unless you run the build. 
+3. To configure WhiteSource, uncomment (Remove the #) the following lines:
 
-    ![White Source SRC](./images/Module4-WhiteSourceSrc.png =500x)
+    > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
-4.  Navigate to `White Source Bolt` tab under `Pipelines` section
-    and wait for the report generation of the completed build to see the
-    vulnerability report.
+    **74** to **76** enable Software Composition Analysis
 
-    ![White source Result](./images/Module4-WhiteSourceResult.png =600x)
+    ![](./images/Module4-WhiteSourceSrc.png  =400x)
 
-## Lab 3 - Secure DevOps Kit for Azure
+    Click in `Save`
+
+    ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
+
+    Click in `Save`
+
+    ![](./Images/Module2-CreateKeyVault06.png =400x)
+
+    > **Note** Once you click save DevOps will trigger a new pipeline to build and release changes, approve and check the results in Pipelines
+
+## Secure DevOps Kit for Azure
 
 **Introduction**
 
@@ -234,52 +247,33 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
 **Estimated Time to Complete This Lab**
 
-30 minutes
+10 minutes
 
-### Exercise 1: Release Pipeline
+### Exercise 4: Release Pipeline
 
-1. Under `Pipelines`, click on `Releases`,
-    select **MyHealth.Release-Web** and the click `Edit`. 
+1. Bo back to `Pipelines` and Click on `...` to Edit the pipeline `MyHealthClinicSecDevOps-CICD`
 
-    ![AzSK Tool](./images/Module4-AzSKAdd1.png =800x)
+    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-    Click on the `Tasks` tab and in the `Dev`
-    Environment, then create a new deployment phase by clicking on the `three dots` and selecting `Add an agent job`. Name this Agent as `AzSK`.
+2. To configure WhiteSource, uncomment (Remove the #) the following lines:
 
-    ![AzSK Tool](./images/Module4-AzSKAdd.png =800x)
+    > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
-2. In the display name enter `AzSK` and in the `Agent pool` select \"windows-2019\".
+    **74** to **76** enable Software Composition Analysis
 
-    ![AzSk Config](./images/Module4-AzSKAgentConfig.png =800x)
+    ![AzSK Tool](./images/Module4-AzSKAdd1.png =400x)
 
-3. Click the plus sign `( + )` and search for \"AzSK\". Add the task `AzSK Security Verification Tests` by clicking on `Add`.
+    Click in `Save`
 
-    ![AzSK Add to Pipeline](./images/Module4-AzSKAddToPipe.png =800x)
+    ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
 
-4. Set the `Display name` for the task to `Secure Devops kit for
-    Azure` and set your `Azure Subscription`. In the `Select the
-    Parameter Set` dropdown select \"ResourceGroupName\". Set
-    the `ResourceGroup Name` to the one created in Module 0 - Prerequisites lab. ResourceGroup Name
-    is the output of the IaC-AzureEnvCreation.ps1 script you ran when creating your Azure resources.
-    Set the `Subscription ID` to the Id of the subscription hosting the
-    resources. You will run the Security Verification Tests (SVTs) on
-    the `Subscription ID`. You can get the Subscription ID by running the command below in the Azure CLI:
+    Click in `Save`
 
-    `az account show`
+    ![](./Images/Module2-CreateKeyVault06.png =400x)
 
-    All this information is also available by navigating to https://portal.azure.com.
+    > **Note** Once you click save DevOps will trigger a new pipeline to build and release changes, approve and check the results in Pipelines
 
-
-    The final config should be like this:
-
-    ![Az Configured](./images/Module4-AzSKConfigured.png =800x)
-
-    > Note: In order to generate the **Autofix scripts** which are useful for Remediation include the ExtendedCommand variable in the pipeline with the switch -GenerateFixScript. Check the `Variables` section under the release definition the value `ExtendedCommand` variable with the switch `  -GenerateFixScript` as value.
-
-5.  Click `Save` and Run the Release pipeline by clicking on `Release` and
-    selecting `Create a new release`. Click on `Create`
-
-### Exercise 2: Remediation
+### Exercise 5: Remediation
 
 1. Navigate to the `Release` section under the `Pipelines` menu,
     select `MyHealth.Release` and select the latest release.
