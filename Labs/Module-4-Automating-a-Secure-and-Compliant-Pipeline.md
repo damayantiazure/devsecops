@@ -275,53 +275,39 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
 ### Exercise 5: Remediation
 
-1. Navigate to the `Release` section under the `Pipelines` menu,
-    select `MyHealth.Release` and select the latest release.
+1. Bo back to `Pipelines`, wait until the pipeline completes and click on it
 
-    ![Remediation](./images/Module4-RemediationCheck.png =800x)
+    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-2. In the  \"Dev\" `Stages` click `Logs` under the failed release.
-   
-    ![Remediation Log](./images/Module4-RemediationCheckLog.png =800x)
-
-3. Click the failed task `Secure Devops Kit for Azure` for detailed
-    description about the scan results.
-
-    ![Remediation Log of AzSK](./images/Module4-RemediationCheckLogAzSK.png =800x)
-
-4. Scroll down to verify the number of passed and failed Controls.
-
-    ![Remediation Log of AzSK View](./images/Module4-RemediationCheckLogAzSKView.png =800x)
-
-5. Click the `Download all logs` to download all the logs to you
+2. Click the `...` on the right corner to download all the logs to you
     local machine.
 
     ![Download Logs](./images/Module4-RemediationCheckDownloadLog.png =800x)
 
-6. After downloading the logs, navigate to the below path and extract
+3. After downloading the logs, navigate to the below path and extract
     the AzSK Logs.
 
     ![Extract logs](./images/Module4-RemediationCheckLogExtract.png =600x)
 
-7. This consists of the Security Report in CSV format and also the
+4. This consists of the Security Report in CSV format and also the
     AutoFix Scripts that you can use to fix the failed Controls that are
     supported.
 
     ![Download Check](./images/Module4-RemediationCheckDownloadCheck.png =600x)
 
-8. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. 
+5. Just for illustration, if you open the file `SecurityRepor...csv` in the Excel you can check for the controls which can be Fixed by the Scripts. 
    In the image below Excel sheet shows only one control that is supported by the AutoFix scripts.
 
     ![Auto Fix Problems](./images/Module4-RemediationAutoFix.png =600x)
 
-9. Navigate to the `FixControlScripts` folder and check the scripts
+6. Navigate to the `FixControlScripts` folder and check the scripts
     generated in the `Services` folder to see what they do.
 
     ![Run AutoFix](./images/Module4-RemediationAutoFixRun.png =600x)
 
 > (Optional Functionality may not work due the FixControlScripts being a Preview Feature)
 
-10. Running these scripts are not recommended as part of this lab. Typical remediation paths would include a partnership between the
+7. Running these scripts are not recommended as part of this lab. Typical remediation paths would include a partnership between the
     Developer and Operations teams to ensure the DEV, TEST, or PROD environments are not impacted by the changes.
 
 
