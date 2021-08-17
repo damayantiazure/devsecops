@@ -170,7 +170,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-07.png =400x)
 
-## Exercise 2: Confirm de deployment in Azure
+## Exercise 2: Confirm the deployment in Azure
 
 1. Wait until the pipeline complete the execution.
 
