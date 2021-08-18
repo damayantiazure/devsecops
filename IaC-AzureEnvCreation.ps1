@@ -202,7 +202,7 @@ if ($snrexists -eq $false)
 }
 
 #Create the Azure DevOps Pipeline
-Write-Host 'Create the Azure DevOps Pipeline .....' 
+Write-Host 'Create the Azure DevOps Pipeline (Please ignore errors after this step, this will be solved on the module 1) .....' 
 az pipelines create --name 'MyHealthClinicSecDevOps-CICD' --description 'Pipeline for contoso project'  --repository MyHealthClinicSecDevOps-Public --branch master --yml-path azure-pipelines.yml --repository-type tfsgit
 
 # Create service SonarQube  in Azure Container Instances

@@ -255,7 +255,7 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 
     ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-2. To configure WhiteSource, uncomment (Remove the #) the following lines:
+2. To configure AzSK, uncomment (Remove the #) the following lines:
 
     > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
