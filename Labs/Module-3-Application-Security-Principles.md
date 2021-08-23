@@ -11,17 +11,15 @@ Student Lab Manual
 **Introduction**
 
 In this lab, you will investigate security vulnerabilities in a web
-application and discuss with the instructor on how to resolve them.
+application and discuss with the instructor how to resolve them.
 
 **Objectives**
 
-After completing this lab, you will be able to:
-
-- Understand common security design vulnerabilities
-
-- Fix vulnerabilities
+After completing this lab, you will be able to understand common security design vulnerabilities.
 
 **Prerequisites**
+
+Completed module - 0
 
 **Estimated time to complete this lab**
 
@@ -31,82 +29,114 @@ After completing this lab, you will be able to:
 
 - Use the website
 
-- Review code for vulnerabilities
+- Explore some basic hacking opportunities
 
-- Discuss your findings with class and instructor
+- Discuss your findings with the class and instructor
 
-### Exercise 1: Use the Web Site
+### Exercise 1: Explore some OWASP listed vulnerabilities in the Juice Shop
 
-**Objectives**
+#### Task 1: Explorer the website and an XXS attack
 
-In this exercise, you will open the web project and browse the website.
+1. Navigate to OWASP juice shop. The URL was provided on the module-0, and your URL should be like: https://devsecopsowaspappXXXXXt10.azurewebsites.net/ (Don't use this link)
 
-**Prerequisites**
+    Start being familiar with this website.
 
-You must have Visual Studio installed in order to open the web project.
-SQL Server Express is required to host the database.
+    ![Contoso](./Images/Module3-ContosoTimes.png =800x)
 
-#### Task 1: Open the Web Project
+2. On the search Box, Perform a reflected XSS (Cross-Site Scripting) attack to see if the website accept, use the following code:
 
-  1. Double click the Contoso Times.sln located in \\Users\\Student\\source\\repos\\Contoso Times.
-     If the directory is not present, please clone project from https://dev.azure.com/securedevopsdelivery/_git/ContosoTimes
+    ```js
+    <iframe src="javascript:alert(`HACKED`)">
+    ```
 
-  2. Start the Web Application without debug
+    Note as an attacker, XSS can be used to send a malicious script to an unsuspecting user. The end user's browser has no way to know that the script should not be trusted and will execute the script. Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by the browser and used with that site. These scripts can even rewrite the content of the HTML page. 
 
-      ![Contoso](./Images/Module3-ContosoTimes.png)
+#### Task 2: Explore the unhandled exception
 
-  3. Contoso Times is a fictional news web site that you can read news.
+1. Navigate to the login page, and press **F12** to enable developers tools, then select the Network tab
 
-  4. Click on a news in Travel category.
+    Use the following information to trigger an error:
 
-  5. You need to create an account to view the news in that category.
+    Email: `'`
 
-      ![Login](./Images/Module3-ContosoTimesLogin.png)
+    Password: `anything`
 
-  6. Click "Not a member? Create an account" link.
+    Click **Log in**
 
-  7. This will navigate you to the registration page.
+    ![Login](./Images/Module3-ContosoTimesLogin.png =800x)
 
-  8. Create a new account for yourself with a username and password.
+2. Click on the login item with the status 500 to explorer the unhandled exception.
 
-  9. Click "Login" link on the top right side of the page.
+    > Note: Error and exception handling occurs in all areas of an application, including critical business logic as well as security features and framework code.
+    >
+    > Error handling is also important from an intrusion detection perspective. Certain attacks against your application may trigger errors which can help detect attacks in progress.
 
-      ![Link to login](./Images/Module3-ContosoTimesLinkLogin.png)
+    ![](./Images/Module3-ContosoTimesLinkLogin.png =800x)
 
-  10. Enter the login information that you created.
+    Observe how the front end just shows the error as **[object Object]**. This indicates that an unhandled error was trowed by the back end and arrived just to the main page.
 
-  11. Click "Travel" category on the menu.
+    ![Module 3](./Images/Module3-ContosoTimesMenu.png =800x)
 
-      ![Menu Contoso](./Images/Module3-ContosoTimesMenu.png)
+    Observe that the backend just trowed all the errors from SQLite to the front end, and now we know the backend uses SQLite you can alternatively check all the vulnerabilities for SQLite at:
 
-  12. Read the second news in that category. Titled; "Airlines Announce Lowest European Fares Ever" by clicking "read more" link.
+    <a href="https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=SQLite" target="_blank">https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=SQLite</a>
 
-  13. Click the "Edit" link at the bottom of the page to edit the story.
+    Now that we know that the website uses SQLite let's to explore another very common SQL Injection
 
-      ![Contoso Text Body](./Images/Module3-ContosoTimesText.png)
+3. Log in as Admin using SQL Injection, use the following "Credentials"
 
-  14. Change the title with "This is my title" and update the story.
+    Email: `'or 1=1 --`
 
-  15. Navigate the same news and see your changes.
+    Password: `anything`
 
-  16. Now click the "World" category.
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText.png =800x)
 
-  17. Open the first story in that category, titled "Bill Clinton Elected to British Parliament".
+    Note that you are now logged in as Admin, but since this is an SQL injection, all possibilities are true.
 
-  18. Click on "Read more..." link for "Bill Clinton Elected to British Parliament" story.
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText2.png =600x)
 
-  19. Click the "Edit" link at the bottom of the page to edit the story.
+    Now you are connected as an Admin, let's check other possibilities available.
 
-  20. Change the title as "Are you kidding?".
+#### Task 3: Use an automated tool to attack and find vulnerabilities
 
-  21. Click "Update" button.
+OWASP Zed Attack Proxy (ZAP) is a free, open-source penetration testing tool being maintained under the umbrella of the Open Web Application Security Project (OWASP). ZAP is designed specifically for testing web applications
 
-  22. What happened to the application? What do you see on the screen and why?
+1. Open OWASP ZAP, click on `Automated Scan`
 
-#### Task 2: Review the code
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText3.png =800x)
 
-In this task, you will review the code and document the vulnerabilities that you find.
+    Type the URL of our Juice shop and then click `Attack`.
 
-#### Task 3: Discuss your findings with class and instructor
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText4.png =600x)
+
+    > **NOTE!** You can use OWASP Zap as a tool for scan websites on your pipeline on Azure DevOps on the command line, this kind of scan is also known as Dynamic Application Security Test (DAST)
+    >
+    > Optional: you can explorer all the vulnerabilities found on the **Alerts** tab
+
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText5.png =800x)
+
+2. Click on **Spider** to check all the hidden URLs found during the scaner
+
+    Note that very interesting URL ending by "acquisitions.md ", copy that URL and paste into your browser to see the results
+
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText6.png =800x)
+
+    Here we can check many problems:
+
+    - Restricted area open on the internet without any authentication
+    - Data stored without encryption
+    - Confidential document about acquisitions which should never leak
+  
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText7.png =800x)
+
+    > Optional: Since you are logged in as an Admin, you can now access privileged areas on the website, for instance, all the information from customers:
+
+    ![Contoso Text Body](./Images/Module3-ContosoTimesText8.png =800x)
+
+#### Task 4: Discuss your findings with the class and instructor
 
 In this task, you will discuss your findings with your colleagues and instructor.
+
+Most of the vulnerabilities listed here can be detected with a Static Analysis Security Test (SAST), others with Dynamic Application Security Test (DAST)
+
+In Lab 4, we will see how to automate scanners within the pipelines to search for those vulnerabilities.
