@@ -19,6 +19,8 @@ After completing this lab, you will be able to:
 
 - Understand common security design vulnerabilities
 
+- Fix vulnerabilities
+
 **Prerequisites**
 
 **Estimated time to complete this lab**
@@ -29,7 +31,7 @@ After completing this lab, you will be able to:
 
 - Use the website
 
-- Explore some base hacking activities
+- Review code for vulnerabilities
 
 - Discuss your findings with class and instructor
 
@@ -46,11 +48,12 @@ SQL Server Express is required to host the database.
 
 #### Task 1: Open the Web Project
 
-  1. Navigate to OWASP juice shop. The URL was provided on the module-0 and your URL should be like: https://devsecopsowaspappXXXXXt10.azurewebsites.net/ (Don't use this link)
+  1. Double click the Contoso Times.sln located in \\Users\\Student\\source\\repos\\Contoso Times.
+     If the directory is not present, please clone project from https://dev.azure.com/securedevopsdelivery/_git/ContosoTimes
 
-  2. Start being familiar with this website
+  2. Start the Web Application without debug
 
-      ![Contoso](./Images/Module3-ContosoTimes.png){width=600px}
+      ![Contoso](./Images/Module3-ContosoTimes.png)
 
   3. Contoso Times is a fictional news web site that you can read news.
 
