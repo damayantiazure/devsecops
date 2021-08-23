@@ -83,7 +83,7 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
     ![](images/CreateDevOpsAcc01.png =300x)
 
-3. In your new Organization, create a **Personal Access Token (PAT)**. Navigate to `Security`
+3. In your new Organization, create a **Personal Access Token (PAT)**. Navigate to `Security` or `User Settings`
 
     ![](images/CreateDevOpsAcc10.png =400x)
 

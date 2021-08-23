@@ -212,7 +212,10 @@ Please take note of the following ressource names, they will be used in the next
 			Azure Container Registry name : $($acrname).azurecr.io 
 			SQL Server name : $($sqlsvname).database.windows.net
 			Resource Groupe name : $($rgname) 
-					
+
+            OWASP Juice shop: 
+            https://$($app).azurewebsites.net
+
 			SonarQube Instance: 
 			http://$($sonarqaciname)dns.eastus.azurecontainer.io:9000 
 

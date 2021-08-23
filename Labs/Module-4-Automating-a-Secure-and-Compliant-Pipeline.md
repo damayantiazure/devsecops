@@ -94,9 +94,9 @@ discover bug or vulnerability early in the process.
 
    Select `On Overall Code` option
 
-    As `Quality Gate fails when` select **Vulnerabilities**  in the combobox
+    As `Quality Gate fails when` select **Security Review Rating**  in the combobox
 
-    On `Value` type **1** and click `Add Condition`.
+    On `Value` select **A** and click `Add Condition`.
 
     ![](./images/Module4-AddSonarConfigure04.png =800x)
 
