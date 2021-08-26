@@ -45,21 +45,22 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: "Publish results in the Pipeline Artifact"
       inputs:
-        targetPath: "$(Pipeline.Workspace)/detect-secrets.json"
+        targetPath: "detect-secrets.json"
         artifact: "detect-secrets"
         publishLocation: "pipeline"
 
+    ## Note this build will fail because we have a lot of secrets in the source code.
     - task: PowerShell@2
       displayName: "Analyzing detect-secrets results"
       inputs:
-        targetType: "inline"
+        targetType: 'inline'
         script: |
           $ds = Get-Content detect-secrets.json
           Write-Output $ds
-
+          
           $dsObj = $ds | ConvertFrom-Json
           $num = ($dsObj.results | Get-Member -MemberType NoteProperty).Count
-
+          
           if ($num -gt 0) {
             Write-Host "##vso[task.logissue type=error]Secrets were detected in code."
             exit 1
