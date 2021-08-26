@@ -66,5 +66,5 @@ stages:
           else {
             Write-Host "No secrets detected."
           }
-        errorActionPreference: 'silentlyContinue'
+        errorActionPreference: 'continue'
         pwsh: true
