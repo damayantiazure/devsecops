@@ -53,7 +53,7 @@ stages:
     - task: PublishPipelineArtifact@1
       displayName: "Publish results in the Pipeline Artifact"
       inputs:
-        targetPath: "$(Pipeline.Workspace)/detect-secrets.json"
+        targetPath: "detect-secrets.json"
         artifact: "detect-secrets"
         publishLocation: "pipeline"
 
