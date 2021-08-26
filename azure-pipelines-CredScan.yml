@@ -1,0 +1,70 @@
+# Docker.
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  - master
+
+resources:
+- repo: self
+
+
+variables:
+  - group: 'DevSecOpsVariables'
+  # - group: 'SecurityKeyVault' #Module-2 - Exercise 4: CTRL + K, CTRL + U to uncomment
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+        
+    
+    - task: UsePythonVersion@0
+      displayName: "Set Python 3 as default"
+      inputs:
+        versionSpec: 3
+
+    - task: CmdLine@2
+      displayName: "Install detect-secrets using pip"
+      inputs:
+        script: |
+          pip install detect-secrets
+
+    ## Optional Uncomment the following session to re-scan for secrets
+    # - task: CmdLine@2
+    #   displayName: "Run detect-secrets tool"
+    #   inputs:
+    #     script: |
+    #       detect-secrets scan src/ --all-files > detect-secrets.json
+
+    - task: PublishPipelineArtifact@1
+      displayName: "Publish results in the Pipeline Artifact"
+      inputs:
+        targetPath: "$(Pipeline.Workspace)/detect-secrets.json"
+        artifact: "detect-secrets"
+        publishLocation: "pipeline"
+
+    - task: PowerShell@2
+      displayName: "Analyzing detect-secrets results"
+      inputs:
+        targetType: "inline"
+        script: |
+          $ds = Get-Content detect-secrets.json
+          Write-Output $ds
+
+          $dsObj = $ds | ConvertFrom-Json
+          $num = ($dsObj.results | Get-Member -MemberType NoteProperty).Count
+
+          if ($num -gt 0) {
+            Write-Host "##vso[task.logissue type=error]Secrets were detected in code."
+            exit 1
+          }
+          else {
+            Write-Host "No secrets detected."
+          }
+        pwsh: true

@@ -1,0 +1,32 @@
+# Docker.
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  - master
+
+resources:
+- repo: self
+
+
+variables:
+  - group: 'DevSecOpsVariables'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+ 
+    #Module-4 - Exercise 5: CTRL + K, CTRL + U to uncomment  
+    - task: AzSKSVTs@4
+      continueOnError: true
+      inputs:
+        ConnectedServiceNameARM: $(Subscription)
+        GenerateMethodParameterSetSelection: 'ResourceGroupName'
+        ResourceGroupName: $(resourcegroupe)
+        SubscriptionId: $(Subscription)
