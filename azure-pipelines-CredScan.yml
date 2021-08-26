@@ -41,15 +41,6 @@ stages:
     #   inputs:
     #     script: |
     #       detect-secrets scan src/ --all-files > detect-secrets.json
-
-    - task: PowerShell@2
-      displayName: "Analyzing detect-secrets results"
-      inputs:
-        targetType: "inline"
-        script: |
-          dir
-        pwsh: true
-
     - task: PublishPipelineArtifact@1
       displayName: "Publish results in the Pipeline Artifact"
       inputs:
@@ -60,14 +51,14 @@ stages:
     - task: PowerShell@2
       displayName: "Analyzing detect-secrets results"
       inputs:
-        targetType: "inline"
+        targetType: 'inline'
         script: |
           $ds = Get-Content detect-secrets.json
           Write-Output $ds
-
+          
           $dsObj = $ds | ConvertFrom-Json
           $num = ($dsObj.results | Get-Member -MemberType NoteProperty).Count
-
+          
           if ($num -gt 0) {
             Write-Host "##vso[task.logissue type=error]Secrets were detected in code."
             exit 1
@@ -75,4 +66,5 @@ stages:
           else {
             Write-Host "No secrets detected."
           }
+        errorActionPreference: 'silentlyContinue'
         pwsh: true
