@@ -42,6 +42,14 @@ stages:
     #     script: |
     #       detect-secrets scan src/ --all-files > detect-secrets.json
 
+    - task: PowerShell@2
+      displayName: "Analyzing detect-secrets results"
+      inputs:
+        targetType: "inline"
+        script: |
+          dir
+        pwsh: true
+
     - task: PublishPipelineArtifact@1
       displayName: "Publish results in the Pipeline Artifact"
       inputs:
