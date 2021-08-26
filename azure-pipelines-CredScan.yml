@@ -67,4 +67,6 @@ stages:
             Write-Host "No secrets detected."
           }
         errorActionPreference: 'continue'
+        showWarnings: true
+        ignoreLASTEXITCODE: true
         pwsh: true
