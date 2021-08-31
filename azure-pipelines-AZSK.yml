@@ -19,14 +19,14 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
     steps:
  
-    #Module-4 - Exercise 5: CTRL + K, CTRL + U to uncomment  
+    #Module-4 - Exercise 5
     - task: AzSKSVTs@4
       continueOnError: true
       inputs:
-        ConnectedServiceNameARM: $(Subscription)
+        ConnectedServiceNameARM: 'Azure-Service-Connection-Development'
         GenerateMethodParameterSetSelection: 'ResourceGroupName'
         ResourceGroupName: $(resourcegroupe)
         SubscriptionId: $(Subscription)

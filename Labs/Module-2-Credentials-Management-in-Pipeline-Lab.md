@@ -112,7 +112,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 ## Exercise 1: Set up Approvals in your Service Connection
 
-1. In Azure DevOps, Navigate to `Project Settings`-->`Service connections` and click in your Service connections created to deploy to Azure Infrastructure e.g.:
+1. In Azure DevOps, Navigate to `Project Settings`-->`Service connections` and click in your Service connections `Azure-Service-Connection-Production` used to deploy azure resources to production e.g.:
 
     ![](./Images/Module2-SecurityPipeline-01.png  =800x)
 
@@ -170,7 +170,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     a) Switch the `Link secrets from Azure key vault as variables` to On.
 
-    b) Select your `Azure Pass - Sponsorship`.
+    b) Select your `Azure-Service-Connection-Development` service connection created previously.
 
     c) Select your Azure Key Vault and click in `Authorize` button.
 
@@ -182,7 +182,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     ![Key vault](./Images/Module2-CreateKeyVault03.png =600x)
 
-    Click on `Save` 
+    Click on `Save`
 
      ![Key vault](./Images/Module2-CreateKeyVault04.png =400x)
 
@@ -198,7 +198,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
-2. Uncomment (Remove the #) the line **14** to enable the usage of the new variable group that comes from Azure Key Vault
+2. Uncomment (Remove the #) the line **15** to enable the usage of the new variable group that comes from Azure Key Vault
 
     > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
@@ -206,7 +206,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     ![](./Images/Module2-CreateKeyVaultRelease02.png =800x)
 
-3. Uncomment (Remove the #) all lines from **216**  to **261** to enable the deployment on the Production environment
+3. Uncomment (Remove the #) all lines from **126**  to **171** to enable the deployment on the Production environment
 
     > **Note**: You can select the text and use the keys `CTRL + K`, `CTRL + U` to uncomment
 
@@ -216,7 +216,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     ![](./Images/Module2-CreateKeyVaultRelease04.png =600x)
 
-    Click in `Save`
+    Click in `Save`, then click `Run`
 
     ![](./Images/Module2-CreateKeyVault06.png =400x)
 
@@ -230,13 +230,15 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     Click on the pending deployment
 
+    >Note: the deployment stoped on the last stage Production
+
     ![](./Images/Module2-CreateKeyVault08.png =700x)
 
     Click `Review`
 
     ![](./Images/Module2-CreateKeyVault09.png =800x)
 
-    > **Note** Since all stages use the `service connection` the pipeline will wait until the approval for that resource
+    > **Note** We have 2 resources to approve, 1 for the Service Connection to deploy to Azure, 1 for the Production environment
 
     Click `Approve`
 
@@ -244,21 +246,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
     Repeat the approval for the Stage development.
 
-2. Approve the deployment for **Production** environment
-
-    > **Note** Since the production uses 2 resources that need approvals, you should check both
-
-    > Click in `Review`
-
-    ![](./Images/Module2-CreateKeyVault11.png =800x)
-
-    > **Note** The next scree shows the two resources used in this pipeline that requires approvals
-
-    Click `Approve`
-
-    ![](./Images/Module2-CreateKeyVault12.png =400x)
-
-3. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
+2. Wait for the release to be completed and confirm that the website is still running, but now with passwords coming from Azure Key Vault.
 
     ![](./Images/Module1-AzureResultAKSShowPortsAKS_Site.png =800x)
 

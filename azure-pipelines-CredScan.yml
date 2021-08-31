@@ -8,10 +8,8 @@ trigger:
 resources:
 - repo: self
 
-
 variables:
   - group: 'DevSecOpsVariables'
-  # - group: 'SecurityKeyVault' #Module-2 - Exercise 4: CTRL + K, CTRL + U to uncomment
 
 stages:
 - stage: Build
@@ -35,7 +33,7 @@ stages:
         script: |
           pip install detect-secrets
 
-    ## Optional Uncomment the following session to re-scan for secrets
+    ## Optional Uncomment the following section to re-scan for secrets (about 1.5h execution)
     # - task: CmdLine@2
     #   displayName: "Run detect-secrets tool"
     #   inputs:

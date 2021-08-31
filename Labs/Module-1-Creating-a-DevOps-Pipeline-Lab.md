@@ -15,7 +15,7 @@ Instructor Edition
 **Microsoft Confidential**
 
 This training package is proprietary and confidential and is intended
-only for uses described in the training materials. Content and software
+only for the uses described in the training materials. Content and software
 is provided to you under a Non-Disclosure Agreement and cannot be
 distributed. Copying or disclosing all or any portion of the content
 and/or software included in such packages is strictly prohibited.
@@ -112,19 +112,19 @@ After completing this exercise, you will be able to:
 **Scenario**
 
 In this exercise, you will configure a Build Pipeline that will
-eventually publish artifacts for the Release Pipeline to consume.
+eventually, publish artifacts for the Release Pipeline to consume.
 
 ## Exercise 1: Setup Parallel MS Hosted Job and Service Connections
 
 1. Navigate to the Azure DevOps organization you created in Module 0.
     The link will look similar to ``https://dev.azure.com/<your organization>``
 
-    At your organizations home page, navigate to the bottom left corner of the page.
+    At your organization's home page, navigate to the bottom left corner of the page.
     Click on `Organization Settings` 
 
     ![Modify Organization Settings](./Images/Module-1-OrgSettings.png =800x)
 
-2.  Navigate to the `Billing` area under `General`. Select `Set up billing`.
+2. Navigate to the `Billing` area under `General`. Select `Set up billing`.
 
     ![Modify Organization Settings](./Images/Module-1-BillingOption.png =800x)
 
@@ -133,8 +133,8 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     ![Modify Organization Settings](./Images/Module-1-ChangeBilling.png =300x)
 
-4. In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 1.
-    This will provide you with one paid parallel job, which will be charged to your Azure Pass. 
+4. In the `Paid parallel jobs` box for `MS Hosted CI/CD`, enter the value 5.
+    This will provide you with one paid parallel job, which will be charged to your Azure Pass.
 
     ![Modify Organization Settings](./Images/Module-1-ParallelJob.png =800x)
 
@@ -152,17 +152,31 @@ eventually publish artifacts for the Release Pipeline to consume.
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-02.png =400x)
 
-7. Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** paste the `Subscription ID` that you got on the Module-0
+7. Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** type the `Azure-Service-Connection-Development`
+
+    > NOTE: you will be asked to log in Azure again on the first time in this screen
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-03.png =400x)
 
     Click `Save`
 
-8. Navigate to Pipelines and Edit the pipeline `MyHealthClinicSecDevOps-CICD`
+8. Repete the step **5,6** to create another Service connection but now for production, Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** type the `Azure-Service-Connection-Production`
+
+    >NOTE: if you have an error, just refresh the page on your browser and try again
+
+    ![Edit Release Pipeline](./Images/CreateServiceConnection-03b.png =400x)
+
+    Click `Save`
+
+    >NOTE: your service connection should look like this:
+
+    ![Edit Release Pipeline](./Images/CreateServiceConnection-03c.png =800x)
+
+9.  Navigate to Pipelines and Edit the pipeline `MyHealthClinicSecDevOps-CICD`
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-05.png =800x)
 
-9. Explore the YAML pipeline and observe how it is parametrized, then click `Run`
+10. Explore the YAML pipeline and observe how it is parametrized, then click `Run`
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-06.png =800x)
 
@@ -172,7 +186,7 @@ eventually publish artifacts for the Release Pipeline to consume.
 
 ## Exercise 2: Confirm the deployment in Azure
 
-1. Wait until the pipeline complete the execution.
+1. Wait until the pipeline completes the execution.
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-08.png =800x)
 
