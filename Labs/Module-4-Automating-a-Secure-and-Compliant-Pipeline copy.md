@@ -10,12 +10,12 @@ Student Lab Manual
 
 **Objectives**
 
-After completing this lab, you will be able to:
+After completing this exercise, you will be able to:
 
-- Trigger a build and a deployment of an application
-
-- Secure your application and infrastructure through tooling and
-    automation
+- Integrate Static Application Security Testing into the Azure DevOps Pipeline
+- Integrate Static Code Analysis (SCA) into the Azure DevOps Pipeline
+- Integrate Security Verification tests for infrastructure
+- Integrate Credential Scanners verification on the repos
 
 **Prerequisites**
 
@@ -28,15 +28,6 @@ Completion of the Module 1 Lab, Creating a DevOps Pipeline
 45 minutes
 
 ## Configure Build Pipeline for SonarQube
-
-**Objectives**
-
-After completing this exercise, you will be able to:
-
-- Integrate Static Application Security Testing into the Azure DevOps Pipeline
-- Integrate Static Code Analysis (SCA) into the Azure DevOps Pipeline
-- Integrate Security Verification tests for infrastructure
-- Integrate Credential Scanners verification on the repos
 
 **Scenario**
 
@@ -103,7 +94,7 @@ discover bugs or vulnerabilities early in the process.
 
     ![](./images/Module4-AddSonarConfigure04.png =800x)
 
-    > **Note**: This condition means that if the number of Vulnerabilities in Sonar Analysis is greater than 1, then the quality gate will fail, and optionally this fails the DevOps build.
+    > **Note**: This condition means that if the number of Vulnerabilities in Sonar Analysis is lower than A, then the quality gate will fail, and optionally this fails the DevOps build.
 
 6. To enforce this quality gate for the DevSecOps project, click on `All` under `Projects` section and select the project checkbox.
 
@@ -412,3 +403,11 @@ However, unlike other similar packages that solely focus on finding secrets, thi
     >Note: Sometimes the tool will find some false-positive cases. You can manage those cases using the baseline file, more information on:
     >
     > <a href="https://github.com/Yelp/detect-secrets" target="_blank">https://github.com/Yelp/detect-secrets</a>
+
+3. Back to Pipelines, rename the pipeline `MyHeathClinicSecDevOps-Pulic` to `MyHeathClinicSecDevOps-CredScan`
+
+    ![](./images/Module4-UsingDetectCredentials6.png  =800x)
+
+    On **Name** text box type `MyHeathClinicSecDevOps-CredScan` then click `Save`
+
+    ![](./images/Module4-UsingDetectCredentials7.png =500x)
