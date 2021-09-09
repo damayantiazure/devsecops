@@ -40,8 +40,6 @@ This process is an important place to add security inside the pull request proce
 
     ![](./images/Module8-BranchPolicies.png =800x)
 
-    > **Note** On the first log-in, you will be asked to change the password, take note of your new password
-
 2. Select the following options.
 
     1. `Require a minimum number of reviewers` 
