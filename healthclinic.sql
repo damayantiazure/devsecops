@@ -1,4 +1,8 @@
-﻿
+﻿SET IDENTITY_INSERT [dbo].[Tenants] ON 
+
+INSERT [dbo].[Tenants] ([TenantId], [Address], [AssociatedUsername], [City], [Creator], [Name], [WaitTimeAvg]) VALUES (1, N'Madison Ave 10037', N'User', N'New York', N'Admin', N'HealthClinic.biz', 7)
+SET IDENTITY_INSERT [dbo].[Tenants] OFF
+
 delete from [dbo].[AspNetUsers] 
 INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FirstName], [LastName], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TenantId], [TwoFactorEnabled], [UserName]) VALUES (N'd736621d-4237-428d-8ff0-356fd2c71602', 0, N'b069e24a-547f-4355-b382-f0a1bde4a01f', NULL, 0, NULL, NULL, 1, NULL, NULL, N'ADMIN', N'AQAAAAEAACcQAAAAEJT6cbeZf2cTIydAQIVQ50SLUEfWuwUUh0ocCb9jnNVeWrmoHyCiFn+QiWLTujGGoA==', NULL, 0, N'5226e643-ba75-459f-a250-02aa16d1d2fd', NULL, 0, N'Admin')
 INSERT [dbo].[AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [FirstName], [LastName], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TenantId], [TwoFactorEnabled], [UserName]) VALUES (N'e733e66c-0576-4e37-81a1-759f66a7c1e6', 0, N'4c96eb7c-5e3d-4ce1-aad9-02dfb9e4d802', NULL, 0, NULL, NULL, 1, NULL, NULL, N'USER', N'AQAAAAEAACcQAAAAEPUo1c5mwO+CHMtuLemNbOmAtw3ulzPFcimWZrwS7dsOE1DorafIwOtN/fRiC+2t5w==', NULL, 0, N'00c0a56e-a5b7-49b0-8dd2-bcff13477f9b', 1, 0, N'User')
