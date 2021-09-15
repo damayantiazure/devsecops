@@ -372,7 +372,7 @@ However, unlike other similar packages that solely focus on finding secrets, thi
 
     ![](./Images/Module2-CreateKeyVaultRelease01d.png =800x)
 
-    Select `/azure-pipeline-AzSK.yml` then click `Continue`
+    Select `/azure-pipeline-CredScan.yml` then click `Continue`
 
     ![](./Images/Module4-UsingDetectCredentials.png =800x)
 
