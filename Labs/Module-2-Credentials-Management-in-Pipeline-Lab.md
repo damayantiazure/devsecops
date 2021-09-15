@@ -194,9 +194,9 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 ## Exercise 4: Configure the YAML Pipeline to use the New Key Vault and the new Environment
 
-1. Bo back to `Pipelines` and Click on `...` to Edit the pipeline `MyHealthClinicSecDevOps-CICD`
+1. Bo back to `Pipelines` and Click on `...` then `Edit` to visualise the pipeline `MyHealthClinicSecDevOps-CICD`
 
-    ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
+    ![](./Images/Module2-CreateKeyVault000.png =800x)
 
 2. Uncomment (Remove the #) the line **15** to enable the usage of the new variable group that comes from Azure Key Vault
 
