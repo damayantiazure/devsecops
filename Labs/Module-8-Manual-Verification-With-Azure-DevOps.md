@@ -102,29 +102,17 @@ This process is an important place to add security inside the pull request proce
 
     ![](./images/Module8-PullRequest1.png =800x)
 
-3. Associate this work item with the work in progress on the branch `issue/remove-secrets`
-
-    Click on `Add link` on `Development` session
-
-    On the box `Branch`, select the branch `issue/remove-secrets`, then click `OK`
-
-    ![](./images/Module8-PullRequest2.png =800x)
-
-    Click `Save` then click `Create a pull request`
-
-    ![](./images/Module8-PullRequest3.png =800x)
-
-4. Navigate to `Repos`-->`Files` Select `MyHealthClinicSecDevOps-Public`
+3. Navigate to `Repos`-->`Files` Select the repo `MyHealthClinicSecDevOps-Public`
 
     ![](./images/Module8-PullRequest4.png =800x)
 
-    Open the file at `test/MyHealth.API.IntegrationTests/appsettings.json`
-
-    ![](./images/Module8-PullRequest5.png =800x)
-
-5. switch to the branche `issue/remove-secrets` then click `Edit`
+4. switch to the branche `issue/remove-secrets`
 
     ![](./images/Module8-PullRequest6.png =800x)
+
+    Open the file at `test/MyHealth.API.IntegrationTests/appsettings.json` then click `Edit`
+
+    ![](./images/Module8-PullRequest5.png =800x)
 
     Set the  `DefaultPassword` to `""`
 
@@ -146,7 +134,7 @@ This process is an important place to add security inside the pull request proce
 
     ![](./images/Module8-PullRequest9.png =800x)
 
-6. Wait until all automatic checks pass, including the CredScan, then click `Approve`
+4. Wait until all automatic checks pass, including the CredScan, then click `Approve`
 
     > NOTE! since we are changing the file **/test/MyHealth.API.IntegrationTests/appsettings.json**, your user name is already added as reviewers required.
     >
