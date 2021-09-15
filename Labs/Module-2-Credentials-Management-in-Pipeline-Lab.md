@@ -194,7 +194,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 ## Exercise 4: Configure the YAML Pipeline to use the New Key Vault and the new Environment
 
-1. Bo back to `Pipelines` and Click on `...` then `Edit` to visualise the pipeline `MyHealthClinicSecDevOps-CICD`
+1. Go back to `Pipelines` and Click on `...` then `Edit` to visualise the pipeline `MyHealthClinicSecDevOps-CICD`
 
     ![](./Images/Module2-CreateKeyVault000.png =800x)
 
@@ -224,7 +224,7 @@ get Passwords from a KeyVault and publish artifacts for the Release Pipeline to 
 
 ## Exercise 5: Approve the usage of the Service Connections and the Production
 
-1. Bo back to `Pipelines` and Click on `MyHealthClinicSecDevOps-CICD`
+1. Go back to `Pipelines` and Click on `MyHealthClinicSecDevOps-CICD`
 
     ![](./Images/Module2-CreateKeyVault07.png =700x)
 
