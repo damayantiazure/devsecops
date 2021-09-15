@@ -396,7 +396,7 @@ However, unlike other similar packages that solely focus on finding secrets, thi
 
     ![](./images/Module4-UsingDetectCredentials4.png  =800x)
 
-    Go to line 111 and observe that the password used on the Lab Module 1 was caught by this tool
+    Go to line 115 and observe that the password used on the Lab Module 1 was caught by this tool
 
     ![](./images/Module4-UsingDetectCredentials5.png  =800x)
 
