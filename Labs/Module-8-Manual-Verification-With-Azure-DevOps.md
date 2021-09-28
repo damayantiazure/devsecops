@@ -92,7 +92,7 @@ This process is an important place to add security inside the pull request proce
 
 ## Exercise - 2: Test the secure process with the Pull request
 
-1. Navigate to `Boards` --> `Branches` and click on `new Work Item` and select `Issue` *(if you have a different template select a similar work item)*
+1. Navigate to `Boards` --> `Work Items` and click on `new Work Item` and select `Issue` *(if you have a different template select a similar work item)*
 
     ![](./images/Module8-PullRequest.png =800x)
 
