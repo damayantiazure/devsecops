@@ -126,11 +126,7 @@ This process is an important place to add security inside the pull request proce
 
     ![](./images/Module8-PullRequest8.png =500x)
 
-    Select the work item `Suppress secrets from source code` then click on`Commit`
-
-    ![](./images/Module8-PullRequest8.png =500x)
-
-    Click on `Suppress secrets from source code` link to navigate to the open Pull request
+    Click on `Create a pull request` button to navigate to the open Pull request
 
     ![](./images/Module8-PullRequest9.png =800x)
 
@@ -153,7 +149,7 @@ This process is an important place to add security inside the pull request proce
     >NOTE!: It's a good practice to complete the work item and delete the work branch
     >
     >you can always check from the history of the work item which branch the changes come from
-    > 
+    >
     >who approved the pull-request, and have the traceability end-to-end from this process
 
      ![](./images/Module8-PullRequest12.png =500x)
