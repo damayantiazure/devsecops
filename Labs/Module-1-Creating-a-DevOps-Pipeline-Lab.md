@@ -160,7 +160,7 @@ eventually, publish artifacts for the Release Pipeline to consume.
 
     Click `Save`
 
-8. Repete the step **5,6** to create another Service connection but now for production, Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** type the `Azure-Service-Connection-Production`
+8. Repete the step **5,6** to create another Service connection but now for production, Select the subscription `Azure Pass - Sponsorship` with the ID that you got on the Module-0. For **Service connection name** type `Azure-Service-Connection-Production`
 
     >NOTE: if you have an error, just refresh the page on your browser and try again
 
