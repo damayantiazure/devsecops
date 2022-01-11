@@ -76,7 +76,7 @@ $repomyclinic = 'MyHealthClinicSecDevOps-Public'
 az extension add --name azure-devops
 
 #Configure local variables to call DevOps Services
-$devopsservice = Read-Host -Prompt 'Type the of URL DevOps with your organization e.g. : https://dev.azure.com/your_orgnization_name'
+$devopsservice = Read-Host -Prompt 'Type the URL DevOps with your organization e.g. : https://dev.azure.com/your_orgnization_name'
 $devopspat = Read-Host -Prompt 'Enter Personal Token Access (PAT) created in the first part of requisites.'
 $env:AZURE_DEVOPS_EXT_PAT = $devopspat
 
