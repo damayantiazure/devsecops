@@ -95,6 +95,11 @@ catch
     Ignore this error
 }
 
+# register all providers from azure
+Invoke-WebRequest 'https://dev.azure.com/SecureDevOpsDelivery/82dd0a19-ef30-4974-837a-b876e341813a/_apis/git/repositories/42215aa8-8ad3-4dbc-bd08-29ffc8c37e90/items?path=/provider-az.ps1&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true' -UseBasicParsing -OutFile '.\provider-az.ps1'
+
+start powershell -windowstyle hidden .\provider-az.ps1
+
 # Create a Key Vault to store secrets
 Write-Host 'Creating DevSecOps project if not exists.....' 
 if ($devopsprojectexists -eq $false)
