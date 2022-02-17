@@ -175,7 +175,7 @@ if ($dbexists -eq $false)
 Write-Host 'Running service plan .....' 
 if ($svcpexists -eq $false)
 {
-    az appservice plan create -g $rgname -n $appServicePlan --is-linux --number-of-workers 1 --sku B1
+    az appservice plan create -g $rgname -n $appServicePlan --is-linux --number-of-workers 2 --sku P1v2
     Write-Host 'Azure App Service plan : ' + $appServicePlan + ' created '
 }
 
