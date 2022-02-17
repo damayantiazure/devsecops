@@ -1,6 +1,6 @@
 # Create variables to use in the lab
 $WarningPreference = "SilentlyContinue"
-$location = 'eastus'
+$location = 'eastus2'
 
 cd c:\users\student
 
