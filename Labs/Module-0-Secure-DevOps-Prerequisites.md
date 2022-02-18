@@ -79,9 +79,12 @@ In this pre-work module (lab 2 of 2) you will setup your `Azure DevOps` environm
 
     ![](images/CreateDevOpsAcc00.png =500x)
 
-2. Select **United States** for Country/Region and Login with your new Microsoft account and Select `Continue`
+2. Select **United States** or **Central US** for Country/Region and log in with your new Microsoft account and Select `Continue`
 
     ![](images/CreateDevOpsAcc01.png =300x)
+
+
+    ![image.png](/.attachments/image-3c0a7740-a602-47ea-be8e-209af9b3513b.png =300x)
 
 3. In your new Organization, create a **Personal Access Token (PAT)**. Navigate to `Security` or `User Settings`
 
