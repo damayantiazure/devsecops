@@ -187,6 +187,9 @@ eventually, publish artifacts for the Release Pipeline to consume.
 ## Exercise 2: Confirm the deployment in Azure
 
 1. On the first run, you will need to give permission. Click through the pipeline, and click the "Permit" button. 
+![image.png](/.attachments/image-cafc72fb-4514-4e1d-bbab-d3ab41b2ff48.png)
+
+![image.png](/.attachments/image-df8823f3-505c-4f08-9e03-2a7932c621e3.png)
 
 1. Wait until the pipeline completes the execution.
 
