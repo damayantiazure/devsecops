@@ -186,6 +186,8 @@ eventually, publish artifacts for the Release Pipeline to consume.
 
 ## Exercise 2: Confirm the deployment in Azure
 
+1. On the first run, you will need to give permission. Click through the pipeline, and click the "Permit" button. 
+
 1. Wait until the pipeline completes the execution.
 
     ![Edit Release Pipeline](./Images/CreateServiceConnection-08.png =800x)
