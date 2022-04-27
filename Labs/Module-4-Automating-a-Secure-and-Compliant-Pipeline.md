@@ -122,7 +122,7 @@ discover bugs or vulnerabilities early in the process.
 
     Click `Save`
 
-2. Go back to `Pipelines` and Click on `New Pipeline` to configure the pipeline `azure-pipeline-SAST.yml`
+2. Go back to `Pipelines` and Click on `New Pipeline` to configure the pipeline `azure-pipelines-SAST.yml`
 
     ![](./Images/Module4-UsingSAST1.png =800x)
 
@@ -138,7 +138,7 @@ discover bugs or vulnerabilities early in the process.
 
     ![](./Images/Module2-CreateKeyVaultRelease01d.png =800x)
 
-    Select `/azure-pipeline-SAST.yml` then click `Continue`
+    Select `/azure-pipelines-SAST.yml` then click `Continue`
 
     ![](./Images/Module2-CreateKeyVaultRelease01e.png =800x)
 
