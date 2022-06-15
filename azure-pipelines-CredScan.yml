@@ -8,9 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  - group: 'DevSecOpsVariables'
-
 stages:
 - stage: Build
   displayName: Build image
@@ -33,12 +30,12 @@ stages:
         script: |
           pip install detect-secrets
 
-    ## Optional Uncomment the following section to re-scan for secrets (about 1.5h execution)
-    # - task: CmdLine@2
-    #   displayName: "Run detect-secrets tool"
-    #   inputs:
-    #     script: |
-    #       detect-secrets scan src/ --all-files > detect-secrets.json
+    # Optional Uncomment the following section to re-scan for secrets (about 1.5h execution)
+    - task: CmdLine@2
+      displayName: "Run detect-secrets tool"
+      inputs:
+        script: |
+          detect-secrets scan --exclude-lines '__USER_TEST__' --exclude-lines '__PASS_TEST__' frontend/src/app/oauth/ --all-files > detect-secrets.json
 
     - task: PublishPipelineArtifact@1
       displayName: "Publish results in the Pipeline Artifact"
