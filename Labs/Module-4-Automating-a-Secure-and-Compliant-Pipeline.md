@@ -352,7 +352,7 @@ However, unlike other similar packages that solely focus on finding secrets, thi
 2. Detecting if such preventions are explicitly bypassed, and
 3. Providing a checklist of secrets to roll, and migrate off to more secure storage.
 
-## Exercise 4: Search for credentials on the repo
+## Exercise 5: Search for credentials on the repo
 
 1. Go back to `Pipelines` and Click on `New Pipeline` to configure the pipeline `azure-pipeline-CredScan.yml`
 
