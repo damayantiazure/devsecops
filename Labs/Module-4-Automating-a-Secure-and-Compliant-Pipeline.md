@@ -217,7 +217,7 @@ post-deployment stages) and across all projects and products.
 
     ![WhiteBolt Confirmation](./images/Module4-WhiteBoltConfigResult.png =600x)
 
-2. Go back to `Pipelines` and Click on `New Pipeline` to configure the pipeline `azure-pipeline-SCA.yml`
+2. Go back to `Pipelines` and Click on `New Pipeline` to configure the pipeline `azure-pipelines-SCA.yml`
 
     ![](./Images/Module4-UsingSCA1.png =800x)
 
@@ -233,7 +233,7 @@ post-deployment stages) and across all projects and products.
 
     ![](./Images/Module2-CreateKeyVaultRelease01d.png =800x)
 
-    Select `/azure-pipeline-SCA.yml` then click `Continue`
+    Select `/azure-pipelines-SCA.yml` then click `Continue`
 
     ![](./Images/Module2-CreateKeyVaultRelease01.png =800x)
 
