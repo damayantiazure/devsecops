@@ -216,7 +216,7 @@
                     "allOf": [
                         {
                             "field" : "type",
-                            "contains": "Microsoft.SecurityDevOps/azureDevOpsConnectors"
+                            "contains": "Microsoft.Security/securityConnectors"
                         },
                         {
                             "field": "location",
