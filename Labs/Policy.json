@@ -3,6 +3,22 @@
         "not": {
             "anyOf": [
                 {
+                    "field": "location",
+                    "equals": "centralus"
+                },
+                {
+                    "field": "location",
+                    "equals": "eastus"
+                },
+                {
+                    "field" : "type",
+                    "contains": "Microsoft.Security/securityConnectors"
+                },
+                {
+                    "field" : "type",
+                    "contains": "microsoft.securitydevops/azuredevopsconnectors"
+                },
+                {
                     "allOf": [
                         {
                             "field": "type",
@@ -213,7 +229,7 @@
                     ]
                 },
                 {
-                    "allOf": [
+                    "anyOf": [
                         {
                             "field" : "type",
                             "contains": "Microsoft.Security/securityConnectors"

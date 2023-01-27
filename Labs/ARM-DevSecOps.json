@@ -11,7 +11,7 @@
     "parameters": {
       "keyvaultName": {
         "type": "string",
-        "defaultValue": "[format('kvdevsecops{0}', take(uniqueString(resourceGroup().id), 5))]"
+        "defaultValue": "[format('kvdevsecops{0}', resourcegroup().tags.LabInstance)]"
       },
       "webAppName": {
         "type": "string",
@@ -19,15 +19,15 @@
       },
       "appServicePlanName": {
         "type": "string",
-        "defaultValue": "[format('sp-devsecops-{0}', take(uniqueString(resourceGroup().id), 5))]"
+        "defaultValue": "[format('sp-devsecops-{0}', resourcegroup().tags.LabInstance)]"
       },
       "acrName": {
         "type": "string",
-        "defaultValue": "[format('acrdevsecops{0}', take(uniqueString(resourceGroup().id), 5))]"
+        "defaultValue": "[format('acrdevsecops{0}', resourcegroup().tags.LabInstance)]"
       },
       "containerInstanceName": {
         "type": "string",
-        "defaultValue": "[format('sonarq-devsecops-{0}', take(uniqueString(resourceGroup().id), 5))]"
+        "defaultValue": "[format('sonarq-devsecops-{0}', resourcegroup().tags.LabInstance)]"
       },
       "tenantId": {
         "type": "string",
@@ -44,6 +44,10 @@
           "prod"
         ]
       }
+    },
+    "variables": {
+      "DockerComposeExpanded": "[base64ToString('dmVyc2lvbjogJzMuNycKCnZvbHVtZXM6CiAgZGVwZW5kZW5jeS10cmFjazoKCnNlcnZpY2VzOgogIGR0cmFjay1mcm9udGVuZDoKICAgIGltYWdlOiBkZXBlbmRlbmN5dHJhY2svYnVuZGxlZAogICAgZW52aXJvbm1lbnQ6CiAgICAtIEFMUElORV9EQVRBQkFTRV9NT0RFPWV4dGVybmFsCiAgICAtIEFMUElORV9EQVRBQkFTRV9VUkw9amRiYzpzcWxzZXJ2ZXI6Ly9fX19TUUxfTkFNRV9fXy5kYXRhYmFzZS53aW5kb3dzLm5ldDoxNDMzO2RhdGFiYXNlTmFtZT1kdHJhY2s7c2VuZFN0cmluZ1BhcmFtZXRlcnNBc1VuaWNvZGU9ZmFsc2UKICAgIC0gQUxQSU5FX0RBVEFCQVNFX0RSSVZFUj1jb20ubWljcm9zb2Z0LnNxbHNlcnZlci5qZGJjLlNRTFNlcnZlckRyaXZlcgogICAgLSBBTFBJTkVfREFUQUJBU0VfVVNFUk5BTUU9c2Vjb3BzCiAgICAtIEFMUElORV9EQVRBQkFTRV9QQVNTV09SRD1QQCQkdzByZDEyMwogICAgZGVwbG95OgogICAgICByZXNvdXJjZXM6CiAgICAgICAgbGltaXRzOgogICAgICAgICAgbWVtb3J5OiAxMjI4OG0KICAgICAgICByZXNlcnZhdGlvbnM6CiAgICAgICAgICBtZW1vcnk6IDgxOTJtCiAgICAgIHJlc3RhcnRfcG9saWN5OgogICAgICAgIGNvbmRpdGlvbjogb24tZmFpbHVyZQogICAgcG9ydHM6CiAgICAgIC0gIjgwODA6ODA4MCIKICAgIHZvbHVtZXM6CiAgICAgIC0gJHtXRUJBUFBfU1RPUkFHRV9IT01FfS9zaXRlL3d3d3Jvb3Q6L2RhdGEKICAgIHJlc3RhcnQ6IHVubGVzcy1zdG9wcGVk')]",
+      "DockerCompose":"[replace(variables('DockerComposeExpanded'),'___SQL_NAME___', format('sql-devsecops-{0}', resourcegroup().tags.LabInstance))]"
     },
     "resources": [
       {
@@ -95,7 +99,9 @@
         "location": "[parameters('location')]",
         "sku": {
           "tier": "Basic",
-          "name": "B1"
+          "name": "B3",                
+          "family": "B",                
+          "capacity": 3
         },
         "kind": "linux",
         "properties": {
@@ -169,7 +175,7 @@
         },
         "type": "Microsoft.Web/sites",
         "apiVersion": "2021-03-01",
-        "name": "[format('{0}-{1}-devsecops-{2}', parameters('webAppName'), parameters('envirments')[copyIndex()], take(uniqueString(resourceGroup().id), 5))]",
+        "name": "[format('{0}-{1}-devsecops-{2}', parameters('webAppName'), parameters('envirments')[copyIndex()], resourcegroup().tags.LabInstance)]",
         "location": "[parameters('location')]",
         "kind": "app,linux,container",
         "identity": {
@@ -223,6 +229,120 @@
           "[resourceId('Microsoft.ContainerRegistry/registries', parameters('acrName'))]",
           "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
         ]
+      },
+      {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-03-01",
+        "name": "[format('dependency-track-devsecops-{0}', resourcegroup().tags.LabInstance)]",
+        "location": "[parameters('location')]",
+        "kind": "app,linux,container",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "enabled": true,
+          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+          "reserved": true,
+          "isXenon": false,
+          "hyperV": false,
+          "siteConfig": {
+            "numberOfWorkers": 1,
+            "defaultDocuments": [ "Default.htm", "Default.html", "Default.asp", "index.htm", "index.html", "iisstart.htm", "default.aspx", "index.php", "hostingstart.html" ],
+            "netFrameworkVersion": "v4.0",            
+            "linuxFxVersion": "[concat('COMPOSE|', base64(variables('DockerCompose')))]",
+            "acrUseManagedIdentityCreds": false,
+            "alwaysOn": true,
+            "http20Enabled": true,
+            "functionAppScaleLimit": 0,
+            "minimumElasticInstanceCount": 0,
+            "appSettings": [
+              {
+                "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                "value": "true"
+              }
+            ]
+          },
+          "scmSiteAlsoStopped": false,
+          "clientAffinityEnabled": true,
+          "clientCertEnabled": false,
+          "clientCertMode": "Required",
+          "hostNamesDisabled": false,
+          "containerSize": 0,
+          "dailyMemoryTimeQuota": 0,
+          "httpsOnly": false,
+          "redundancyMode": "None",
+          "keyVaultReferenceIdentity": "SystemAssigned"
+        },
+        "dependsOn": [
+          "[resourceId('Microsoft.ContainerRegistry/registries', parameters('acrName'))]",
+          "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        ]
+      },
+      {
+            "type": "Microsoft.Sql/servers",
+            "apiVersion": "2021-11-01-preview",
+            "name": "[format('sql-devsecops-{0}', resourcegroup().tags.LabInstance)]",
+            "location": "eastus",
+            "kind": "v12.0",
+            "properties": {
+                "administratorLogin": "secops",
+                "administratorLoginPassword": "P@$$w0rd123",
+                "version": "12.0",
+                "minimalTlsVersion": "1.2",
+                "publicNetworkAccess": "Enabled",
+                "restrictOutboundNetworkAccess": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases",
+            "apiVersion": "2021-11-01-preview",
+            "name": "[concat(format('sql-devsecops-{0}', resourcegroup().tags.LabInstance), '/dtrack')]",
+            "location": "eastus",
+            "dependsOn": [ "[resourceId('Microsoft.Sql/servers', format('sql-devsecops-{0}', resourcegroup().tags.LabInstance))]" ],
+            "sku": {
+                "name": "GP_S_Gen5",
+                "tier": "GeneralPurpose",
+                "family": "Gen5",
+                "capacity": 1
+            },
+            "kind": "v12.0,user,vcore,serverless",
+            "properties": {
+                "collation": "SQL_Latin1_General_CP1_CI_AS",
+                "maxSizeBytes": 17179869184,
+                "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+                "zoneRedundant": false,
+                "readScale": "Disabled",
+                "autoPauseDelay": 60,
+                "requestedBackupStorageRedundancy": "Local",
+                "minCapacity": 0.5,
+                "isLedgerOn": false
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/firewallRules",
+            "apiVersion": "2021-11-01-preview",
+            "name": "[concat(format('sql-devsecops-{0}', resourcegroup().tags.LabInstance), '/AllowAccess')]",
+            "dependsOn": [ "[resourceId('Microsoft.Sql/servers', format('sql-devsecops-{0}', resourcegroup().tags.LabInstance))]" ],
+            "properties": {
+                "endIpAddress": "0.0.0.0",
+                "startIpAddress": "0.0.0.0"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/firewallRules",
+            "apiVersion": "2021-11-01-preview",
+            "name": "[concat(format('sql-devsecops-{0}', resourcegroup().tags.LabInstance), '/AllowAllWindowsAzureIps')]",
+            "dependsOn": [ "[resourceId('Microsoft.Sql/servers', format('sql-devsecops-{0}', resourcegroup().tags.LabInstance))]" ],
+            "properties": {
+                "endIpAddress": "255.255.255.255",
+                "startIpAddress": "255.255.255.255"
+            }
+        }
+    ],
+    "outputs": {
+      "stringOutput": {
+      "type": "string",
+      "value": "[variables('DockerCompose')]"
       }
-    ]
+    }
   }
