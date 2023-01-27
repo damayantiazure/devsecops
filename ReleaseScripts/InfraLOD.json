@@ -46,7 +46,7 @@
       }
     },
     "variables": {
-      "DockerComposeExpanded": "[base64ToString('dmVyc2lvbjogJzMuNycKCnZvbHVtZXM6CiAgZGVwZW5kZW5jeS10cmFjazoKCnNlcnZpY2VzOgogIGR0cmFjay1mcm9udGVuZDoKICAgIGltYWdlOiBkZXBlbmRlbmN5dHJhY2svYnVuZGxlZAogICAgZW52aXJvbm1lbnQ6CiAgICAtIEFMUElORV9EQVRBQkFTRV9NT0RFPWV4dGVybmFsCiAgICAtIEFMUElORV9EQVRBQkFTRV9VUkw9amRiYzpzcWxzZXJ2ZXI6Ly9fX19TUUxfTkFNRV9fX30uZGF0YWJhc2Uud2luZG93cy5uZXQ6MTQzMztkYXRhYmFzZU5hbWU9ZHRyYWNrO3NlbmRTdHJpbmdQYXJhbWV0ZXJzQXNVbmljb2RlPWZhbHNlCiAgICAtIEFMUElORV9EQVRBQkFTRV9EUklWRVI9Y29tLm1pY3Jvc29mdC5zcWxzZXJ2ZXIuamRiYy5TUUxTZXJ2ZXJEcml2ZXIKICAgIC0gQUxQSU5FX0RBVEFCQVNFX1VTRVJOQU1FPXNlY29wcwogICAgLSBBTFBJTkVfREFUQUJBU0VfUEFTU1dPUkQ9UEAkJHcwcmQxMjMKICAgIGRlcGxveToKICAgICAgcmVzb3VyY2VzOgogICAgICAgIGxpbWl0czoKICAgICAgICAgIG1lbW9yeTogMTIyODhtCiAgICAgICAgcmVzZXJ2YXRpb25zOgogICAgICAgICAgbWVtb3J5OiA4MTkybQogICAgICByZXN0YXJ0X3BvbGljeToKICAgICAgICBjb25kaXRpb246IG9uLWZhaWx1cmUKICAgIHBvcnRzOgogICAgICAtICI4MDgwOjgwODAiCiAgICB2b2x1bWVzOgogICAgICAtICR7V0VCQVBQX1NUT1JBR0VfSE9NRX0vc2l0ZS93d3dyb290Oi9kYXRhCiAgICByZXN0YXJ0OiB1bmxlc3Mtc3RvcHBlZA==')]",
+      "DockerComposeExpanded": "[base64ToString('dmVyc2lvbjogJzMuNycKCnZvbHVtZXM6CiAgZGVwZW5kZW5jeS10cmFjazoKCnNlcnZpY2VzOgogIGR0cmFjay1mcm9udGVuZDoKICAgIGltYWdlOiBkZXBlbmRlbmN5dHJhY2svYnVuZGxlZAogICAgZW52aXJvbm1lbnQ6CiAgICAtIEFMUElORV9EQVRBQkFTRV9NT0RFPWV4dGVybmFsCiAgICAtIEFMUElORV9EQVRBQkFTRV9VUkw9amRiYzpzcWxzZXJ2ZXI6Ly9fX19TUUxfTkFNRV9fXy5kYXRhYmFzZS53aW5kb3dzLm5ldDoxNDMzO2RhdGFiYXNlTmFtZT1kdHJhY2s7c2VuZFN0cmluZ1BhcmFtZXRlcnNBc1VuaWNvZGU9ZmFsc2UKICAgIC0gQUxQSU5FX0RBVEFCQVNFX0RSSVZFUj1jb20ubWljcm9zb2Z0LnNxbHNlcnZlci5qZGJjLlNRTFNlcnZlckRyaXZlcgogICAgLSBBTFBJTkVfREFUQUJBU0VfVVNFUk5BTUU9c2Vjb3BzCiAgICAtIEFMUElORV9EQVRBQkFTRV9QQVNTV09SRD1QQCQkdzByZDEyMwogICAgZGVwbG95OgogICAgICByZXNvdXJjZXM6CiAgICAgICAgbGltaXRzOgogICAgICAgICAgbWVtb3J5OiAxMjI4OG0KICAgICAgICByZXNlcnZhdGlvbnM6CiAgICAgICAgICBtZW1vcnk6IDgxOTJtCiAgICAgIHJlc3RhcnRfcG9saWN5OgogICAgICAgIGNvbmRpdGlvbjogb24tZmFpbHVyZQogICAgcG9ydHM6CiAgICAgIC0gIjgwODA6ODA4MCIKICAgIHZvbHVtZXM6CiAgICAgIC0gJHtXRUJBUFBfU1RPUkFHRV9IT01FfS9zaXRlL3d3d3Jvb3Q6L2RhdGEKICAgIHJlc3RhcnQ6IHVubGVzcy1zdG9wcGVk')]",
       "DockerCompose":"[replace(variables('DockerComposeExpanded'),'___SQL_NAME___', format('sql-devsecops-{0}', take(uniqueString(resourceGroup().id), 5)))]"
     },
     "resources": [
@@ -249,7 +249,7 @@
             "numberOfWorkers": 1,
             "defaultDocuments": [ "Default.htm", "Default.html", "Default.asp", "index.htm", "index.html", "iisstart.htm", "default.aspx", "index.php", "hostingstart.html" ],
             "netFrameworkVersion": "v4.0",            
-            "linuxFxVersion": "[concat('COMPOSE|', variables('DockerCompose'))]",
+            "linuxFxVersion": "[concat('COMPOSE|', base64(variables('DockerCompose')))]",
             "acrUseManagedIdentityCreds": false,
             "alwaysOn": true,
             "http20Enabled": true,
@@ -338,5 +338,11 @@
                 "startIpAddress": "255.255.255.255"
             }
         }
-    ]
+    ],
+    "outputs": {
+      "stringOutput": {
+      "type": "string",
+      "value": "[variables('DockerCompose')]"
+      }
+    }
   }
