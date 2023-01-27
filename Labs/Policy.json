@@ -1,0 +1,241 @@
+{
+    "if": {
+        "not": {
+            "anyOf": [
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.ContainerInstance/containerGroups"
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('sonarq-devsecops-',resourcegroup().tags.LabInstance)]"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.memoryInGB",
+                            "LessOrEquals": 4
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.cpu",
+                            "LessOrEquals": 2
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.gpu.count",
+                            "exists": false
+                        },
+                        {
+                            "field": "id",
+                            "contains": "/resourceGroups/rg-lod/"
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Sql/servers"
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('sql-devsecops-',resourcegroup().tags.LabInstance)]"
+                            ]
+                        },
+                        {
+                            "field": "id",
+                            "contains": "/resourceGroups/rg-lod/"
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Sql/servers/databases"
+                        },
+                        {
+                            "field": "Microsoft.Sql/servers/databases/sku.name",
+                            "equals": "GP_S_Gen5"
+                        },
+                        {
+                            "field": "Microsoft.Sql/servers/databases/sku.tier",
+                            "equals": "GeneralPurpose"
+                        },
+                        {
+                            "field": "Microsoft.Sql/servers/databases/sku.capacity",
+                            "lessOrEquals": 1
+                        },
+                        {
+                            "field": "type",
+                            "contains": "Microsoft.Sql/servers/firewallRules"
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "id",
+                            "contains": "/resourceGroups/rg-lod/"
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.ContainerRegistry/registries"
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('acrdevsecops',resourcegroup().tags.LabInstance)]"
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.ContainerRegistry/registries/sku.name",
+                            "equals": "Standard"
+                        },
+                        {
+                            "field": "Microsoft.ContainerRegistry/registries/sku.tier",
+                            "equals": "Standard"
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "id",
+                            "contains": "/resourceGroups/rg-lod/"
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "contains": "Microsoft.Portal/dashboards"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.KeyVault/vaults"
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('kvdevsecops',resourcegroup().tags.LabInstance)]"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.KeyVault/vaults/sku.name",
+                            "equals": "standard"
+                        },
+                        {
+                            "field": "id",
+                            "contains": "/resourceGroups/rg-lod/"
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "contains": "Microsoft.Web/serverFarms"
+                        },
+                        {
+                            "field": "Microsoft.Web/serverFarms/sku.name",
+                            "equals": "B3"
+                        },
+                        {
+                            "field": "Microsoft.Web/serverFarms/sku.tier",
+                            "equals": "Basic"
+                        },
+                        {
+                            "field": "Microsoft.Web/serverFarms/sku.size",
+                            "equals": "B3"
+                        },
+                        {
+                            "field": "Microsoft.Web/serverFarms/sku.family",
+                            "equals": "B"
+                        },
+                        {
+                            "field": "Microsoft.Web/serverFarms/sku.capacity",
+                            "lessOrEquals": 3
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field" : "type",
+                            "contains": "Microsoft.SecurityDevOps/azureDevOpsConnectors"
+                        },
+                        {
+                            "field": "location",
+                            "in": [
+                                "centralus"
+                            ]
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                               "DevSecOps"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "then": {
+        "effect": "Deny"
+    }
+}
