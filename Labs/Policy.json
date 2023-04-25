@@ -3,20 +3,28 @@
         "not": {
             "anyOf": [
                 {
-                    "field": "location",
-                    "equals": "centralus"
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "contains": "Microsoft.Security/securityConnectors"
+                        },
+                        {
+                            "field": "location",
+                            "equals": "centralus"
+                        }
+                    ]
                 },
                 {
-                    "field": "location",
-                    "equals": "eastus"
-                },
-                {
-                    "field" : "type",
-                    "contains": "Microsoft.Security/securityConnectors"
-                },
-                {
-                    "field" : "type",
-                    "contains": "microsoft.securitydevops/azuredevopsconnectors"
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "contains": "microsoft.securitydevops/azuredevopsconnectors"
+                        },
+                        {
+                            "field": "location",
+                            "equals": "centralus"
+                        }
+                    ]
                 },
                 {
                     "allOf": [
@@ -32,9 +40,7 @@
                         },
                         {
                             "field": "location",
-                            "in": [
-                                "eastus"
-                            ]
+                            "equals": "eastus"
                         },
                         {
                             "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.memoryInGB",
@@ -76,9 +82,7 @@
                         },
                         {
                             "field": "location",
-                            "in": [
-                                "eastus"
-                            ]
+                            "equals": "eastus"
                         },
                         {
                             "field": "location",
@@ -110,9 +114,7 @@
                         },
                         {
                             "field": "location",
-                            "in": [
-                                "eastus"
-                            ]
+                            "equals": "eastus"
                         },
                         {
                             "field": "id",
@@ -146,9 +148,7 @@
                         },
                         {
                             "field": "location",
-                            "in": [
-                                "eastus"
-                            ]
+                            "equals": "eastus"
                         },
                         {
                             "field": "id",
@@ -182,9 +182,7 @@
                         },
                         {
                             "field": "location",
-                            "in": [
-                                "eastus"
-                            ]
+                            "equals": "eastus"
                         },
                         {
                             "field": "Microsoft.KeyVault/vaults/sku.name",
@@ -225,26 +223,6 @@
                         {
                             "field": "Microsoft.Web/serverFarms/sku.capacity",
                             "lessOrEquals": 3
-                        }
-                    ]
-                },
-                {
-                    "anyOf": [
-                        {
-                            "field" : "type",
-                            "contains": "Microsoft.Security/securityConnectors"
-                        },
-                        {
-                            "field": "location",
-                            "in": [
-                                "centralus"
-                            ]
-                        },
-                        {
-                            "field": "name",
-                            "in": [
-                               "DevSecOps"
-                            ]
                         }
                     ]
                 }
