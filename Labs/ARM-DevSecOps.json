@@ -36,13 +36,6 @@
       "location": {
         "type": "string",
         "defaultValue": "[resourceGroup().location]"
-      },
-      "envirments": {
-        "type": "array",
-        "defaultValue": [
-          "dev",
-          "prod"
-        ]
       }
     },
     "variables": {
@@ -169,13 +162,9 @@
         }
       },
       {
-        "copy": {
-          "name": "webApp",
-          "count": "[length(parameters('envirments'))]"
-        },
         "type": "Microsoft.Web/sites",
         "apiVersion": "2021-03-01",
-        "name": "[format('{0}-{1}-devsecops-{2}', parameters('webAppName'), parameters('envirments')[copyIndex()], resourcegroup().tags.LabInstance)]",
+        "name": "[format('{0}-{1}-devsecops-{2}', parameters('webAppName'), 'dev', resourcegroup().tags.LabInstance)]",
         "location": "[parameters('location')]",
         "kind": "app,linux,container",
         "identity": {
