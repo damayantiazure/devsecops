@@ -29,11 +29,19 @@
               "equals": "B3"
             },
             {
+              "field": "Microsoft.Web/serverfarms/sku.family",
+              "equals": "B"
+            },
+            {
+              "field": "Microsoft.Web/serverfarms/sku.capacity",
+              "equals": 3
+            },
+            {
               "field": "Microsoft.Web/serverfarms/sku.tier",
               "equals": "Basic"
             },
             {
-              "field": "Microsoft.Web/serverfarms/sku.size",
+              "field": "Microsoft.Web/serverFarms/sku.size",
               "equals": "B3"
             }
           ]

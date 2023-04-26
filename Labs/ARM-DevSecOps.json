@@ -94,7 +94,8 @@
           "tier": "Basic",
           "name": "B3",                
           "family": "B",                
-          "capacity": 3
+          "capacity": 3,
+          "size": "B3"
         },
         "kind": "linux",
         "properties": {
