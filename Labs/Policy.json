@@ -2,6 +2,30 @@
   "if": {
     "not": {
       "anyOf": [
+          {
+            "allOf": [
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Security/securityConnectors"
+                },
+                {
+                    "field": "location",
+                    "equals": "centralus"
+                }
+            ]
+        },
+        {
+            "allOf": [
+                {
+                    "field": "type",
+                    "contains": "microsoft.securitydevops/azuredevopsconnectors"
+                },
+                {
+                    "field": "location",
+                    "equals": "centralus"
+                }
+            ]
+        },        
         {
           "allOf": [
             {
