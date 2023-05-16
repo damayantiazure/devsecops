@@ -1,0 +1,40 @@
+trigger: none
+resources:
+- repo: self
+
+stages:
+- stage: DeployDevInfrastructure  
+  displayName: Deploy Development Infrastructure
+  jobs:
+  - job: DeployInfrastructure
+    displayName: Deploy Development Infrastructure
+    pool:
+      name: 'Default'   
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure-Service-Connection-Development'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az deployment group create --resource-group rg-juiceshop-dev-lod --name deployinfradev \
+              --template-file ARM-DevSecOps.json
+        addSpnToEnvironment: true
+
+- stage: DeployProdInfrastructure  
+  displayName: Deploy Production Infrastructure
+  jobs:
+  - job: DeployInfrastructure
+    displayName: Deploy Production Infrastructure
+    pool:
+      name: 'Default'   
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure-Service-Connection-Production'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az deployment group create --resource-group rg-juiceshop-prod-lod --name deployinfraprod \
+              --template-file ARM-DevSecOps-Prod.json
+        addSpnToEnvironment: true
