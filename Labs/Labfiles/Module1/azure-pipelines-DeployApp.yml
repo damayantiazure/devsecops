@@ -1,0 +1,95 @@
+trigger: none 
+
+resources:
+- repo: self
+
+variables:
+- group: DevSecOps-Variables
+
+stages:
+- stage: Build  
+  displayName: Build and push stage  
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure-Service-Connection-Development'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az acr build --image $(ContainerRegistry).azurecr.io/devsecops:$(Build.BuildId) --no-logs --registry $(ContainerRegistry) --file Dockerfile .'
+        addSpnToEnvironment: true
+
+- stage: Deploy_Dev
+  displayName: Deploy container to WebApp in development
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy_to_Dev
+    displayName: Deployment to development environment
+    environment: Development
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureAppServiceSettings@1
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Development'
+              appName: $(DevAppName)
+              resourceGroupName: $(DevResourceGroup)
+              generalSettings: |
+                [{
+                     "linuxFxVersion": "DOCKER|$(ContainerRegistry).azurecr.io/devsecops:$(Build.BuildId)"
+                 }
+                ]
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Development'
+              Action: 'Restart Azure App Service'
+              WebAppName: $(DevAppName)
+
+- stage: Deploy_Prod
+  displayName: Deploy container to WebApp in production
+  dependsOn: Deploy_Dev
+  jobs:
+  - deployment: Deploy_to_Prod
+    displayName: Deployment to production environment
+    environment: Production
+    pool:
+      vmImage: ubuntu-latest
+    strategy:     
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureAppServiceSettings@1
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Production'
+              appName: '$(ProdAppName)'
+              resourceGroupName: '$(ProdResourceGroup)'
+              appSettings: |
+                [
+                    {
+                        "name": "SQL_DB_URL",
+                        "value": "@Microsoft.KeyVault(SecretUri=https://kvdevsecops31109008.vault.azure.net/secrets/SQL-DB-URL)",
+                        "slotSetting": false
+                    },        
+                    {
+                        "name": "2FASecret",
+                        "value": "@Microsoft.KeyVault(SecretUri=https://kvdevsecops31109008.vault.azure.net/secrets/2FASecret)",
+                        "slotSetting": false
+                    }
+                ]
+              generalSettings: |
+                [{
+                     "linuxFxVersion": "DOCKER|$(ContainerRegistry).azurecr.io/devsecops:$(Build.BuildId)"
+                 }
+                ]
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Production'
+              Action: 'Restart Azure App Service'
+              WebAppName: $(ProdAppName)
