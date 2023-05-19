@@ -16,7 +16,7 @@ steps:
   inputs:
     aggressivemode: true
     scantype: 'targetedScan'
-    url: https://$(DevAppName)-$(LabInstanceID).azurewebsites.net
+    url: https://$(DevAppName).azurewebsites.net
     port: '443'
 
 - task: CopyFiles@2
