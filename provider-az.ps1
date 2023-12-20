@@ -1,1 +1,0 @@
-$namespaces=(az provider list --query "[?registrationState=='NotRegistered'].{Provider:namespace}" --output tsv) | foreach { "$(az provider register -n $_)" }
