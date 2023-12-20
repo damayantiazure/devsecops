@@ -2,7 +2,8 @@
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
-trigger: none
+trigger:
+- master
 
 resources:
 - repo: self
@@ -18,7 +19,7 @@ stages:
     steps:
 
     #Module-4 - Exercise 2
-    - task: SonarQubePrepare@4
+    - task: SonarQubePrepare@5
       inputs:
         SonarQube: 'Sonar'
         scannerMode: 'CLI'
@@ -28,11 +29,11 @@ stages:
         cliSources: '.'
 
     #Module-4 - Exercise 2
-    - task: SonarQubeAnalyze@4
+    - task: SonarQubeAnalyze@5
       displayName: 'Run Code Analysis'
 
     #Module-4 - Exercise 2
-    - task: SonarQubePublish@4
+    - task: SonarQubePublish@5
       displayName: 'Publish Quality Gate Result'
       inputs:
         pollingTimeoutSec: '300'

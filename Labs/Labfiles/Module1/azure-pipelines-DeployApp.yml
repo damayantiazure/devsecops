@@ -58,8 +58,14 @@ stages:
           - task: AzureAppServiceManage@0
             inputs:
               azureSubscription: 'Azure-Service-Connection-Development'
-              Action: 'Restart Azure App Service'
-              WebAppName: $(DevAppName)
+              Action: 'Stop Azure App Service'
+              WebAppName: '$(DevAppName)'
+
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Development'
+              Action: 'Start Azure App Service'
+              WebAppName: '$(DevAppName)'
 
 - stage: Deploy_Prod
   displayName: Deploy container to WebApp in production
@@ -87,5 +93,11 @@ stages:
           - task: AzureAppServiceManage@0
             inputs:
               azureSubscription: 'Azure-Service-Connection-Production'
-              Action: 'Restart Azure App Service'
-              WebAppName: $(ProdAppName)
+              Action: 'Stop Azure App Service'
+              WebAppName: '$(ProdAppName)'
+
+          - task: AzureAppServiceManage@0
+            inputs:
+              azureSubscription: 'Azure-Service-Connection-Production'
+              Action: 'Start Azure App Service'
+              WebAppName: '$(ProdAppName)'

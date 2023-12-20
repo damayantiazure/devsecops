@@ -3,5 +3,11 @@
         "activityBar.background": "#1B340B",
         "titleBar.activeBackground": "#26490F",
         "titleBar.activeForeground": "#F6FCF2"
-    }
+    },
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\roborges\\.azurelogicapps\\dependencies\\DotNetSDK;${env:PATH}"
+    },
+    "omnisharp.dotNetCliPaths": [
+        "C:\\Users\\roborges\\.azurelogicapps\\dependencies\\DotNetSDK"
+    ]
 }

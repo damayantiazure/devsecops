@@ -1,40 +1,70 @@
-trigger: none
+trigger:
+- master
 
 pool:
   vmImage: ubuntu-latest
 
 variables:
 - group: DevSecOps-Variables
+- group: DevSecOps-KeyVault
 
-steps:
+stages:
+- stage: Build  
+  displayName: Build and generate bom.xml  
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            npm install --global @cyclonedx/cyclonedx-npm
+            npm i -g typescript ts-node
+            npm install --production --unsafe-perm
+            npm dedupe
+        displayName: 'Run a multi-line script'
+        
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            $npmPrefix = npm config get prefix; $env:Path += ";$npmPrefix"; [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
+            cyclonedx-npm --output-file '$(Build.SourcesDirectory)/bom.xml'
+        displayName: 'Create BOM'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      npm install --global @cyclonedx/cyclonedx-npm
-      npm i -g typescript ts-node
-      npm install --production --unsafe-perm
-      npm dedupe
-  displayName: 'Run a multi-line script'
-  
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $npmPrefix = npm config get prefix; $env:Path += ";$npmPrefix"; [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
-      cyclonedx-npm --output-file '$(Build.SourcesDirectory)/bom.xml'
-  displayName: 'Create BOM'
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.SourcesDirectory)/bom.xml'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
 
-- task: upload-bom-dtrack-task@1
-  displayName: 'Upload BOM to Dependency-Track'
-  inputs:
-    bomFilePath: '$(Build.SourcesDirectory)/bom.xml'
-    dtrackProjId: 'REPLACE THIS TEXT THE OBJECT INDENTIFIER FROM PROJECT'
-    dtrackAPIKey: 'REPLACE THIS TEXT THE KEY FROM ADMINISTRATION'
-    dtrackURI: 'https://dependency-track-devsecops-$(LabInstanceID).azurewebsites.net'
-    thresholdAction: 'warn'
-    thresholdCritical: '0'
-    thresholdHigh: '0'
-    thresholdMedium: '0'
-    thresholdLow: '0'
+- stage: Publish  
+  displayName: Publish the bom.xml DTracker  
+  jobs:
+  - job: Publish
+    displayName: Publish
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+      
+    - task: upload-bom-dtrack-task@1
+      displayName: 'Upload BOM to Dependency-Track'
+      inputs:
+        dtrackProjId: '$(dtrackProjId)'
+        bomFilePath: '$(System.ArtifactsDirectory)/drop/bom.xml'
+        dtrackAPIKey: '$(dtrackAPIKey)'
+        dtrackURI: 'https://dependency-track-devsecops-$(LabInstanceID).azurewebsites.net'
+        thresholdAction: 'warn'
+        thresholdCritical: '0'
+        thresholdHigh: '0'
+        thresholdMedium: '0'
+        thresholdLow: '0'

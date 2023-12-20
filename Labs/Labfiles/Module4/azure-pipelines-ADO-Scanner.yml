@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+
+- task: ADOSecurityScanner@1
+  inputs:
+    ADOConnectionName: 'SecurityScanner'
+    OrgName: '$(System.CollectionUri)'
+    ProjectNames: '$(System.TeamProject)'
+    ScanFilter: 'All'
+    BuildNames: '*'
+    ReleaseNames: '*'
+    ServiceConnectionNames: '*'
+    AgentPoolNames: '*'
+    VariableGroupNames: '*'

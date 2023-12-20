@@ -1,9 +1,14 @@
-trigger: none
+trigger:
+- master
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
+
+- task: AdvancedSecurity-Codeql-Init@1
+  inputs:
+    languages: 'javascript'
 
 - task: UseDotNet@2
   displayName: 'Use dotnet 3.1'
@@ -21,6 +26,17 @@ steps:
     npm install --production --unsafe-perm
     npm dedupe
   displayName: 'Run a multi-line script'
+- task: AdvancedSecurity-Codeql-Autobuild@1
+
+- task: AdvancedSecurity-Dependency-Scanning@1
+- task: AdvancedSecurity-Codeql-Analyze@1
+
+- task: AdvancedSecurity-Publish@1
+  inputs:
+    SarifsInputDirectory: '$(Agent.TempDirectory)/advancedsecurity.codeql/out'
 
 - task: MicrosoftSecurityDevOps@1
+  inputs:
+    command: 'run'
+    policy: 'microsoft'
   displayName: 'Run Microsoft Security DevOps'
